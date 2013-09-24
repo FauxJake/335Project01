@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aqua>
+  <item x="519" y="155" SpeedX="43.140709" SpeedY="-43.464286" type="molly"/>
+  <item x="354" y="413" SpeedX="53.905517" SpeedY="58.841463" type="beta"/>
+  <item x="136" y="280" SpeedX="53.905517" SpeedY="58.841463" type="beta"/>
+  <item x="141" y="661" SpeedX="-53.905517" SpeedY="-58.841463" type="beta"/>
+  <item x="146" y="633" SpeedX="53.905517" SpeedY="58.841463" type="beta"/>
+  <item x="242" y="412" SpeedX="-53.905517" SpeedY="58.841463" type="beta"/>
+  <item x="200" y="338" SpeedX="-14.859928" SpeedY="-12.628690" type="nemo"/>
+  <item x="192" y="308" SpeedX="-14.859928" SpeedY="-12.628690" type="nemo"/>
+  <item x="201" y="268" SpeedX="-14.859928" SpeedY="-12.628690" type="nemo"/>
+  <item x="180" y="604" SpeedX="53.905517" SpeedY="58.841463" type="beta"/>
+  <item x="210" y="291" SpeedX="-14.859928" SpeedY="-12.628690" type="nemo"/>
+  <item x="839" y="582" type="treasure-chest"/>
+</aqua>

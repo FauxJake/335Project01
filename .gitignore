@@ -1,0 +1,5 @@
+# exclude save files
+*.aqua
+
+# exclude prec headers
+/wx/prec.h.gch 
