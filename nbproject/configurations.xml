@@ -4,6 +4,15 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>CApp.h</itemPath>
+      <itemPath>CAquarium.h</itemPath>
+      <itemPath>CDecorTreasure.h</itemPath>
+      <itemPath>CFish.h</itemPath>
+      <itemPath>CFishBeta.h</itemPath>
+      <itemPath>CFishMolly.h</itemPath>
+      <itemPath>CFishNemo.h</itemPath>
+      <itemPath>CFrame.h</itemPath>
+      <itemPath>CItem.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -12,6 +21,15 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>CApp.cpp</itemPath>
+      <itemPath>CAquarium.cpp</itemPath>
+      <itemPath>CDecorTreasure.cpp</itemPath>
+      <itemPath>CFish.cpp</itemPath>
+      <itemPath>CFishBeta.cpp</itemPath>
+      <itemPath>CFishMolly.cpp</itemPath>
+      <itemPath>CFishNemo.cpp</itemPath>
+      <itemPath>CFrame.cpp</itemPath>
+      <itemPath>CItem.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -24,24 +42,8 @@
                    kind="IMPORTANT_FILES_FOLDER">
       <itemPath>Makefile</itemPath>
     </logicalFolder>
-    <itemPath>CApp.cpp</itemPath>
-    <itemPath>CApp.h</itemPath>
-    <itemPath>CAquarium.cpp</itemPath>
-    <itemPath>CAquarium.h</itemPath>
-    <itemPath>CDecorTreasure.cpp</itemPath>
-    <itemPath>CDecorTreasure.h</itemPath>
-    <itemPath>CFish.cpp</itemPath>
-    <itemPath>CFish.h</itemPath>
-    <itemPath>CFishBeta.cpp</itemPath>
-    <itemPath>CFishBeta.h</itemPath>
-    <itemPath>CFishMolly.cpp</itemPath>
-    <itemPath>CFishMolly.h</itemPath>
-    <itemPath>CFishNemo.cpp</itemPath>
-    <itemPath>CFishNemo.h</itemPath>
-    <itemPath>CFrame.cpp</itemPath>
-    <itemPath>CFrame.h</itemPath>
-    <itemPath>CItem.cpp</itemPath>
-    <itemPath>CItem.h</itemPath>
+    <itemPath>CAnimatedTreasure.cpp</itemPath>
+    <itemPath>CAnimatedTreasure.h</itemPath>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -60,6 +62,10 @@
           <commandLine>`wx-config --libs`</commandLine>
         </linkerTool>
       </compileType>
+      <item path="CAnimatedTreasure.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="CAnimatedTreasure.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="CApp.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="CApp.h" ex="false" tool="3" flavor2="0">
@@ -118,6 +124,10 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="CAnimatedTreasure.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="CAnimatedTreasure.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="CApp.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="CApp.h" ex="false" tool="3" flavor2="0">
