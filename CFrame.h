@@ -23,31 +23,46 @@ public:
     
     DECLARE_EVENT_TABLE()
     //!  Ids Handles for the event table       
-    enum Ids {ID_Exit=1, ID_About, ID_AddFishBeta, ID_AddFishNemo, ID_AddFishMolly, 
-              ID_FileTrashCan, ID_OnFileCountBetaFish, ID_AddDecorTreasure, ID_SaveAs,
-              ID_FileOpen, ID_Timer};
+    enum Ids {ID_Exit=1, 
+            ID_About, 
+            ID_AddFishBeta, 
+            ID_AddFishNemo, 
+            ID_AddFishMolly,
+            ID_AddDecorTreasure,
+            ID_AddAnimatedChest,
+            ID_FileTrashCan, 
+            ID_OnFileCountBetaFish, 
+            ID_SaveAs,
+            ID_FileOpen, 
+            ID_Timer};
     
-    void OnExit(wxCommandEvent& event);
-    void OnAbout(wxCommandEvent& event);
-    
-    void OnPaint(wxPaintEvent &event);
-    
+    // Add object events
+    // - Fish
     void OnAddFishBeta(wxCommandEvent& event);
     void OnAddFishNemo(wxCommandEvent& event);
     void OnAddFishMolly(wxCommandEvent& event);
     
+    // - Chests
     void OnAddDecorTreasure(wxCommandEvent& event);
+    void OnAddAnimatedChest(wxCommandEvent& event);
     
+    // Mouse events
     void OnLeftButtonDown(wxMouseEvent &event);
     void OnMouseMove(wxMouseEvent &event);
-    //! Event handler for save the aquarium
+    
+    // Event handlers for save/load the aquarium
     void OnFileSaveAs(wxCommandEvent& event);
-    //! Event handler for loading the aquarium
     void OnFileOpen(wxCommandEvent& event);
+    
+    //File Menu event handlers
+    void OnExit(wxCommandEvent& event);
+    void OnAbout(wxCommandEvent& event);
     void OnFileTrashCan(wxCommandEvent& event);
     void OnFileCountBetaFish(wxCommandEvent& event);
     
+    // Other Event handlers
     void OnTimer(wxTimerEvent &event);
+    void OnPaint(wxPaintEvent &event);
     
 private:
     //! An object that describes our aquarium

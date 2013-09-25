@@ -4,6 +4,7 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>CAnimatedTreasure.h</itemPath>
       <itemPath>CApp.h</itemPath>
       <itemPath>CAquarium.h</itemPath>
       <itemPath>CDecorTreasure.h</itemPath>
@@ -21,6 +22,7 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>CAnimatedTreasure.cpp</itemPath>
       <itemPath>CApp.cpp</itemPath>
       <itemPath>CAquarium.cpp</itemPath>
       <itemPath>CDecorTreasure.cpp</itemPath>
@@ -42,8 +44,6 @@
                    kind="IMPORTANT_FILES_FOLDER">
       <itemPath>Makefile</itemPath>
     </logicalFolder>
-    <itemPath>CAnimatedTreasure.cpp</itemPath>
-    <itemPath>CAnimatedTreasure.h</itemPath>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>
   <confs>

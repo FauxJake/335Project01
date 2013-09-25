@@ -13,6 +13,7 @@
 #include "CFishNemo.h"
 #include "CFishMolly.h"
 #include "CDecorTreasure.h"
+#include "CAnimatedTreasure.h"
 
 BEGIN_EVENT_TABLE(CFrame, wxFrame)
     EVT_MENU(ID_Exit, CFrame::OnExit)
@@ -25,6 +26,7 @@ BEGIN_EVENT_TABLE(CFrame, wxFrame)
     EVT_MENU(ID_AddFishNemo, CFrame::OnAddFishNemo)
     EVT_MENU(ID_AddFishMolly, CFrame::OnAddFishMolly)
     EVT_MENU(ID_AddDecorTreasure, CFrame::OnAddDecorTreasure)
+    EVT_MENU(ID_AddAnimatedChest, CFrame::OnAddAnimatedChest)
     EVT_PAINT(CFrame::OnPaint)
     EVT_LEFT_DOWN(CFrame::OnLeftButtonDown)
     EVT_MOTION(CFrame::OnMouseMove)
@@ -73,6 +75,10 @@ CFrame::CFrame() : wxFrame( NULL, -1, L"Aquarium",
      //
      wxMenu *menuDecor = new wxMenu;
      menuDecor->Append(ID_AddDecorTreasure, L"&Treasure Chest");
+     wxMenuItem *addAnimatedTreasureItem = menuDecor->Append(ID_AddAnimatedChest,
+                                                            L"&Animated Chest");
+     
+     addAnimatedTreasureItem->SetHelp(L"Add an animated chest to the aquarium");
      
      //
      // Menu Bar
@@ -171,6 +177,15 @@ void CFrame::OnAddFishMolly(wxCommandEvent& event)
 void CFrame::OnAddDecorTreasure(wxCommandEvent& event) 
 {
     mAquarium.AddItem(new CDecorTreasure(&mAquarium));
+    Refresh();
+}
+
+/*! \brief Add Animated Chest menu option handler
+ * \param event  An object that describes the event
+ */
+void CFrame::OnAddAnimatedChest(wxCommandEvent& event)
+{
+    mAquarium.AddItem(new CAnimatedTreasure(&mAquarium));
     Refresh();
 }
 
