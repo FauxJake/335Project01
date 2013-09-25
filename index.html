@@ -3,29 +3,49 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="chrome=1">
-        <title>335project01 by FauxJake</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Project 1 : Group Land Shark</title>
 
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
         <script src="http://codeorigin.jquery.com/jquery-2.0.3.min.js"></script>
 
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-        <!--[if lt IE 9]>
-        <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+        <style>
+            /*Fix for bootstrap jumbotron*/
+            body { padding-top: 70px; }
+        </style>
     </head>
     <body>
+        <nav class="navbar navbar-inverse" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <a class="navbar-brand" href="/">Aquarium Game</a>
+
+            <!--Nav links and dropdowns-->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/LandShark">Group Members</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-download" ></span>  Download Source <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="https://github.com/FauxJake/335Project01/zipball/master"><strong>ZIP File</strong></a></li>
+                            <li><a href="https://github.com/FauxJake/335Project01/tarball/master"><strong>TAR Ball</strong></a></li>
+                        </ul>
+                    </li>
+                </ul>
+        </nav>
         <div class="container">
             <div class="jumbotron">
                 <h1>335 Project 01</h1>
-                <p>This is a repository for CSE335 Project 1 Group LandShark.</p>
-
-                <a class="btn btn-primary btn-large" href="https://github.com/FauxJake/335Project01">GitHub Repository</a>
-
-                <ul class="list-unstyled">
-                    <li><a href="https://github.com/FauxJake/335Project01/zipball/master">Download <strong>ZIP File</strong></a></li>
-                    <li><a href="https://github.com/FauxJake/335Project01/tarball/master">Download <strong>TAR Ball</strong></a></li>
-                </ul>
+                <p>This is a repository for CSE335 Project 1 Group LandShark.  
+                <a class="btn btn-primary btn-large" href="https://github.com/FauxJake/335Project01">View on GitHub</a>
+                </p>
             </div>
         </div>
         <div class="container">
