@@ -25,7 +25,7 @@ public:
     //!  Ids Handles for the event table       
     enum Ids {ID_Exit=1, ID_About, ID_AddFishBeta, ID_AddFishNemo, ID_AddFishMolly, 
               ID_FileTrashCan, ID_OnFileCountBetaFish, ID_AddDecorTreasure, ID_SaveAs,
-              ID_FileOpen, ID_Timer};
+              ID_FileOpen, ID_Timer, ID_Clean, ID_Feed};
     
     void OnExit(wxCommandEvent& event);
     void OnAbout(wxCommandEvent& event);
@@ -37,6 +37,9 @@ public:
     void OnAddFishMolly(wxCommandEvent& event);
     
     void OnAddDecorTreasure(wxCommandEvent& event);
+    
+    void OnClean(wxCommandEvent& event);
+    void OnFeed(wxCommandEvent& event);
     
     void OnLeftButtonDown(wxMouseEvent &event);
     void OnMouseMove(wxMouseEvent &event);

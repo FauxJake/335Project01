@@ -22,13 +22,15 @@ const std::wstring DirectoryContainingImages(L"images/");
 
 CAquarium::CAquarium()
 {
-    if(!mBackground.LoadFile(L"images/background1.png", wxBITMAP_TYPE_PNG))
-        wxMessageBox(L"Failed to open image background1.png");
+    if(!mBackground.LoadFile(L"images/backgroundW.png", wxBITMAP_TYPE_PNG))
+        wxMessageBox(L"Failed to open image background.png");
     
     if(!mTrashcan.LoadFile(L"images/trashcan.png", wxBITMAP_TYPE_PNG))
         wxMessageBox(L"Failed to open image trashcan.png");
     
     mTrashCanActive = false;
+    
+    mTimerClean = 0.00;
 }
 
 //! \brief Destructor
@@ -311,10 +313,41 @@ void CAquarium::Clear()
  */
 void CAquarium::Update(double elapsed)
 {
+    mTimerClean += elapsed;
+    
+    // Change background depending on cleaning needed
+    // Only check if statements if within range (save run speed)
+    if (mTimerClean > 9.00 && mTimerClean < 46.00)
+    {
+        if (mTimerClean >= 10.00 && mTimerClean <= 10.10)
+        {
+            // Stage 1
+            if(!mBackground.LoadFile(L"images/backgroundW1.png", wxBITMAP_TYPE_PNG))
+                wxMessageBox(L"Failed to open image backgroundW1.png");
+        } else if (mTimerClean >= 25.00 && mTimerClean <= 25.10)
+        {
+            // Stage 2
+            if(!mBackground.LoadFile(L"images/backgroundW2.png", wxBITMAP_TYPE_PNG))
+                wxMessageBox(L"Failed to open image backgroundW2.png");
+        } else if (mTimerClean >= 45.00 && mTimerClean <= 45.10)
+        {
+            // Stage 3
+            if(!mBackground.LoadFile(L"images/backgroundW3.png", wxBITMAP_TYPE_PNG))
+                wxMessageBox(L"Failed to open image backgroundW3.png");
+        }
+    }
+    
     for(std::list<CItem *>::iterator i=mItems.begin(); 
             i != mItems.end();  i++) 
     {
         CItem *item = *i;
         item->Update(elapsed);
     }
+}
+
+void CAquarium::Clean()
+{
+    mTimerClean = 0.00;
+    if(!mBackground.LoadFile(L"images/backgroundW.png", wxBITMAP_TYPE_PNG))
+        wxMessageBox(L"Failed to open image backgroundW.png");
 }

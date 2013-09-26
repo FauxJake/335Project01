@@ -9,19 +9,19 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=GNU-Linux-x86
 CND_ARTIFACT_DIR_Debug=dist/Debug/GNU-Linux-x86
-CND_ARTIFACT_NAME_Debug=project1
-CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux-x86/project1
+CND_ARTIFACT_NAME_Debug=project01_335
+CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux-x86/project01_335
 CND_PACKAGE_DIR_Debug=dist/Debug/GNU-Linux-x86/package
-CND_PACKAGE_NAME_Debug=project1.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux-x86/package/project1.tar
+CND_PACKAGE_NAME_Debug=project01335.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux-x86/package/project01335.tar
 # Release configuration
 CND_PLATFORM_Release=GNU-Linux-x86
 CND_ARTIFACT_DIR_Release=dist/Release/GNU-Linux-x86
-CND_ARTIFACT_NAME_Release=project1
-CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux-x86/project1
+CND_ARTIFACT_NAME_Release=project01_335
+CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux-x86/project01_335
 CND_PACKAGE_DIR_Release=dist/Release/GNU-Linux-x86/package
-CND_PACKAGE_NAME_Release=project1.tar
-CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux-x86/package/project1.tar
+CND_PACKAGE_NAME_Release=project01335.tar
+CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux-x86/package/project01335.tar
 #
 # include compiler specific variables
 #

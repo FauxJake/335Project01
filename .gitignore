@@ -3,3 +3,5 @@
 
 # exclude prec headers
 /wx/prec.h.gch 
+/build/
+/dist/

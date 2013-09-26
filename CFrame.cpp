@@ -25,6 +25,8 @@ BEGIN_EVENT_TABLE(CFrame, wxFrame)
     EVT_MENU(ID_AddFishNemo, CFrame::OnAddFishNemo)
     EVT_MENU(ID_AddFishMolly, CFrame::OnAddFishMolly)
     EVT_MENU(ID_AddDecorTreasure, CFrame::OnAddDecorTreasure)
+    EVT_MENU(ID_Clean, CFrame::OnClean)
+    EVT_MENU(ID_Feed, CFrame::OnFeed)
     EVT_PAINT(CFrame::OnPaint)
     EVT_LEFT_DOWN(CFrame::OnLeftButtonDown)
     EVT_MOTION(CFrame::OnMouseMove)
@@ -75,12 +77,21 @@ CFrame::CFrame() : wxFrame( NULL, -1, L"Aquarium",
      menuDecor->Append(ID_AddDecorTreasure, L"&Treasure Chest");
      
      //
+     // Care Menu
+     //
+     
+     wxMenu *menuCare = new wxMenu;
+     menuCare->Append(ID_Clean, L"&Clean");
+     menuCare->Append(ID_Feed, L"&Feed");
+     
+     //
      // Menu Bar
      //
      wxMenuBar *menuBar = new wxMenuBar;
      menuBar->Append( menuFile, L"&File");
      menuBar->Append( menuFish, L"&Add Fish");
      menuBar->Append( menuDecor, L"&Add Decor");
+     menuBar->Append( menuCare, L"&Care");
 
      SetMenuBar( menuBar );
      
@@ -172,6 +183,17 @@ void CFrame::OnAddDecorTreasure(wxCommandEvent& event)
 {
     mAquarium.AddItem(new CDecorTreasure(&mAquarium));
     Refresh();
+}
+
+void CFrame::OnClean(wxCommandEvent& event)
+{
+    mAquarium.Clean();
+    Refresh();
+}
+
+void CFrame::OnFeed(wxCommandEvent& event)
+{
+    
 }
 
 void CFrame::OnFileSaveAs(wxCommandEvent& event)
