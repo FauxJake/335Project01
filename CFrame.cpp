@@ -27,6 +27,8 @@ BEGIN_EVENT_TABLE(CFrame, wxFrame)
     EVT_MENU(ID_AddFishMolly, CFrame::OnAddFishMolly)
     EVT_MENU(ID_AddDecorTreasure, CFrame::OnAddDecorTreasure)
     EVT_MENU(ID_AddAnimatedChest, CFrame::OnAddAnimatedChest)
+    EVT_MENU(ID_Clean, CFrame::OnClean)
+    EVT_MENU(ID_Feed, CFrame::OnFeed)
     EVT_PAINT(CFrame::OnPaint)
     EVT_LEFT_DOWN(CFrame::OnLeftButtonDown)
     EVT_MOTION(CFrame::OnMouseMove)
@@ -81,12 +83,21 @@ CFrame::CFrame() : wxFrame( NULL, -1, L"Aquarium",
      addAnimatedTreasureItem->SetHelp(L"Add an animated chest to the aquarium");
      
      //
+     // Care Menu
+     //
+     
+     wxMenu *menuCare = new wxMenu;
+     menuCare->Append(ID_Clean, L"&Clean");
+     menuCare->Append(ID_Feed, L"&Feed");
+     
+     //
      // Menu Bar
      //
      wxMenuBar *menuBar = new wxMenuBar;
      menuBar->Append( menuFile, L"&File");
      menuBar->Append( menuFish, L"&Add Fish");
      menuBar->Append( menuDecor, L"&Add Decor");
+     menuBar->Append( menuCare, L"&Care");
 
      SetMenuBar( menuBar );
      
@@ -187,6 +198,23 @@ void CFrame::OnAddAnimatedChest(wxCommandEvent& event)
 {
     mAquarium.AddItem(new CAnimatedTreasure(&mAquarium));
     Refresh();
+}
+
+/*! Add Care/Clean menu option handler
+ * \param event  An object that describes the event.
+ */ 
+void CFrame::OnClean(wxCommandEvent& event)
+{
+    mAquarium.Clean();
+    Refresh();
+}
+
+/*! Add Care/Feed menu option handler
+ * \param event  An object that describes the event.
+ */ 
+void CFrame::OnFeed(wxCommandEvent& event)
+{
+    mAquarium.Feed();
 }
 
 void CFrame::OnFileSaveAs(wxCommandEvent& event)
