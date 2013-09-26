@@ -23,9 +23,23 @@ public:
     
     DECLARE_EVENT_TABLE()
     //!  Ids Handles for the event table       
-    enum Ids {ID_Exit=1, ID_About, ID_AddFishBeta, ID_AddFishNemo, ID_AddFishMolly, 
-              ID_FileTrashCan, ID_OnFileCountBetaFish, ID_AddDecorTreasure, ID_SaveAs,
-              ID_FileOpen, ID_Timer, ID_Clean, ID_Feed};
+    enum Ids 
+    {
+        ID_Exit=1, 
+        ID_About, 
+        ID_AddFishBeta, 
+        ID_AddFishNemo, 
+        ID_AddFishMolly, 
+        ID_FileTrashCan, 
+        ID_OnFileCountBetaFish, 
+        ID_AddDecorTreasure, 
+        ID_AddAnimatedChest, 
+        ID_SaveAs,
+        ID_FileOpen, 
+        ID_Timer, 
+        ID_Clean, 
+        ID_Feed
+    };
     
     // Add object events
     // - Fish
