@@ -48,6 +48,8 @@ public:
     
     void Clean();
     
+    void Feed();
+    
     //! \brief Get the width of the aquarium
     //! \returns Aquarium width
     int GetWidth() const {return mBackground.GetWidth();}
@@ -69,7 +71,11 @@ private:
     //! All of the items that populate our aquarium
     std::list<CItem *> mItems;
     
+    //! Timer to check changing background image
     double mTimerClean;
+    
+    //! Timer to check fish being fed
+    double mTimerFeed;
 };
 
 #endif	/* CAQUARIUM_H */

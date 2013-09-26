@@ -185,15 +185,21 @@ void CFrame::OnAddDecorTreasure(wxCommandEvent& event)
     Refresh();
 }
 
+/*! Add Care/Clean menu option handler
+ * \param event  An object that describes the event.
+ */ 
 void CFrame::OnClean(wxCommandEvent& event)
 {
     mAquarium.Clean();
     Refresh();
 }
 
+/*! Add Care/Feed menu option handler
+ * \param event  An object that describes the event.
+ */ 
 void CFrame::OnFeed(wxCommandEvent& event)
 {
-    
+    mAquarium.Feed();
 }
 
 void CFrame::OnFileSaveAs(wxCommandEvent& event)

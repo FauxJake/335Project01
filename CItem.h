@@ -69,6 +69,9 @@ public:
     //! what actual underlying type it is.
     virtual CItem *Clone() = 0;
     
+    //! Tells item is not a fish
+    virtual bool IsFish() { return false; }
+    
 protected:
     CItem(CAquarium *aquarium, const std::wstring &filename);
     CItem(const CItem &);

@@ -31,6 +31,9 @@ public:
     //! Get the y speed of the fish
     void SetSpeedY(double speedy) {mSpeedY = speedy;}
     
+    //! Tells item is a fish
+    virtual bool IsFish() { return true; }
+    
 protected:
     CFish(CAquarium *aquarium, const std::wstring &filename);
     CFish(const CFish &);
