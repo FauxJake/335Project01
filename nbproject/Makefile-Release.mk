@@ -67,11 +67,11 @@ LDLIBSOPTIONS=
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/335project01
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/project01_335
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/335project01: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/project01_335: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/335project01 ${OBJECTFILES} ${LDLIBSOPTIONS}
+	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/project01_335 ${OBJECTFILES} ${LDLIBSOPTIONS}
 
 ${OBJECTDIR}/CAnimatedTreasure.o: CAnimatedTreasure.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -139,7 +139,7 @@ ${OBJECTDIR}/CItemVisitor.o: CItemVisitor.cpp
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/335project01
+	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/project01_335
 
 # Subprojects
 .clean-subprojects:

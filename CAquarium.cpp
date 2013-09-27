@@ -116,8 +116,6 @@ void CAquarium::AddItem(CItem *item)
     for(std::list<CItem *>::iterator i=mItems.begin(); 
             i != mItems.end();  i++) 
     {
-        CItem *item = *i;
-        
         if((*i)->IsFish())
             fishCount++;
     }
@@ -125,6 +123,9 @@ void CAquarium::AddItem(CItem *item)
     // Start feed timer if first fish added
     if (fishCount == 1 && mTimerFeed == 0.00)
         mTimerFeed = 0.01;
+    
+    PushScrollButtonToTop();
+    
 }
 
 /*! \brief Test an x,y click location to see if it clicked
@@ -155,6 +156,9 @@ void CAquarium::MoveToFront(CItem *item)
 {
     mItems.remove(item);
     mItems.push_back(item);
+    
+    //Make sure the scroll mode button is rendered first
+    PushScrollButtonToTop();
 }
 
 /*! \brief Toggle the state of the flag mTrashCanActive
@@ -361,7 +365,7 @@ void CAquarium::Update(double elapsed)
             }
             
             // No fish, no feed timer
-            mTimerFeed == 0.00;
+            mTimerFeed = 0.00;
         } else
             item->Update(elapsed);
     }
@@ -380,7 +384,20 @@ void CAquarium::Clean()
  */
 void CAquarium::Feed()
 {
-    mTimerFeed == 0.01;
+    // Check for any fish
+    int fishCount = 0;
+    for(std::list<CItem *>::iterator i=mItems.begin(); 
+            i != mItems.end();  i++) 
+    {
+        if((*i)->IsFish())
+            fishCount++;
+    }
+    
+    // Reset timer depending on fish being present or not
+    if (fishCount == 0)
+        mTimerFeed = 0.00;
+    else
+        mTimerFeed = 0.01;
 }
 
 void CAquarium::Accept(CItemVisitor *visitor)
