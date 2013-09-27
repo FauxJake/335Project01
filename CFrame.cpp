@@ -14,6 +14,7 @@
 #include "CFishMolly.h"
 #include "CDecorTreasure.h"
 #include "CAnimatedTreasure.h"
+#include "CCountBetaVisitor.h"
 
 BEGIN_EVENT_TABLE(CFrame, wxFrame)
     EVT_MENU(ID_Exit, CFrame::OnExit)
@@ -334,8 +335,9 @@ void CFrame::OnFileTrashCan(wxCommandEvent& event)
 void CFrame::OnFileCountBetaFish(wxCommandEvent& event) 
 {
     std::wstringstream str;
-    int cnt = mAquarium.NumBetaFish();
-    str << L"There are " << cnt << " Beta Fish" << std::ends;
+    CCountBetaVisitor visitor;
+    mAquarium.Accept(&visitor);
+    str << L"There are " << visitor.GetCount() << " Beta Fish." << std::ends;
 
     wxMessageBox(str.str().c_str(),
                  L"Astounding Aquarium Information",
