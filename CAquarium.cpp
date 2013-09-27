@@ -29,11 +29,7 @@ CAquarium::CAquarium()
     if(!mTrashcan.LoadFile(L"images/trashcan.png", wxBITMAP_TYPE_PNG))
         wxMessageBox(L"Failed to open image trashcan.png");
     
-    if(!mNav.LoadFile(L"images/nav1.png", wxBITMAP_TYPE_PNG))
-        wxMessageBox(L"Failed to open image nav1.png");
-    
     mTrashCanActive = false;
-    mNavToggle = false;
     
     mTimerClean = mTimerFeed = 0.00;
 }
@@ -56,16 +52,6 @@ void CAquarium::OnDraw(wxDC &dc)
      if(mTrashCanActive) 
      {
         dc.DrawBitmap(mTrashcan, 0, 0);
-     }
-     
-     if(mNavToggle)
-     {
-         if(!mNav.LoadFile(L"images/nav2.png", wxBITMAP_TYPE_PNG))
-             wxMessageBox(L"Failed to open image nav2.png");
-     } else
-     {
-         if(!mNav.LoadFile(L"images/nav1.png", wxBITMAP_TYPE_PNG))
-             wxMessageBox(L"Failed to open image nav1.png");
      }
      
      for(std::list<CItem *>::iterator t=mItems.begin(); t!=mItems.end(); t++)

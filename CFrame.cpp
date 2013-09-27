@@ -144,7 +144,7 @@ void CFrame::OnPaint(wxPaintEvent &event)
     wxPaintDC dc(this);
 
     mAquarium.OnDraw(dc);
-
+    
     dc.SetPen(wxNullPen);
     dc.SetBrush(wxNullBrush);
     dc.SetFont(wxNullFont);

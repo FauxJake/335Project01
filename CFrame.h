@@ -71,6 +71,12 @@ public:
     void OnTimer(wxTimerEvent &event);
     void OnPaint(wxPaintEvent &event);
     
+    //! getter for current width of frame
+    int GetCurrWidth() {return this->m_width;}
+    
+    //! getter for current height of frame
+    int GetCurrHeight() {return this->m_height();}
+    
 private:
     //! An object that describes our aquarium
     CAquarium  mAquarium;
