@@ -381,15 +381,23 @@ void CFrame::OnReport(wxTimerEvent &event)
 {
     mReporter->Report(L"5 seconds has passed");
     
-    std::wstringstream str;
+    std::wstringstream strCount;
     CCountFishVisitor countFish;
     mAquarium.Accept(&countFish);
-    str << L"Number of Fish in Tank: " 
+    strCount << L"Number of Fish in Tank: " 
         << (countFish.GetBetaCount() +
             countFish.GetNemoCount() +
             countFish.GetMollyCount()) << "\n"
         << L"Beta Fish: " << countFish.GetBetaCount() << "\n"
         << L"Nemo Fish: " << countFish.GetNemoCount() << "\n"
         << L"Molly Fish: " << countFish.GetMollyCount() << std::ends;
-    mReporter->Report(str.str());
+    mReporter->Report(strCount.str());
+    
+    std::wstringstream strDirty;
+    strDirty << L"Time since last cleaned: " << mAquarium.GetLastClean() << std::ends;
+    mReporter->Report(strDirty.str());
+    
+    std::wstringstream strFed;
+    strFed << L"Time since last fed: " << mAquarium.GetLastFed() << "\n" << std::ends;
+    mReporter->Report(strFed.str());
 }
