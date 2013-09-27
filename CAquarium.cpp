@@ -29,7 +29,11 @@ CAquarium::CAquarium()
     if(!mTrashcan.LoadFile(L"images/trashcan.png", wxBITMAP_TYPE_PNG))
         wxMessageBox(L"Failed to open image trashcan.png");
     
+    if(!mNav.LoadFile(L"images/nav1.png", wxBITMAP_TYPE_PNG))
+        wxMessageBox(L"Failed to open image nav1.png");
+    
     mTrashCanActive = false;
+    mNavToggle = false;
     
     mTimerClean = mTimerFeed = 0.00;
 }
@@ -52,6 +56,16 @@ void CAquarium::OnDraw(wxDC &dc)
      if(mTrashCanActive) 
      {
         dc.DrawBitmap(mTrashcan, 0, 0);
+     }
+     
+     if(mNavToggle)
+     {
+         if(!mNav.LoadFile(L"images/nav2.png", wxBITMAP_TYPE_PNG))
+             wxMessageBox(L"Failed to open image nav2.png");
+     } else
+     {
+         if(!mNav.LoadFile(L"images/nav1.png", wxBITMAP_TYPE_PNG))
+             wxMessageBox(L"Failed to open image nav1.png");
      }
      
      for(std::list<CItem *>::iterator t=mItems.begin(); t!=mItems.end(); t++)
@@ -365,7 +379,7 @@ void CAquarium::Update(double elapsed)
             }
             
             // No fish, no feed timer
-            mTimerFeed == 0.00;
+            mTimerFeed = 0.00;
         } else
             item->Update(elapsed);
     }
@@ -384,7 +398,20 @@ void CAquarium::Clean()
  */
 void CAquarium::Feed()
 {
-    mTimerFeed == 0.01;
+    // Check for any fish
+    int fishCount = 0;
+    for(std::list<CItem *>::iterator i=mItems.begin(); 
+            i != mItems.end();  i++) 
+    {
+        if((*i)->IsFish())
+            fishCount++;
+    }
+    
+    // Reset timer depending on fish being present or not
+    if (fishCount == 0)
+        mTimerFeed = 0.00;
+    else
+        mTimerFeed = 0.01;
 }
 
 void CAquarium::Accept(CItemVisitor *visitor)
