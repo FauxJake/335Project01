@@ -117,7 +117,7 @@ mTimer(this, ID_Timer)
     if (!mScrollModeInactive.LoadFile(L"images/nav1.png", wxBITMAP_TYPE_PNG))
         wxMessageBox(L"Failed to open image nav1.png");
 
-    mIsScrollMode = true;
+    mIsScrollMode = false;
 
 }
 
@@ -152,6 +152,13 @@ void CFrame::OnPaint(wxPaintEvent &event)
     wxPaintDC dc(this);
 
     mAquarium.OnDraw(dc);
+    
+    // Background width = 806
+    if(this->m_height > 806)
+        this->SetSize(this->m_width, 806);
+    // Background height = 2560
+    if(this->m_width > 2560)
+        this->SetSize(2560, this->m_height);
 
     // draw interface stuff
     if (mIsScrollMode)
