@@ -80,6 +80,9 @@ public:
     //! getter for current height of frame
     int GetCurrHeight() {return this->m_height;}
     
+    //! Toggle for scroll mode
+    void ToggleScrollMode() { mIsScrollMode = mIsScrollMode ? false:true; }
+    
 private:
     wxBitmap    mScrollModeActive;      //!< Scroll mode active button image to use
     wxBitmap    mScrollModeInactive;    //!< Scroll mode inactive button image to use

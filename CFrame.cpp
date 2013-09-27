@@ -110,13 +110,13 @@ mTimer(this, ID_Timer)
 
     mTimer.Start(FrameDuration);
     mCurrentTime = wxGetLocalTimeMillis().GetValue();
-    
-    if(!mScrollModeActive.LoadFile(L"images/nav2.png", wxBITMAP_TYPE_PNG))
+
+    if (!mScrollModeActive.LoadFile(L"images/nav2.png", wxBITMAP_TYPE_PNG))
         wxMessageBox(L"Failed to open image nav2.png");
-    
-    if(!mScrollModeInactive.LoadFile(L"images/nav1.png", wxBITMAP_TYPE_PNG))
+
+    if (!mScrollModeInactive.LoadFile(L"images/nav1.png", wxBITMAP_TYPE_PNG))
         wxMessageBox(L"Failed to open image nav1.png");
-    
+
     mIsScrollMode = true;
 
 }
@@ -156,10 +156,10 @@ void CFrame::OnPaint(wxPaintEvent &event)
     // draw interface stuff
     if (mIsScrollMode)
     {
-        dc.DrawBitmap(mScrollModeActive, 0, this->m_height - 59*2);
+        dc.DrawBitmap(mScrollModeActive, 0, this->m_height - 59 * 2);
     }
     else
-        dc.DrawBitmap(mScrollModeInactive, 0, this->m_height - 59*2);
+        dc.DrawBitmap(mScrollModeInactive, 0, this->m_height - 59 * 2);
 
     dc.SetPen(wxNullPen);
     dc.SetBrush(wxNullBrush);
@@ -278,6 +278,13 @@ void CFrame::OnFileOpen(wxCommandEvent& event)
  */
 void CFrame::OnLeftButtonDown(wxMouseEvent &event)
 {
+    if((event.m_x >= 0 && event.m_x <= 68 )
+            && ((event.m_y <= this->m_height) && event.m_y >= this->m_height - 59*2))
+    {
+        ToggleScrollMode();
+    }
+    
+    //need to test if scroll mode here then
     mGrabbedItem = mAquarium.HitTest(event.m_x, event.m_y);
     if (mGrabbedItem != NULL)
     {
