@@ -38,7 +38,7 @@ public:
         ID_FileOpen, 
         ID_Timer, 
         ID_Clean, 
-        ID_Feed
+        ID_Feed,
     };
     
     // Add object events
@@ -71,13 +71,19 @@ public:
     void OnTimer(wxTimerEvent &event);
     void OnPaint(wxPaintEvent &event);
     
+    //! getter for frame
+    CFrame* GetFrame() { return this; }
+    
     //! getter for current width of frame
     int GetCurrWidth() {return this->m_width;}
     
     //! getter for current height of frame
-    int GetCurrHeight() {return this->m_height();}
+    int GetCurrHeight() {return this->m_height;}
     
 private:
+    wxBitmap    mScrollModeActive;      //!< Scroll mode active button image to use
+    wxBitmap    mScrollModeInactive;    //!< Scroll mode inactive button image to use
+    
     //! An object that describes our aquarium
     CAquarium  mAquarium;
     

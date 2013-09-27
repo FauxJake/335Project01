@@ -11,6 +11,7 @@
 #include <sstream>
 
 #include "CFish.h"
+#include "CFrame.h"
 #include "CAquarium.h"
 #include "CFishBeta.h"
 #include "CFishMolly.h"
@@ -32,6 +33,7 @@ CAquarium::CAquarium()
     mTrashCanActive = false;
     
     mTimerClean = mTimerFeed = 0.00;
+
 }
 
 //! \brief Destructor
@@ -59,6 +61,8 @@ void CAquarium::OnDraw(wxDC &dc)
          CItem *item = *t;
          item->Draw(dc);
      }
+     
+     
 }
 
 /*! \brief Get an image from the image cache

@@ -110,7 +110,15 @@ mTimer(this, ID_Timer)
 
     mTimer.Start(FrameDuration);
     mCurrentTime = wxGetLocalTimeMillis().GetValue();
-    mIsScrollMode = false;
+    
+    if(!mScrollModeActive.LoadFile(L"images/nav2.png", wxBITMAP_TYPE_PNG))
+        wxMessageBox(L"Failed to open image nav2.png");
+    
+    if(!mScrollModeInactive.LoadFile(L"images/nav1.png", wxBITMAP_TYPE_PNG))
+        wxMessageBox(L"Failed to open image nav1.png");
+    
+    mIsScrollMode = true;
+
 }
 
 CFrame::CFrame(const CFrame& orig)
@@ -144,7 +152,15 @@ void CFrame::OnPaint(wxPaintEvent &event)
     wxPaintDC dc(this);
 
     mAquarium.OnDraw(dc);
-    
+
+    // draw interface stuff
+    if (mIsScrollMode)
+    {
+        dc.DrawBitmap(mScrollModeActive, 0, this->m_height - 59*2);
+    }
+    else
+        dc.DrawBitmap(mScrollModeInactive, 0, this->m_height - 59*2);
+
     dc.SetPen(wxNullPen);
     dc.SetBrush(wxNullBrush);
     dc.SetFont(wxNullFont);
@@ -262,34 +278,27 @@ void CFrame::OnFileOpen(wxCommandEvent& event)
  */
 void CFrame::OnLeftButtonDown(wxMouseEvent &event)
 {
-    if (mIsScrollMode)
+    mGrabbedItem = mAquarium.HitTest(event.m_x, event.m_y);
+    if (mGrabbedItem != NULL)
     {
+        // We grabbed something
+        bool ctrl = event.m_controlDown;
 
-    }
-    else
-    {
-        mGrabbedItem = mAquarium.HitTest(event.m_x, event.m_y);
-        if (mGrabbedItem != NULL)
+        if (ctrl)
         {
-            // We grabbed something
-            bool ctrl = event.m_controlDown;
-            
-            if (ctrl)
-            {
-                // Make a copy of the item we grabbed
-                CItem *clone = mGrabbedItem->Clone();
+            // Make a copy of the item we grabbed
+            CItem *clone = mGrabbedItem->Clone();
 
-                mAquarium.AddItem(clone);
-                clone->SetLocation(event.m_x, event.m_y);
-                mGrabbedItem = clone;
-                Refresh();
-            }
-            else
-            {
-                // Move it to the front
-                mAquarium.MoveToFront(mGrabbedItem);
-                Refresh();
-            }
+            mAquarium.AddItem(clone);
+            clone->SetLocation(event.m_x, event.m_y);
+            mGrabbedItem = clone;
+            Refresh();
+        }
+        else
+        {
+            // Move it to the front
+            mAquarium.MoveToFront(mGrabbedItem);
+            Refresh();
         }
     }
 }
