@@ -7,7 +7,7 @@
       <itemPath>CAnimatedTreasure.h</itemPath>
       <itemPath>CApp.h</itemPath>
       <itemPath>CAquarium.h</itemPath>
-      <itemPath>CCountBetaVisitor.h</itemPath>
+      <itemPath>CCountFishVisitor.h</itemPath>
       <itemPath>CDecorTreasure.h</itemPath>
       <itemPath>CFish.h</itemPath>
       <itemPath>CFishBeta.h</itemPath>
@@ -28,7 +28,7 @@
       <itemPath>CAnimatedTreasure.cpp</itemPath>
       <itemPath>CApp.cpp</itemPath>
       <itemPath>CAquarium.cpp</itemPath>
-      <itemPath>CCountBetaVisitor.cpp</itemPath>
+      <itemPath>CCountFishVisitor.cpp</itemPath>
       <itemPath>CDecorTreasure.cpp</itemPath>
       <itemPath>CFish.cpp</itemPath>
       <itemPath>CFishBeta.cpp</itemPath>
@@ -80,9 +80,9 @@
       </item>
       <item path="CAquarium.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="CCountBetaVisitor.cpp" ex="false" tool="1" flavor2="0">
+      <item path="CCountFishVisitor.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="CCountBetaVisitor.h" ex="false" tool="3" flavor2="0">
+      <item path="CCountFishVisitor.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="CDecorTreasure.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -154,9 +154,9 @@
       </item>
       <item path="CAquarium.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="CCountBetaVisitor.cpp" ex="false" tool="1" flavor2="0">
+      <item path="CCountFishVisitor.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="CCountBetaVisitor.h" ex="false" tool="3" flavor2="0">
+      <item path="CCountFishVisitor.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="CDecorTreasure.cpp" ex="false" tool="1" flavor2="0">
       </item>

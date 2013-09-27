@@ -19,6 +19,10 @@ public:
 
     virtual ~CFishNemo();
     
+    //! \brief Test if this item is a Nemo Fish
+    //! \returns true if it is
+    virtual bool IsNemoFish() const {return true;}
+    
     wxXmlNode *XmlSave();
     
     CItem *Clone();

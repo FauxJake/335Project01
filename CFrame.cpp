@@ -14,7 +14,7 @@
 #include "CFishMolly.h"
 #include "CDecorTreasure.h"
 #include "CAnimatedTreasure.h"
-#include "CCountBetaVisitor.h"
+#include "CCountFishVisitor.h"
 
 BEGIN_EVENT_TABLE(CFrame, wxFrame)
 EVT_MENU(ID_Exit, CFrame::OnExit)
@@ -349,9 +349,9 @@ void CFrame::OnFileTrashCan(wxCommandEvent& event)
 void CFrame::OnFileCountBetaFish(wxCommandEvent& event)
 {
     std::wstringstream str;
-    CCountBetaVisitor visitor;
+    CCountFishVisitor visitor;
     mAquarium.Accept(&visitor);
-    str << L"There are " << visitor.GetCount() << " Beta Fish." << std::ends;
+    str << L"There are " << visitor.GetBetaCount() << " Beta Fish." << std::ends;
 
     wxMessageBox(str.str().c_str(),
                  L"Astounding Aquarium Information",
@@ -380,4 +380,16 @@ void CFrame::OnTimer(wxTimerEvent &event)
 void CFrame::OnReport(wxTimerEvent &event)
 {
     mReporter->Report(L"5 seconds has passed");
+    
+    std::wstringstream str;
+    CCountFishVisitor countFish;
+    mAquarium.Accept(&countFish);
+    str << L"Number of Fish in Tank: " 
+        << (countFish.GetBetaCount() +
+            countFish.GetNemoCount() +
+            countFish.GetMollyCount()) << "\n"
+        << L"Beta Fish: " << countFish.GetBetaCount() << "\n"
+        << L"Nemo Fish: " << countFish.GetNemoCount() << "\n"
+        << L"Molly Fish: " << countFish.GetMollyCount() << std::ends;
+    mReporter->Report(str.str());
 }

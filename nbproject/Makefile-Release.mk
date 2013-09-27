@@ -38,7 +38,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/CAnimatedTreasure.o \
 	${OBJECTDIR}/CApp.o \
 	${OBJECTDIR}/CAquarium.o \
-	${OBJECTDIR}/CCountBetaVisitor.o \
+	${OBJECTDIR}/CCountFishVisitor.o \
 	${OBJECTDIR}/CDecorTreasure.o \
 	${OBJECTDIR}/CFish.o \
 	${OBJECTDIR}/CFishBeta.o \
@@ -89,10 +89,10 @@ ${OBJECTDIR}/CAquarium.o: CAquarium.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/CAquarium.o CAquarium.cpp
 
-${OBJECTDIR}/CCountBetaVisitor.o: CCountBetaVisitor.cpp 
+${OBJECTDIR}/CCountFishVisitor.o: CCountFishVisitor.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/CCountBetaVisitor.o CCountBetaVisitor.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/CCountFishVisitor.o CCountFishVisitor.cpp
 
 ${OBJECTDIR}/CDecorTreasure.o: CDecorTreasure.cpp 
 	${MKDIR} -p ${OBJECTDIR}

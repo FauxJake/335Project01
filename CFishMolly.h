@@ -19,6 +19,10 @@ public:
 
     virtual ~CFishMolly();
     
+    //! \brief Test if this item is a Molly Fish
+    //! \returns true if it is
+    virtual bool IsMollyFish() const {return true;}
+    
     wxXmlNode *XmlSave();
     
     CItem *Clone();
