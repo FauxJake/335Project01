@@ -38,8 +38,6 @@ public:
     bool IsOverTrashcan(int x, int y);
     void DeleteItem(CItem *item);
     
-    int NumBetaFish() const;
-    
     void Save(const std::wstring &filename);
     void Load(const std::wstring &filename);
     void Clear();
