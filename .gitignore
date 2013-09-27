@@ -5,3 +5,8 @@
 /wx/prec.h.gch 
 /build/
 /dist/
+
+# exclude auto-generated nb files
+
+/nbproject/Makefile*
+/nbproject/Package*
