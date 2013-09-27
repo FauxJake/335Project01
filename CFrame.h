@@ -11,6 +11,7 @@
 #include "wx/prec.h"
 #include "CAquarium.h"
 #include "CItem.h"
+#include "CReporter.h"
 
 //! Program main display frame
 class CFrame : public wxFrame
@@ -30,13 +31,14 @@ public:
         ID_AddFishBeta, 
         ID_AddFishNemo, 
         ID_AddFishMolly, 
-        ID_FileTrashCan, 
+        ID_FileTrashCan,
         ID_OnFileCountBetaFish, 
         ID_AddDecorTreasure, 
         ID_AddAnimatedChest, 
         ID_SaveAs,
         ID_FileOpen, 
-        ID_Timer, 
+        ID_Timer,
+        ID_ReportDisplay,
         ID_Clean, 
         ID_Feed
     };
@@ -69,6 +71,7 @@ public:
     
     // Other Event handlers
     void OnTimer(wxTimerEvent &event);
+    void OnReport(wxTimerEvent &event);
     void OnPaint(wxPaintEvent &event);
     
 private:
@@ -84,6 +87,9 @@ private:
     //! A timer for animation
     wxTimer mTimer;
     
+    //! A timer for report display
+    wxTimer mReport;
+    
     //! The current Unix time
     long long mCurrentTime;
     
@@ -92,6 +98,9 @@ private:
     
     //! scroll mode boolean
     bool mIsScrollMode;
+    
+    //! A reporter window
+    CReporter *mReporter;
 };
 
 #endif	/* CFRAME_H */

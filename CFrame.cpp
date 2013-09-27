@@ -35,10 +35,12 @@ EVT_LEFT_DOWN(CFrame::OnLeftButtonDown)
 EVT_MOTION(CFrame::OnMouseMove)
 EVT_LEFT_UP(CFrame::OnMouseMove)
 EVT_TIMER(ID_Timer, CFrame::OnTimer)
+EVT_TIMER(ID_ReportDisplay, CFrame::OnReport)
 END_EVENT_TABLE()
 
 //! Milliseconds
 const int FrameDuration = 30;
+const int ReporterDisplay = 5000;
 
 /*! \brief Default constructor
  * 
@@ -46,7 +48,7 @@ const int FrameDuration = 30;
  */
 CFrame::CFrame() : wxFrame(NULL, -1, L"Aquarium",
                            wxPoint(20, 20), wxSize(1024, 800)),
-mTimer(this, ID_Timer)
+mTimer(this, ID_Timer), mReport(this, ID_ReportDisplay)
 {
     //
     // File menu
@@ -107,7 +109,10 @@ mTimer(this, ID_Timer)
     SetBackgroundColour(wxColour(0, 0, 0));
 
     mGrabbedItem = NULL;
-
+    
+    mReporter = new CReporter(this);
+    mReport.Start(ReporterDisplay);
+    
     mTimer.Start(FrameDuration);
     mCurrentTime = wxGetLocalTimeMillis().GetValue();
     mIsScrollMode = false;
@@ -363,4 +368,16 @@ void CFrame::OnFileCountBetaFish(wxCommandEvent& event)
 void CFrame::OnTimer(wxTimerEvent &event)
 {
     Refresh();
+}
+
+/*! \brief Report handler function
+ * 
+ * This function is called on a regular basis to report status of the
+ * the window, allowing for report display.
+ * 
+ * \param event The timer event
+ */
+void CFrame::OnReport(wxTimerEvent &event)
+{
+    mReporter->Report(L"5 seconds has passed");
 }

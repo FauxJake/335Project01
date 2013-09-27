@@ -46,7 +46,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/CFishNemo.o \
 	${OBJECTDIR}/CFrame.o \
 	${OBJECTDIR}/CItem.o \
-	${OBJECTDIR}/CItemVisitor.o
+	${OBJECTDIR}/CItemVisitor.o \
+	${OBJECTDIR}/CReporter.o
 
 
 # C Compiler Flags
@@ -67,11 +68,11 @@ LDLIBSOPTIONS=
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/project1
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/335project01
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/project1: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/335project01: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/project1 ${OBJECTFILES} ${LDLIBSOPTIONS} `wx-config --libs`
+	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/335project01 ${OBJECTFILES} ${LDLIBSOPTIONS} `wx-config --libs`
 
 ${OBJECTDIR}/CAnimatedTreasure.o: CAnimatedTreasure.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -133,13 +134,18 @@ ${OBJECTDIR}/CItemVisitor.o: CItemVisitor.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g `wx-config --cppflags` -MMD -MP -MF $@.d -o ${OBJECTDIR}/CItemVisitor.o CItemVisitor.cpp
 
+${OBJECTDIR}/CReporter.o: CReporter.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g `wx-config --cppflags` -MMD -MP -MF $@.d -o ${OBJECTDIR}/CReporter.o CReporter.cpp
+
 # Subprojects
 .build-subprojects:
 
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/project1
+	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/335project01
 
 # Subprojects
 .clean-subprojects:
