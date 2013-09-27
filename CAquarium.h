@@ -57,6 +57,10 @@ public:
     int GetHeight() const {return mBackground.GetHeight();}
     
     void Accept(CItemVisitor *visitor);
+    
+    /*! \brief makes sure the scroll button is always rendered first
+     */
+    void PushScrollButtonToTop() { mItems.splice(mItems.end(), mItems, --mItems.end() ); }
             
 private:
     //! Default copy constructor
