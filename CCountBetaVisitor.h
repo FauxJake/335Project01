@@ -11,7 +11,8 @@
 
 #include "CItemVisitor.h"
 
-class CCountBetaVisitor {
+class CCountBetaVisitor : public CItemVisitor
+{
 public:
     CCountBetaVisitor() {mNum = 0;}
     virtual ~CCountBetaVisitor();

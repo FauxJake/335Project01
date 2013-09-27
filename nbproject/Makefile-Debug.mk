@@ -38,13 +38,15 @@ OBJECTFILES= \
 	${OBJECTDIR}/CAnimatedTreasure.o \
 	${OBJECTDIR}/CApp.o \
 	${OBJECTDIR}/CAquarium.o \
+	${OBJECTDIR}/CCountBetaVisitor.o \
 	${OBJECTDIR}/CDecorTreasure.o \
 	${OBJECTDIR}/CFish.o \
 	${OBJECTDIR}/CFishBeta.o \
 	${OBJECTDIR}/CFishMolly.o \
 	${OBJECTDIR}/CFishNemo.o \
 	${OBJECTDIR}/CFrame.o \
-	${OBJECTDIR}/CItem.o
+	${OBJECTDIR}/CItem.o \
+	${OBJECTDIR}/CItemVisitor.o
 
 
 # C Compiler Flags
@@ -86,6 +88,11 @@ ${OBJECTDIR}/CAquarium.o: CAquarium.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g `wx-config --cppflags` -MMD -MP -MF $@.d -o ${OBJECTDIR}/CAquarium.o CAquarium.cpp
 
+${OBJECTDIR}/CCountBetaVisitor.o: CCountBetaVisitor.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g `wx-config --cppflags` -MMD -MP -MF $@.d -o ${OBJECTDIR}/CCountBetaVisitor.o CCountBetaVisitor.cpp
+
 ${OBJECTDIR}/CDecorTreasure.o: CDecorTreasure.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
@@ -120,6 +127,11 @@ ${OBJECTDIR}/CItem.o: CItem.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -g `wx-config --cppflags` -MMD -MP -MF $@.d -o ${OBJECTDIR}/CItem.o CItem.cpp
+
+${OBJECTDIR}/CItemVisitor.o: CItemVisitor.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g `wx-config --cppflags` -MMD -MP -MF $@.d -o ${OBJECTDIR}/CItemVisitor.o CItemVisitor.cpp
 
 # Subprojects
 .build-subprojects:

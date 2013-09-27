@@ -188,23 +188,6 @@ void CAquarium::DeleteItem(CItem *item)
     delete item;
 }
 
-/*! \brief Determine the number of Beta fish
- * \returns Number of Beta Fish
- */
-int CAquarium::NumBetaFish() const
-{
-    int cnt = 0;
-    for(std::list<CItem *>::const_iterator i=mItems.begin(); 
-            i != mItems.end();  i++) 
-    {
-        if((*i)->IsBetaFish())
-        {
-            cnt++;
-        }
-    }
-    return  cnt;
-}
-
 /*! \brief Save the aquarium as a .aqua XML file.
  * 
  * Open an XML file and stream the aquarium data to it.
