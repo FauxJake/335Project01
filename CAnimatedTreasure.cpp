@@ -6,7 +6,6 @@
 
 #include "wx/prec.h"
 #include "CAnimatedTreasure.h"
-#include "CItem.h"
 #include "CAquarium.h"
 
 //! treasure chest filename, closed is default image
