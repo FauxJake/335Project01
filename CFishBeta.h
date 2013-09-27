@@ -10,6 +10,7 @@
 
 #include "wx/prec.h"
 #include "CFish.h"
+#include "CItemVisitor.h"
 
 //! Class that implements a fish of type Beta
 class CFishBeta : public CFish
@@ -27,6 +28,7 @@ public:
     
     CItem *Clone();
     
+    virtual void Accept(CItemVisitor *visitor) {visitor->VisitBeta(this);}
     
 private:
     //! Default constructor (disabled)

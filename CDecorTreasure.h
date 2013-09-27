@@ -26,6 +26,8 @@ public:
     
     CItem *Clone();
     
+    virtual void Accept(CItemVisitor *visitor) {visitor->VisitTreasure(this);}
+    
 private:
     //! Default constructor (disabled)
     CDecorTreasure();

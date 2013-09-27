@@ -87,7 +87,11 @@ private:
     //! The current Unix time
     long long mCurrentTime;
     
+    //! control key is pressed?
     bool m_controlDown;
+    
+    //! scroll mode boolean
+    bool mIsScrollMode;
 };
 
 #endif	/* CFRAME_H */

@@ -11,6 +11,7 @@
 #define	CITEM_H
 
 #include "wx/prec.h"
+#include "CItemVisitor.h"
 
 class CAquarium;
 
@@ -71,6 +72,9 @@ public:
     
     //! Tells item is not a fish
     virtual bool IsFish() { return false; }
+    
+    //! Virtual function to accept visitors into items
+    virtual void Accept(CItemVisitor *) = 0;
     
 protected:
     CItem(CAquarium *aquarium, const std::wstring &filename);

@@ -38,8 +38,6 @@ public:
     bool IsOverTrashcan(int x, int y);
     void DeleteItem(CItem *item);
     
-    int NumBetaFish() const;
-    
     void Save(const std::wstring &filename);
     void Load(const std::wstring &filename);
     void Clear();
@@ -57,6 +55,12 @@ public:
     //! \brief Get the height of the aquarium
     //! \returns Aquarium height
     int GetHeight() const {return mBackground.GetHeight();}
+    
+    void Accept(CItemVisitor *visitor);
+    
+    /*! \brief makes sure the scroll button is always rendered first
+     */
+    void PushScrollButtonToTop() { mItems.splice(mItems.end(), mItems, --mItems.end() ); }
             
 private:
     //! Default copy constructor
