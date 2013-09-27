@@ -23,6 +23,8 @@ public:
     
     CItem *Clone();
     
+    virtual void Accept(CItemVisitor *visitor) {visitor->VisitMolly(this);}
+    
 private:
     //! Default constructor (disabled)
     CFishMolly();

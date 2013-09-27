@@ -38,13 +38,15 @@ OBJECTFILES= \
 	${OBJECTDIR}/CAnimatedTreasure.o \
 	${OBJECTDIR}/CApp.o \
 	${OBJECTDIR}/CAquarium.o \
+	${OBJECTDIR}/CCountBetaVisitor.o \
 	${OBJECTDIR}/CDecorTreasure.o \
 	${OBJECTDIR}/CFish.o \
 	${OBJECTDIR}/CFishBeta.o \
 	${OBJECTDIR}/CFishMolly.o \
 	${OBJECTDIR}/CFishNemo.o \
 	${OBJECTDIR}/CFrame.o \
-	${OBJECTDIR}/CItem.o
+	${OBJECTDIR}/CItem.o \
+	${OBJECTDIR}/CItemVisitor.o
 
 
 # C Compiler Flags
@@ -65,11 +67,11 @@ LDLIBSOPTIONS=
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/project1
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/project01_335
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/project1: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/project01_335: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/project1 ${OBJECTFILES} ${LDLIBSOPTIONS}
+	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/project01_335 ${OBJECTFILES} ${LDLIBSOPTIONS}
 
 ${OBJECTDIR}/CAnimatedTreasure.o: CAnimatedTreasure.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -85,6 +87,11 @@ ${OBJECTDIR}/CAquarium.o: CAquarium.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/CAquarium.o CAquarium.cpp
+
+${OBJECTDIR}/CCountBetaVisitor.o: CCountBetaVisitor.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/CCountBetaVisitor.o CCountBetaVisitor.cpp
 
 ${OBJECTDIR}/CDecorTreasure.o: CDecorTreasure.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -121,13 +128,18 @@ ${OBJECTDIR}/CItem.o: CItem.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/CItem.o CItem.cpp
 
+${OBJECTDIR}/CItemVisitor.o: CItemVisitor.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/CItemVisitor.o CItemVisitor.cpp
+
 # Subprojects
 .build-subprojects:
 
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/project1
+	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/project01_335
 
 # Subprojects
 .clean-subprojects:

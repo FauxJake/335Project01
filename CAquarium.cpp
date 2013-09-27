@@ -16,6 +16,7 @@
 #include "CFishMolly.h"
 #include "CFishNemo.h"
 #include "CDecorTreasure.h"
+#include "CItemVisitor.h"
 
 //! Images Directory
 const std::wstring DirectoryContainingImages(L"images/");
@@ -28,7 +29,11 @@ CAquarium::CAquarium()
     if(!mTrashcan.LoadFile(L"images/trashcan.png", wxBITMAP_TYPE_PNG))
         wxMessageBox(L"Failed to open image trashcan.png");
     
+    if(!mNav.LoadFile(L"images/nav1.png", wxBITMAP_TYPE_PNG))
+        wxMessageBox(L"Failed to open image nav1.png");
+    
     mTrashCanActive = false;
+    mNavToggle = false;
     
     mTimerClean = mTimerFeed = 0.00;
 }
@@ -51,6 +56,16 @@ void CAquarium::OnDraw(wxDC &dc)
      if(mTrashCanActive) 
      {
         dc.DrawBitmap(mTrashcan, 0, 0);
+     }
+     
+     if(mNavToggle)
+     {
+         if(!mNav.LoadFile(L"images/nav2.png", wxBITMAP_TYPE_PNG))
+             wxMessageBox(L"Failed to open image nav2.png");
+     } else
+     {
+         if(!mNav.LoadFile(L"images/nav1.png", wxBITMAP_TYPE_PNG))
+             wxMessageBox(L"Failed to open image nav1.png");
      }
      
      for(std::list<CItem *>::iterator t=mItems.begin(); t!=mItems.end(); t++)
@@ -115,8 +130,6 @@ void CAquarium::AddItem(CItem *item)
     for(std::list<CItem *>::iterator i=mItems.begin(); 
             i != mItems.end();  i++) 
     {
-        CItem *item = *i;
-        
         if((*i)->IsFish())
             fishCount++;
     }
@@ -124,6 +137,9 @@ void CAquarium::AddItem(CItem *item)
     // Start feed timer if first fish added
     if (fishCount == 1 && mTimerFeed == 0.00)
         mTimerFeed = 0.01;
+    
+    PushScrollButtonToTop();
+    
 }
 
 /*! \brief Test an x,y click location to see if it clicked
@@ -154,6 +170,9 @@ void CAquarium::MoveToFront(CItem *item)
 {
     mItems.remove(item);
     mItems.push_back(item);
+    
+    //Make sure the scroll mode button is rendered first
+    PushScrollButtonToTop();
 }
 
 /*! \brief Toggle the state of the flag mTrashCanActive
@@ -185,23 +204,6 @@ void CAquarium::DeleteItem(CItem *item)
 {
     mItems.remove(item);
     delete item;
-}
-
-/*! \brief Determine the number of Beta fish
- * \returns Number of Beta Fish
- */
-int CAquarium::NumBetaFish() const
-{
-    int cnt = 0;
-    for(std::list<CItem *>::const_iterator i=mItems.begin(); 
-            i != mItems.end();  i++) 
-    {
-        if((*i)->IsBetaFish())
-        {
-            cnt++;
-        }
-    }
-    return  cnt;
 }
 
 /*! \brief Save the aquarium as a .aqua XML file.
@@ -377,7 +379,7 @@ void CAquarium::Update(double elapsed)
             }
             
             // No fish, no feed timer
-            mTimerFeed == 0.00;
+            mTimerFeed = 0.00;
         } else
             item->Update(elapsed);
     }
@@ -396,5 +398,27 @@ void CAquarium::Clean()
  */
 void CAquarium::Feed()
 {
-    mTimerFeed == 0.01;
+    // Check for any fish
+    int fishCount = 0;
+    for(std::list<CItem *>::iterator i=mItems.begin(); 
+            i != mItems.end();  i++) 
+    {
+        if((*i)->IsFish())
+            fishCount++;
+    }
+    
+    // Reset timer depending on fish being present or not
+    if (fishCount == 0)
+        mTimerFeed = 0.00;
+    else
+        mTimerFeed = 0.01;
+}
+
+void CAquarium::Accept(CItemVisitor *visitor)
+{
+    for(std::list<CItem *>::iterator i=mItems.begin(); i != mItems.end(); i++)
+    {
+        CItem *item = *i;
+        item->Accept(visitor);
+    }
 }

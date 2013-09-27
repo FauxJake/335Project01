@@ -22,6 +22,8 @@ public:
     wxXmlNode *XmlSave();
     
     CItem *Clone();
+    
+    virtual void Accept(CItemVisitor *visitor) {visitor->VisitNemo(this);}
         
 private:
     //! Default constructor (disabled)
