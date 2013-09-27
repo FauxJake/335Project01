@@ -16,6 +16,7 @@
 #include "CFishMolly.h"
 #include "CFishNemo.h"
 #include "CDecorTreasure.h"
+#include "CItemVisitor.h"
 
 //! Images Directory
 const std::wstring DirectoryContainingImages(L"images/");
@@ -397,4 +398,13 @@ void CAquarium::Clean()
 void CAquarium::Feed()
 {
     mTimerFeed == 0.01;
+}
+
+void CAquarium::Accept(CItemVisitor *visitor)
+{
+    for(std::list<CItem *>::iterator i=mItems.begin(); i != mItems.end(); i++)
+    {
+        CItem *item = *i;
+        item->Accept(visitor);
+    }
 }

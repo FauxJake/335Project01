@@ -30,6 +30,8 @@ public:
     
     CItem *Clone();
     
+    void Accept(CItemVisitor *visitor) {visitor->VisitAnimatedTreasure(this);}
+    
 private:
     //! Default constructor (disabled)
     CAnimatedTreasure();

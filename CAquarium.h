@@ -57,6 +57,8 @@ public:
     //! \brief Get the height of the aquarium
     //! \returns Aquarium height
     int GetHeight() const {return mBackground.GetHeight();}
+    
+    void Accept(CItemVisitor *visitor);
             
 private:
     //! Default copy constructor
