@@ -61,6 +61,12 @@ public:
     /*! \brief makes sure the scroll button is always rendered first
      */
     void PushScrollButtonToTop() { mItems.splice(mItems.end(), mItems, --mItems.end() ); }
+    
+    //! Gets time since aquarium has been last cleaned
+    double GetLastClean() { return mTimerClean; }
+    
+    //! Gets time since the fish have been last feed
+    double GetLastFed() { return mTimerFeed; }
             
 private:
     //! Default copy constructor
