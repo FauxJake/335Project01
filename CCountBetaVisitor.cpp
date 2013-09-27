@@ -14,6 +14,6 @@ CCountBetaVisitor::~CCountBetaVisitor()
 
 void CCountBetaVisitor::VisitBeta(CFishBeta *beta)
 {
-    if(beta->IsBetaFish()== true)
+    if(beta->IsBetaFish())
         mNum++;
 }

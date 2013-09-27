@@ -41,6 +41,7 @@ CFish::~CFish()
  */
 void CFish::Update(double elapsed) 
 {
+    //for scrolling ad offset here
     SetLocation(GetX() + mSpeedX * elapsed, 
                 GetY() + mSpeedY * elapsed);
     

@@ -116,8 +116,6 @@ void CAquarium::AddItem(CItem *item)
     for(std::list<CItem *>::iterator i=mItems.begin(); 
             i != mItems.end();  i++) 
     {
-        CItem *item = *i;
-        
         if((*i)->IsFish())
             fishCount++;
     }
@@ -125,6 +123,9 @@ void CAquarium::AddItem(CItem *item)
     // Start feed timer if first fish added
     if (fishCount == 1 && mTimerFeed == 0.00)
         mTimerFeed = 0.01;
+    
+    PushScrollButtonToTop();
+    
 }
 
 /*! \brief Test an x,y click location to see if it clicked
@@ -155,6 +156,9 @@ void CAquarium::MoveToFront(CItem *item)
 {
     mItems.remove(item);
     mItems.push_back(item);
+    
+    //Make sure the scroll mode button is rendered first
+    PushScrollButtonToTop();
 }
 
 /*! \brief Toggle the state of the flag mTrashCanActive
@@ -186,23 +190,6 @@ void CAquarium::DeleteItem(CItem *item)
 {
     mItems.remove(item);
     delete item;
-}
-
-/*! \brief Determine the number of Beta fish
- * \returns Number of Beta Fish
- */
-int CAquarium::NumBetaFish() const
-{
-    int cnt = 0;
-    for(std::list<CItem *>::const_iterator i=mItems.begin(); 
-            i != mItems.end();  i++) 
-    {
-        if((*i)->IsBetaFish())
-        {
-            cnt++;
-        }
-    }
-    return  cnt;
 }
 
 /*! \brief Save the aquarium as a .aqua XML file.

@@ -7,6 +7,7 @@
       <itemPath>CAnimatedTreasure.h</itemPath>
       <itemPath>CApp.h</itemPath>
       <itemPath>CAquarium.h</itemPath>
+      <itemPath>CCountBetaVisitor.h</itemPath>
       <itemPath>CDecorTreasure.h</itemPath>
       <itemPath>CFish.h</itemPath>
       <itemPath>CFishBeta.h</itemPath>
@@ -14,6 +15,7 @@
       <itemPath>CFishNemo.h</itemPath>
       <itemPath>CFrame.h</itemPath>
       <itemPath>CItem.h</itemPath>
+      <itemPath>CItemVisitor.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -25,6 +27,7 @@
       <itemPath>CAnimatedTreasure.cpp</itemPath>
       <itemPath>CApp.cpp</itemPath>
       <itemPath>CAquarium.cpp</itemPath>
+      <itemPath>CCountBetaVisitor.cpp</itemPath>
       <itemPath>CDecorTreasure.cpp</itemPath>
       <itemPath>CFish.cpp</itemPath>
       <itemPath>CFishBeta.cpp</itemPath>
@@ -32,6 +35,7 @@
       <itemPath>CFishNemo.cpp</itemPath>
       <itemPath>CFrame.cpp</itemPath>
       <itemPath>CItem.cpp</itemPath>
+      <itemPath>CItemVisitor.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
