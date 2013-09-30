@@ -16,6 +16,7 @@
 #include "CFishMolly.h"
 #include "CFishNemo.h"
 #include "CDecorTreasure.h"
+#include "CAnimatedTreasure.h"
 #include "CItemVisitor.h"
 
 //! Images Directory
@@ -272,6 +273,10 @@ void CAquarium::Load(const std::wstring &filename)
         else if(type == L"treasure-chest")
         {
             item = new CDecorTreasure(this);
+        }
+        else if (type == L"animated-chest")
+        {
+            item = new CAnimatedTreasure(this);
         }
         else if(type == L"molly")
         {

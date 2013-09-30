@@ -37,6 +37,8 @@ public:
     //! Draw this item
     //! \param dc Device context to draw on
     void Draw(wxDC &dc);
+    
+    bool Animate(const std::wstring &filename);
         
     //! Test to see if we clicked on this item
     //! \param x X location

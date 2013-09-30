@@ -78,6 +78,14 @@ void CItem::Draw(wxDC &dc)
                   int(GetY() - hit/2), true);
 }
 
+bool CItem::Animate(const std::wstring &filename)
+{
+    mItemImageOrig = mAquarium->GetCachedImage(filename);
+    mItemImage = new wxImage(*mItemImageOrig);
+    mItemBitmap = new wxBitmap(*mItemImage);
+    return true;
+}
+
 /*! \brief XML function to save an aquarium item
  * 
  * This is the base class version that does the 
