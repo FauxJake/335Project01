@@ -17,6 +17,7 @@
 #include "CFishNemo.h"
 #include "CDecorTreasure.h"
 #include "CAnimatedTreasure.h"
+#include "CEffectBubbles.h"
 #include "CItemVisitor.h"
 
 //! Images Directory
@@ -124,9 +125,19 @@ void CAquarium::AddItem(CItem *item)
     // Start feed timer if first fish added
     if (fishCount == 1 && mTimerFeed == 0.00)
         mTimerFeed = 0.01;
+}
+
+/*! \brief Adds a bubble effect above the origin item
+ *
+ * \param origin  A pointer to a CItem object that is the origin of the bubble effect
+ */
+void CAquarium::AddBubbles(CItem* origin)
+{
+    CEffectBubbles* item = new CEffectBubbles(this);
     
-    PushScrollButtonToTop();
-    
+    item->SetLocation(origin->GetX(),
+                      origin->GetY()- origin->GetImage()->GetHeight());
+    mItems.push_back(item);
 }
 
 /*! \brief Test an x,y click location to see if it clicked
@@ -157,9 +168,6 @@ void CAquarium::MoveToFront(CItem *item)
 {
     mItems.remove(item);
     mItems.push_back(item);
-    
-    //Make sure the scroll mode button is rendered first
-    PushScrollButtonToTop();
 }
 
 /*! \brief Toggle the state of the flag mTrashCanActive

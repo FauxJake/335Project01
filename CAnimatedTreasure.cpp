@@ -98,7 +98,6 @@ void CAnimatedTreasure::Update(double elapsed)
     {
         this->AdvanceAnimation(mChestStage);
         mChestAnimationTimer = 0;
-        //AddBubbles(this location);
     }
     else
     {}
@@ -148,6 +147,7 @@ int CAnimatedTreasure::AdvanceAnimation(int currStage)
                 break;
             mChestStage = 3;
             mChestOpening = false;
+            AddBubbles();
             break;
 
     }

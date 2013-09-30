@@ -48,6 +48,8 @@ public:
     
     void Feed();
     
+    void AddBubbles(CItem* origin);
+    
     //! \brief Get the width of the aquarium
     //! \returns Aquarium width
     int GetWidth() const {return mBackground.GetWidth();}
@@ -57,10 +59,6 @@ public:
     int GetHeight() const {return mBackground.GetHeight();}
     
     void Accept(CItemVisitor *visitor);
-    
-    /*! \brief makes sure the scroll button is always rendered first
-     */
-    void PushScrollButtonToTop() { mItems.splice(mItems.end(), mItems, --mItems.end() ); }
     
     //! Gets time since aquarium has been last cleaned
     double GetLastClean() { return mTimerClean; }

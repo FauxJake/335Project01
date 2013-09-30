@@ -39,6 +39,8 @@ public:
     void Draw(wxDC &dc);
     
     bool Animate(const std::wstring &filename);
+    
+    void AddBubbles();
         
     //! Test to see if we clicked on this item
     //! \param x X location
