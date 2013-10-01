@@ -36,7 +36,7 @@ public:
     
     //! Draw this item
     //! \param dc Device context to draw on
-    void Draw(wxDC &dc);
+    void Draw(wxDC &dc, double offsetX, double offsetY);
         
     //! Test to see if we clicked on this item
     //! \param x X location

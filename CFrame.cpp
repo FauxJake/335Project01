@@ -1,7 +1,7 @@
 /*!
  * \file CFrame.cpp
  *
- * \author David Warner
+ * \author Team Land Shark
  */
 
 #include "wx/prec.h"
@@ -129,8 +129,8 @@ CFrame::~CFrame()
 {
 }
 
-/*!  File/About menu option handler
- * \param event  An object that describes the event.
+/*! \brief File/About menu option handler
+ *  \param event  An object that describes the event.
  */
 void CFrame::OnAbout(wxCommandEvent& event)
 {
@@ -180,8 +180,8 @@ void CFrame::OnPaint(wxPaintEvent &event)
     mAquarium.Update(elapsed);
 }
 
-/*! Add Fish/Beta menu option handler
- * \param event  An object that describes the event.
+/*! \brief Add Fish/Beta menu option handler
+ *  \param event  An object that describes the event.
  */
 void CFrame::OnAddFishBeta(wxCommandEvent& event)
 {
@@ -189,8 +189,8 @@ void CFrame::OnAddFishBeta(wxCommandEvent& event)
     Refresh();
 }
 
-/*! Add Fish/Nemo menu option handler
- * \param event  An object that describes the event.
+/*! \brief Add Fish/Nemo menu option handler
+ *  \param event  An object that describes the event.
  */
 void CFrame::OnAddFishNemo(wxCommandEvent& event)
 {
@@ -198,8 +198,8 @@ void CFrame::OnAddFishNemo(wxCommandEvent& event)
     Refresh();
 }
 
-/*! Add Fish/Molly menu option handler
- * \param event  An object that describes the event.
+/*! \brief Add Fish/Molly menu option handler
+ *  \param event  An object that describes the event.
  */
 void CFrame::OnAddFishMolly(wxCommandEvent& event)
 {
@@ -207,8 +207,8 @@ void CFrame::OnAddFishMolly(wxCommandEvent& event)
     Refresh();
 }
 
-/*! Add Fish/Molly menu option handler
- * \param event  An object that describes the event.
+/*! \brief Add Fish/Molly menu option handler
+ *  \param event  An object that describes the event.
  */
 void CFrame::OnAddDecorTreasure(wxCommandEvent& event)
 {
@@ -217,7 +217,7 @@ void CFrame::OnAddDecorTreasure(wxCommandEvent& event)
 }
 
 /*! \brief Add Animated Chest menu option handler
- * \param event  An object that describes the event
+ *  \param event  An object that describes the event
  */
 void CFrame::OnAddAnimatedChest(wxCommandEvent& event)
 {
@@ -225,8 +225,8 @@ void CFrame::OnAddAnimatedChest(wxCommandEvent& event)
     Refresh();
 }
 
-/*! Add Care/Clean menu option handler
- * \param event  An object that describes the event.
+/*! \breif Add Care/Clean menu option handler
+ *  \param event  An object that describes the event.
  */
 void CFrame::OnClean(wxCommandEvent& event)
 {
@@ -234,14 +234,17 @@ void CFrame::OnClean(wxCommandEvent& event)
     Refresh();
 }
 
-/*! Add Care/Feed menu option handler
- * \param event  An object that describes the event.
+/*! \brief Add Care/Feed menu option handler
+ *  \param event  An object that describes the event.
  */
 void CFrame::OnFeed(wxCommandEvent& event)
 {
     mAquarium.Feed();
 }
 
+/*! \brief Add File/Save option handler
+ *  \param event  An object that describes the event.
+ */
 void CFrame::OnFileSaveAs(wxCommandEvent& event)
 {
     wxFileDialog dlg(this, L"Save File", L"", L"",
@@ -262,7 +265,9 @@ void CFrame::OnFileSaveAs(wxCommandEvent& event)
 
     mAquarium.Save(filename);
 }
-
+/*! \brief Add File/Open option handler
+ *  \param event  An object that describes the event.
+ */
 void CFrame::OnFileOpen(wxCommandEvent& event)
 {
     wxFileDialog dlg(this, L"Open File", L"", L"",
@@ -285,6 +290,11 @@ void CFrame::OnFileOpen(wxCommandEvent& event)
  */
 void CFrame::OnLeftButtonDown(wxMouseEvent &event)
 {
+    // Get mouse location (for scrolling)
+    mMouseLocationX = event.m_x;
+    mMouseLocationY = event.m_y;
+    
+    // Test for button hit (exact box for button)
     if((event.m_x >= 0 && event.m_x <= 68 )
             && ((event.m_y <= this->m_height) && event.m_y >= this->m_height - 59*2))
     {
@@ -292,7 +302,8 @@ void CFrame::OnLeftButtonDown(wxMouseEvent &event)
     }
     
     //need to test if scroll mode here then
-    mGrabbedItem = mAquarium.HitTest(event.m_x, event.m_y);
+    mGrabbedItem = mAquarium.HitTest(event.m_x - mAquarium.GetAquariumTestPointX(), 
+                                     event.m_y - mAquarium.GetAquariumTestPointY());
     if (mGrabbedItem != NULL)
     {
         // We grabbed something
@@ -325,14 +336,15 @@ void CFrame::OnLeftButtonDown(wxMouseEvent &event)
  */
 void CFrame::OnMouseMove(wxMouseEvent &event)
 {
-    // See if an item is currently being moved by the mouse
-    if (mGrabbedItem != NULL)
+    // See if an item is currently being moved by the mouse and scroll mode false
+    if (mGrabbedItem != NULL && !mIsScrollMode)
     {
-        // If an item is being moved, we only continue to 
+        // If an item is being moved, we only continue to
         // move it while the left button is down.
         if (event.m_leftDown)
         {
-            mGrabbedItem->SetLocation(event.m_x, event.m_y);
+            mGrabbedItem->SetLocation(event.m_x - mAquarium.GetAquariumTestPointX(), 
+                                      event.m_y - mAquarium.GetAquariumTestPointY());
         }
         else
         {
@@ -348,6 +360,65 @@ void CFrame::OnMouseMove(wxMouseEvent &event)
 
         // Force the screen to redraw
         Refresh();
+    } else
+    {
+        // Check mouse clicked and scroll mode is active
+        if(event.m_leftDown && mIsScrollMode)
+        {
+            //! Any image outside the frame
+            double imageOutsideX = 2560 - this->m_width;
+            double imageOutsideY = 806 - this->m_height;
+            
+            // Set image bounds
+            if(mAquarium.GetAquariumTestPointX() <= 0.0 &&
+                  mAquarium.GetAquariumTestPointX() >= -imageOutsideX)
+            {
+                // Stop scrolling too far right
+                if(mMouseLocationX > event.m_x &&
+                      mAquarium.GetAquariumTestPointX() > -imageOutsideX + (mMouseLocationX - event.m_x))
+                {
+                    mAquarium.SetAquariumTestPointX(mAquarium.GetAquariumTestPointX()
+                                                      - (mMouseLocationX - event.m_x));
+                    mMouseLocationX = event.m_x;
+                }
+                // Stop scrolling too far left
+                else if(mMouseLocationX < event.m_x &&
+                      mAquarium.GetAquariumTestPointX() < 0 + (event.m_x - mMouseLocationX))
+                {
+                    mAquarium.SetAquariumTestPointX(mAquarium.GetAquariumTestPointX()
+                                                      + (event.m_x - mMouseLocationX));
+                    // Prevent image scroll too far (weird issue with left side)
+                    if (mAquarium.GetAquariumTestPointX() > 0.0)
+                        mAquarium.SetAquariumTestPointX(0.0);
+                    mMouseLocationX = event.m_x;
+                }
+            }
+            
+            // Set image bounds
+            if(mAquarium.GetAquariumTestPointY() <= 0.0 &&
+                  mAquarium.GetAquariumTestPointY() >= -imageOutsideY)
+            {
+                // Stop scrolling too far right
+                if(mMouseLocationY > event.m_y &&
+                      mAquarium.GetAquariumTestPointY() > -imageOutsideY + (mMouseLocationY - event.m_y))
+                {
+                    mAquarium.SetAquariumTestPointY(mAquarium.GetAquariumTestPointY()
+                                                      - (mMouseLocationY - event.m_y));
+                    mMouseLocationY = event.m_y;
+                }
+                // Stop scrolling too far left
+                else if(mMouseLocationY < event.m_y &&
+                      mAquarium.GetAquariumTestPointY() < 0 + (event.m_y - mMouseLocationY))
+                {
+                    mAquarium.SetAquariumTestPointY(mAquarium.GetAquariumTestPointY()
+                                                      + (event.m_y - mMouseLocationY));
+                    // Prevent image scroll too far (weird issue with left side)
+                    if (mAquarium.GetAquariumTestPointY() > 0.0)
+                        mAquarium.SetAquariumTestPointY(0.0);
+                    mMouseLocationY = event.m_y;
+                }
+            }
+        }
     }
 }
 

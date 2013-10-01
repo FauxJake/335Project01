@@ -1,7 +1,7 @@
 /*!
  * \file CFrame.h
  *
- * \author David Warner
+ * \author Team Land Shark
  */
 
 #pragma once
@@ -51,33 +51,41 @@ public:
     void OnAddDecorTreasure(wxCommandEvent& event);
     void OnAddAnimatedChest(wxCommandEvent& event);
     
+    // - Environment
     void OnClean(wxCommandEvent& event);
     void OnFeed(wxCommandEvent& event);
     
+    // - User interaction
     void OnLeftButtonDown(wxMouseEvent &event);
     void OnMouseMove(wxMouseEvent &event);
     
-    // Event handlers for save/load the aquarium
+    // - Event handlers for save/load the aquarium
     void OnFileSaveAs(wxCommandEvent& event);
     void OnFileOpen(wxCommandEvent& event);
     
-    //File Menu event handlers
+    // - File Menu event handlers
     void OnExit(wxCommandEvent& event);
     void OnAbout(wxCommandEvent& event);
     void OnFileTrashCan(wxCommandEvent& event);
     void OnFileCountBetaFish(wxCommandEvent& event);
     
-    // Other Event handlers
+    // - Other Event handlers
     void OnTimer(wxTimerEvent &event);
     void OnPaint(wxPaintEvent &event);
     
-    //! getter for frame
+    /*! \brief Getter for frame
+     *  \returns A pointer to this frame
+     */
     CFrame* GetFrame() { return this; }
     
-    //! getter for current width of frame
+    /*! \brief Getter for the current frame width
+     *  \returns int value for frame width
+     */
     int GetCurrWidth() {return this->m_width;}
     
-    //! getter for current height of frame
+    /*! \brief Getter for the current frame height
+     *  \returns int value for frame height
+     */
     int GetCurrHeight() {return this->m_height;}
     
     //! Toggle for scroll mode
@@ -107,6 +115,10 @@ private:
     
     //! scroll mode boolean
     bool mIsScrollMode;
+    
+    //! Current mouse location X and Y
+    double mMouseLocationX;
+    double mMouseLocationY;
 };
 
 #endif	/* CFRAME_H */
