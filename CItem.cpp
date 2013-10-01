@@ -71,12 +71,12 @@ bool CItem::HitTest(int x, int y)
 /*! Draw our fish
  * \param dc A device context to draw the fish on
  */
-void CItem::Draw(wxDC &dc)
+void CItem::Draw(wxDC &dc, double offsetX, double offsetY)
 {
     int wid = mItemBitmap->GetWidth();
     int hit = mItemBitmap->GetHeight();
-    dc.DrawBitmap(*mItemBitmap, int(GetX() - wid / 2),
-                  int(GetY() - hit / 2), true);
+    dc.DrawBitmap(*mItemBitmap, int((GetX() - wid/2) + offsetX), 
+                  int((GetY() - hit/2) + offsetY), true);
 }
 
 bool CItem::Animate(const std::wstring &filename)

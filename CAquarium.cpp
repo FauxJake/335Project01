@@ -1,7 +1,7 @@
 /*!
  * \file CAquarium.cpp
  *
- * \author David Warner
+ * \author Team Land Shark
  */
 
 #include "wx/prec.h"
@@ -11,6 +11,7 @@
 #include <sstream>
 
 #include "CFish.h"
+#include "CFrame.h"
 #include "CAquarium.h"
 #include "CFishBeta.h"
 #include "CFishMolly.h"
@@ -23,6 +24,11 @@
 //! Images Directory
 const std::wstring DirectoryContainingImages(L"images/");
 
+/*! \brief Default constructor
+ * 
+ *  Loads default background image and trashcan image.
+ *  Sets initial values for bools, timers, and location.
+ */
 CAquarium::CAquarium()
 {
     if(!mBackground.LoadFile(L"images/backgroundW.png", wxBITMAP_TYPE_PNG))
@@ -34,10 +40,13 @@ CAquarium::CAquarium()
     mTrashCanActive = false;
     
     mTimerClean = mTimerFeed = 0.00;
+
+    mX = 0.0;
+    mY = 0.0;
 }
 
-//! \brief Destructor
-/*! Deallocates any allocated memory
+/*! \brief Destructor
+ *  Deallocates any allocated memory
  */
 CAquarium::~CAquarium()
 {
@@ -49,7 +58,7 @@ CAquarium::~CAquarium()
  */
 void CAquarium::OnDraw(wxDC &dc)
 {
-     dc.DrawBitmap(mBackground, 0, 0);
+     dc.DrawBitmap(mBackground, mX, mY);
      
      if(mTrashCanActive) 
      {
@@ -59,8 +68,10 @@ void CAquarium::OnDraw(wxDC &dc)
      for(std::list<CItem *>::iterator t=mItems.begin(); t!=mItems.end(); t++)
      {
          CItem *item = *t;
-         item->Draw(dc);
+         item->Draw(dc, mX, mY);
      }
+     
+     
 }
 
 /*! \brief Get an image from the image cache
@@ -413,6 +424,9 @@ void CAquarium::Feed()
         mTimerFeed = 0.01;
 }
 
+/*! \brief Allows a visitor to each class
+ *  \param *visitor  Visitor that will visit each class
+ */
 void CAquarium::Accept(CItemVisitor *visitor)
 {
     for(std::list<CItem *>::iterator i=mItems.begin(); i != mItems.end(); i++)

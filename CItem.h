@@ -36,7 +36,9 @@ public:
     
     //! Draw this item
     //! \param dc Device context to draw on
-    void Draw(wxDC &dc);
+    //! \param offsetX The x offset
+    //! \param offsetY The y offset
+    void Draw(wxDC &dc, double offsetX, double offsetY);
     
     bool Animate(const std::wstring &filename);
     
