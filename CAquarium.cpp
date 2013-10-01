@@ -20,6 +20,7 @@
 #include "CAnimatedTreasure.h"
 #include "CEffectBubbles.h"
 #include "CItemVisitor.h"
+#include "CEffectBubbles.h"
 
 //! Images Directory
 const std::wstring DirectoryContainingImages(L"images/");

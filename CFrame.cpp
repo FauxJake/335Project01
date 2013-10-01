@@ -15,13 +15,13 @@
 #include "CDecorTreasure.h"
 #include "CAnimatedTreasure.h"
 #include "CCountFishVisitor.h"
+#include "CReporter.h"
 
 BEGIN_EVENT_TABLE(CFrame, wxFrame)
 EVT_MENU(ID_Exit, CFrame::OnExit)
 EVT_MENU(ID_SaveAs, CFrame::OnFileSaveAs)
 EVT_MENU(ID_FileOpen, CFrame::OnFileOpen)
 EVT_MENU(ID_FileTrashCan, CFrame::OnFileTrashCan)
-EVT_MENU(ID_OnFileCountBetaFish, CFrame::OnFileCountBetaFish)
 EVT_MENU(ID_About, CFrame::OnAbout)
 EVT_MENU(ID_AddFishBeta, CFrame::OnAddFishBeta)
 EVT_MENU(ID_AddFishNemo, CFrame::OnAddFishNemo)
@@ -63,7 +63,6 @@ mTimer(this, ID_Timer), mReport(this, ID_ReportDisplay)
                                                L"&Trash Can",
                                                L"Toggle Trash Can Menu Option",
                                                wxITEM_CHECK);
-    menuFile->Append(ID_OnFileCountBetaFish, L"&Count Beta Fish");
     menuFile->AppendSeparator();
     menuFile->Append(ID_About, L"&About");
 
@@ -435,21 +434,6 @@ void CFrame::OnFileTrashCan(wxCommandEvent& event)
     mAquarium.ToggleTrashCanActive();
     mFileTrashCanMenuOption->Check(mAquarium.IsTrashCanActive());
     Refresh();
-}
-
-/*! Count the number of Beta Fish menu option
- * \param event  An object that describes the event.
- */
-void CFrame::OnFileCountBetaFish(wxCommandEvent& event)
-{
-    std::wstringstream str;
-    CCountFishVisitor visitor;
-    mAquarium.Accept(&visitor);
-    str << L"There are " << visitor.GetBetaCount() << " Beta Fish." << std::ends;
-
-    wxMessageBox(str.str().c_str(),
-                 L"Astounding Aquarium Information",
-                 wxOK | wxICON_INFORMATION, this);
 }
 
 /*! \brief Timer handler function
