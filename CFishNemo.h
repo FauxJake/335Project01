@@ -3,7 +3,7 @@
  *
  * Class for a Nemo fish
  *
- * \author David Warner
+ * \author Team Land Shark
  */
 
 #ifndef CFISHNEMO_H

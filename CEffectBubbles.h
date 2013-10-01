@@ -1,6 +1,6 @@
 /*! 
  * \file CEffectBubbles.h
- * \author Jacob M. Riesser
+ * \author Team Land Shark
  *
  * \brief  
  * 
@@ -33,6 +33,11 @@ public:
     void Update(double elapsed);
     
     void Accept(CItemVisitor *){};
+    
+    bool HitTest(int x, int y);
+    
+    // TODO: remove this and implement visitor pattern
+    bool IsBubble() {return true;}
     
     CItem *Clone();
     

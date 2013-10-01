@@ -3,7 +3,7 @@
  *
  * Class that counts all types of fish 
  *
- * \author David Warner
+ * \author Team Land Shark
  */
 
 #ifndef CCOUNTFISHVISITOR_H

@@ -3,7 +3,7 @@
  *
  * Base class for aquarium items
  *
- * \author David Warner
+ * \author Team Land Shark
  */
 
 #pragma once
@@ -48,7 +48,7 @@ public:
     //! \param x X location
     //! \param y Y location
     //! \returns true if we clicked on the item
-    bool HitTest(int x, int y);
+    virtual bool HitTest(int x, int y);
     
     //! \brief Test if this item is a Beta Fish
     //! \returns true if it is
@@ -78,6 +78,9 @@ public:
     
     //! Tells item is not a fish
     virtual bool IsFish() { return false; }
+    
+    //! Is it a bubblE?
+    virtual bool IsBubble() {return false;}
     
     //! Virtual function to accept visitors into items
     virtual void Accept(CItemVisitor *) = 0;

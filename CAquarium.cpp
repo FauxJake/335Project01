@@ -32,14 +32,14 @@ const std::wstring DirectoryContainingImages(L"images/");
  */
 CAquarium::CAquarium()
 {
-    if(!mBackground.LoadFile(L"images/backgroundW.png", wxBITMAP_TYPE_PNG))
+    if (!mBackground.LoadFile(L"images/backgroundW.png", wxBITMAP_TYPE_PNG))
         wxMessageBox(L"Failed to open image background.png");
-    
-    if(!mTrashcan.LoadFile(L"images/trashcan.png", wxBITMAP_TYPE_PNG))
+
+    if (!mTrashcan.LoadFile(L"images/trashcan.png", wxBITMAP_TYPE_PNG))
         wxMessageBox(L"Failed to open image trashcan.png");
-    
+
     mTrashCanActive = false;
-    
+
     mTimerClean = mTimerFeed = 0.00;
 
     mX = 0.0;
@@ -59,20 +59,18 @@ CAquarium::~CAquarium()
  */
 void CAquarium::OnDraw(wxDC &dc)
 {
-     dc.DrawBitmap(mBackground, mX, mY);
-     
-     if(mTrashCanActive) 
-     {
+    dc.DrawBitmap(mBackground, mX, mY);
+
+    if (mTrashCanActive) {
         dc.DrawBitmap(mTrashcan, 0, 0);
-     }
-     
-     for(std::list<CItem *>::iterator t=mItems.begin(); t!=mItems.end(); t++)
-     {
-         CItem *item = *t;
-         item->Draw(dc, mX, mY);
-     }
-     
-     
+    }
+
+    for (std::list<CItem *>::iterator t = mItems.begin(); t != mItems.end(); t++) {
+        CItem *item = *t;
+        item->Draw(dc, mX, mY);
+    }
+
+
 }
 
 /*! \brief Get an image from the image cache
@@ -90,8 +88,7 @@ wxImage *CAquarium::GetCachedImage(const std::wstring name)
 {
     // See if the name exists in the cache already.
     std::map<std::wstring, wxImage>::iterator i = mImageCache.find(name);
-    if(i != mImageCache.end())
-    {
+    if (i != mImageCache.end()) {
         // If we got here, it does exist and i->second is a
         // reference to the bitmap object.
         return &i->second;
@@ -102,11 +99,10 @@ wxImage *CAquarium::GetCachedImage(const std::wstring name)
 
     // Create a bitmap image and load the file into it.
     wxImage bitmap;
-    if(!bitmap.LoadFile(realname.c_str()))
-    {
-         std::wstring msg = std::wstring(L"Unable to open image ") + realname;
-         wxMessageBox(msg.c_str());
-         return NULL;
+    if (!bitmap.LoadFile(realname.c_str())) {
+        std::wstring msg = std::wstring(L"Unable to open image ") + realname;
+        wxMessageBox(msg.c_str());
+        return NULL;
     }
 
     // Add it to the cache and return it.
@@ -122,18 +118,17 @@ wxImage *CAquarium::GetCachedImage(const std::wstring name)
  */
 void CAquarium::AddItem(CItem *item)
 {
-    item->SetLocation(mBackground.GetWidth()/2, mBackground.GetHeight()/2);
+    item->SetLocation(mBackground.GetWidth() / 2, mBackground.GetHeight() / 2);
     mItems.push_back(item);
-    
+
     // Check if first fish added
     int fishCount = 0;
-    for(std::list<CItem *>::iterator i=mItems.begin(); 
-            i != mItems.end();  i++) 
-    {
-        if((*i)->IsFish())
+    for (std::list<CItem *>::iterator i = mItems.begin();
+            i != mItems.end(); i++) {
+        if ((*i)->IsFish())
             fishCount++;
     }
-    
+
     // Start feed timer if first fish added
     if (fishCount == 1 && mTimerFeed == 0.00)
         mTimerFeed = 0.01;
@@ -146,9 +141,9 @@ void CAquarium::AddItem(CItem *item)
 void CAquarium::AddBubbles(CItem* origin)
 {
     CEffectBubbles* item = new CEffectBubbles(this);
-    
+
     item->SetLocation(origin->GetX(),
-                      origin->GetY()- origin->GetImage()->GetHeight());
+                      origin->GetY() - origin->GetImage()->GetHeight() / 2);
     mItems.push_back(item);
 }
 
@@ -158,16 +153,14 @@ void CAquarium::AddBubbles(CItem* origin)
  * \param y Y location
  * \returns Pointer item we clicked on or null if none.
  */
-CItem *CAquarium::HitTest(int x, int y) 
+CItem *CAquarium::HitTest(int x, int y)
 {
-    for(std::list<CItem *>::reverse_iterator i=mItems.rbegin();  i != mItems.rend();  i++) 
-    {
-        if((*i)->HitTest(x, y)) 
-        {
+    for (std::list<CItem *>::reverse_iterator i = mItems.rbegin(); i != mItems.rend(); i++) {
+        if ((*i)->HitTest(x, y)) {
             return *i;
         }
     }
-    return  NULL;
+    return NULL;
 }
 
 /*! \brief Move an item to the front of the list of items.
@@ -176,7 +169,7 @@ CItem *CAquarium::HitTest(int x, int y)
  * will display last.
  * \param item The item to move
  */
-void CAquarium::MoveToFront(CItem *item) 
+void CAquarium::MoveToFront(CItem *item)
 {
     mItems.remove(item);
     mItems.push_back(item);
@@ -191,13 +184,12 @@ void CAquarium::ToggleTrashCanActive()
 
 /*! \brief Returns true if over trashcan
  */
-bool CAquarium::IsOverTrashcan(int x, int y) 
+bool CAquarium::IsOverTrashcan(int x, int y)
 {
-    if(!mTrashCanActive) 
-    {
+    if (!mTrashCanActive) {
         return false;
     }
-    
+
     return x < mTrashcan.GetWidth() && y < mTrashcan.GetHeight();
 }
 
@@ -232,19 +224,16 @@ void CAquarium::Save(const std::wstring &filename)
 
     // Iterate over all of the aquarium items so we can save each to the
     // XML document.
-    for(std::list<CItem *>::const_iterator t=mItems.begin(); t!=mItems.end();  t++)
-    {
+    for (std::list<CItem *>::const_iterator t = mItems.begin(); t != mItems.end(); t++) {
         // And the tile to create a node for itself
         wxXmlNode *node = (*t)->XmlSave();
 
         // If we have a previous child, add this node after
         // the child.
-        if(lastChild == NULL)
-        {
+        if (lastChild == NULL) {
             root->AddChild(node);
         }
-        else
-        {
+        else {
             lastChild->SetNext(node);
         }
 
@@ -263,65 +252,56 @@ void CAquarium::Save(const std::wstring &filename)
 void CAquarium::Load(const std::wstring &filename)
 {
     wxXmlDocument xmlDoc;
-    if(!xmlDoc.Load(filename.c_str()))
-    {
+    if (!xmlDoc.Load(filename.c_str())) {
         std::wstringstream str;
         str << L"Unable to open file " << filename << std::ends;
         wxMessageBox(str.str().c_str(),
-                         L"Error",
-                          wxOK | wxICON_ERROR);
+                     L"Error",
+                     wxOK | wxICON_ERROR);
         return;
     }
 
     // Clear our existing aquarium data
     Clear();
-    
+
     wxXmlNode *root = xmlDoc.GetRoot();
     wxXmlNode *child = root->GetChildren();
-    while(child != NULL)
-    {
+    while (child != NULL) {
         // This is the tile we will create
         CItem *item = NULL;
         CFish *fish = NULL;
 
         // We have a tile. What type?
         wxString type = child->GetAttribute(L"type", L"");
-        if(type == L"beta")
-        {
+        if (type == L"beta") {
             fish = new CFishBeta(this);
         }
-        else if(type == L"treasure-chest")
-        {
+        else if (type == L"treasure-chest") {
             item = new CDecorTreasure(this);
         }
-        else if (type == L"animated-chest")
-        {
+        else if (type == L"animated-chest") {
             item = new CAnimatedTreasure(this);
         }
-        else if(type == L"molly")
-        {
+        else if (type == L"molly") {
             fish = new CFishMolly(this);
         }
-        else if(type == L"nemo")
-        {
+        else if (type == L"nemo") {
             fish = new CFishNemo(this);
         }
 
-        if(item != NULL)
-        {
+        if (item != NULL) {
             item->XmlLoad(child);
             mItems.push_back(item);
         }
-        else if(fish != NULL)
-        {
+        else if (fish != NULL) {
             fish->XmlLoad(child);
             mItems.push_back(fish);
         }
-        
+
         // Move to the next child
         child = child->GetNext();
     }
-    
+
 }
 
 /*! \brief Clear the aquarium data.
@@ -329,8 +309,7 @@ void CAquarium::Load(const std::wstring &filename)
  */
 void CAquarium::Clear()
 {
-    while(!mItems.empty())
-    {
+    while (!mItems.empty()) {
         delete mItems.front();
         mItems.pop_front();
     }
@@ -342,57 +321,61 @@ void CAquarium::Clear()
 void CAquarium::Update(double elapsed)
 {
     bool unFedFish = false;
-    
+
     mTimerClean += elapsed;
-    
+
     if (mTimerFeed != 0.00)
         mTimerFeed += elapsed;
-    
+
     // Change background depending on cleaning needed
     // Only check if statements if within range (save run speed)
-    if (mTimerClean > 9.00 && mTimerClean < 46.00)
-    {
-        if (mTimerClean >= 10.00 && mTimerClean <= 10.10)
-        {
+    if (mTimerClean > 9.00 && mTimerClean < 46.00) {
+        if (mTimerClean >= 10.00 && mTimerClean <= 10.10) {
             // Stage 1
-            if(!mBackground.LoadFile(L"images/backgroundW1.png", wxBITMAP_TYPE_PNG))
+            if (!mBackground.LoadFile(L"images/backgroundW1.png", wxBITMAP_TYPE_PNG))
                 wxMessageBox(L"Failed to open image backgroundW1.png");
-        } else if (mTimerClean >= 25.00 && mTimerClean <= 25.10)
-        {
+        }
+        else if (mTimerClean >= 25.00 && mTimerClean <= 25.10) {
             // Stage 2
-            if(!mBackground.LoadFile(L"images/backgroundW2.png", wxBITMAP_TYPE_PNG))
+            if (!mBackground.LoadFile(L"images/backgroundW2.png", wxBITMAP_TYPE_PNG))
                 wxMessageBox(L"Failed to open image backgroundW2.png");
-        } else if (mTimerClean >= 45.00 && mTimerClean <= 45.10)
-        {
+        }
+        else if (mTimerClean >= 45.00 && mTimerClean <= 45.10) {
             // Stage 3
-            if(!mBackground.LoadFile(L"images/backgroundW3.png", wxBITMAP_TYPE_PNG))
+            if (!mBackground.LoadFile(L"images/backgroundW3.png", wxBITMAP_TYPE_PNG))
                 wxMessageBox(L"Failed to open image backgroundW3.png");
         }
     }
-    
+
     if (mTimerFeed >= 80.00)
         unFedFish = true;
-    
-    for(std::list<CItem *>::iterator i=mItems.begin(); 
-            i != mItems.end();  i++) 
-    {
+
+    for (std::list<CItem *>::iterator i = mItems.begin();
+            i != mItems.end(); i++) {
         CItem *item = *i;
-        
+
         // Fish were not fed (all fish die)
-        if (unFedFish)
-        {   
-            if((item)->IsFish())
-            {
+        if (unFedFish) {
+            if ((item)->IsFish()) {
                 mItems.remove(item);
-                
+
                 // mItems.end() is one back, prevent seg-fault
                 i--;
             }
-            
+
+
             // No fish, no feed timer
             mTimerFeed = 0.00;
-        } else
+        }
+            // hackish way to remove bubbles
+        else {
             item->Update(elapsed);
+            if ((item)->IsBubble()
+                && item->GetY() <= GetAquariumTestPointY()) {
+                mItems.remove(item);
+                i--;
+            }
+        }
     }
 }
 
@@ -401,7 +384,7 @@ void CAquarium::Update(double elapsed)
 void CAquarium::Clean()
 {
     mTimerClean = 0.00;
-    if(!mBackground.LoadFile(L"images/backgroundW.png", wxBITMAP_TYPE_PNG))
+    if (!mBackground.LoadFile(L"images/backgroundW.png", wxBITMAP_TYPE_PNG))
         wxMessageBox(L"Failed to open image backgroundW.png");
 }
 
@@ -411,13 +394,12 @@ void CAquarium::Feed()
 {
     // Check for any fish
     int fishCount = 0;
-    for(std::list<CItem *>::iterator i=mItems.begin(); 
-            i != mItems.end();  i++) 
-    {
-        if((*i)->IsFish())
+    for (std::list<CItem *>::iterator i = mItems.begin();
+            i != mItems.end(); i++) {
+        if ((*i)->IsFish())
             fishCount++;
     }
-    
+
     // Reset timer depending on fish being present or not
     if (fishCount == 0)
         mTimerFeed = 0.00;
@@ -430,8 +412,7 @@ void CAquarium::Feed()
  */
 void CAquarium::Accept(CItemVisitor *visitor)
 {
-    for(std::list<CItem *>::iterator i=mItems.begin(); i != mItems.end(); i++)
-    {
+    for (std::list<CItem *>::iterator i = mItems.begin(); i != mItems.end(); i++) {
         CItem *item = *i;
         item->Accept(visitor);
     }

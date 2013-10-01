@@ -1,7 +1,7 @@
 /*! 
  * \file CEffectBubbles.cpp
  * 
- * \author Jacob M. Riesser
+ * \author Team Land Shark
  */
 
 #include "wx/prec.h"
@@ -66,4 +66,13 @@ CItem *CEffectBubbles::Clone()
  */
 CEffectBubbles::CEffectBubbles(const CEffectBubbles &orig) : CItem(orig)
 {
+}
+
+bool CEffectBubbles::HitTest(int x, int y)
+{
+    if (CItem::HitTest(x,y))
+    {
+        //Point add here
+        GetAquarium()->DeleteItem(this);
+    }
 }

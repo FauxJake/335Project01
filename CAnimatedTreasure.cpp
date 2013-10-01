@@ -1,7 +1,7 @@
 /*! 
  * \file CAnimatedTreasure.cpp
  * 
- * \author Jacob M. Riesser
+ * \author Team Land Shark
  */
 
 #include "wx/prec.h"
@@ -24,7 +24,7 @@ const std::wstring CAnimatedTreasureFileNames [5] =
 CAnimatedTreasure::CAnimatedTreasure(CAquarium *aquarium)
 : CItem(aquarium, CAnimatedTreasureFileNames[0])
 {
-    mChestAnimationTimer = 0;
+    mChestAnimationTimer = 0.0;
     mChestStage = 0;
     mChestOpening = true;
 }
@@ -78,26 +78,26 @@ void CAnimatedTreasure::Update(double elapsed)
     
     // NOTE: comments are for first iteration only
     // closed -> stage 1, time here represents open AND closed timer
-    if(mChestAnimationTimer > 10 && mChestAnimationTimer < 10.01)
+    if(mChestAnimationTimer >= 2.00 && mChestAnimationTimer <= 2.03)
         this->AdvanceAnimation(mChestStage);
     
     // stage 1 -> stage 2
-    else if(mChestAnimationTimer > 12 && mChestAnimationTimer < 12.01)
+    else if(mChestAnimationTimer >= 4.00 && mChestAnimationTimer <= 4.03)
         this->AdvanceAnimation(mChestStage);
     
     // stage 2 -> stage 3
-    else if(mChestAnimationTimer > 14 && mChestAnimationTimer < 14.01)
+    else if(mChestAnimationTimer >= 6.00 && mChestAnimationTimer <= 6.03)
         this->AdvanceAnimation(mChestStage);
     
     // stage 3 -> open
-    else if(mChestAnimationTimer > 16 && mChestAnimationTimer < 16.01)
+    else if(mChestAnimationTimer >= 8.00 && mChestAnimationTimer <= 8.03)
         this->AdvanceAnimation(mChestStage);
     
     // open, reset timer for second iteration
-    else if(mChestAnimationTimer > 18)
+    else if(mChestAnimationTimer >= 10.00)
     {
         this->AdvanceAnimation(mChestStage);
-        mChestAnimationTimer = 0;
+        mChestAnimationTimer = 0.00;
     }
     else
     {}
