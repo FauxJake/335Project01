@@ -3,7 +3,7 @@
  *
  * Class for a Molly fish
  *
- * \author David Warner
+ * \author Team Land Shark
  */
 
 #ifndef CFISHMOLLY_H

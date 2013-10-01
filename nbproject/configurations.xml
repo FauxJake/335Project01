@@ -4,17 +4,6 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
-      <itemPath>CAnimatedTreasure.h</itemPath>
-      <itemPath>CApp.h</itemPath>
-      <itemPath>CAquarium.h</itemPath>
-      <itemPath>CDecorTreasure.h</itemPath>
-      <itemPath>CFish.h</itemPath>
-      <itemPath>CFishBeta.h</itemPath>
-      <itemPath>CFishMolly.h</itemPath>
-      <itemPath>CFishNemo.h</itemPath>
-      <itemPath>CFrame.h</itemPath>
-      <itemPath>CItem.h</itemPath>
-      <itemPath>CItemVisitor.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -24,16 +13,35 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>CAnimatedTreasure.cpp</itemPath>
+      <itemPath>CAnimatedTreasure.h</itemPath>
       <itemPath>CApp.cpp</itemPath>
+      <itemPath>CApp.h</itemPath>
       <itemPath>CAquarium.cpp</itemPath>
+      <itemPath>CAquarium.h</itemPath>
+      <itemPath>CBubbleVisitor.cpp</itemPath>
+      <itemPath>CBubbleVisitor.h</itemPath>
+      <itemPath>CCountFishVisitor.cpp</itemPath>
+      <itemPath>CCountFishVisitor.h</itemPath>
       <itemPath>CDecorTreasure.cpp</itemPath>
+      <itemPath>CDecorTreasure.h</itemPath>
+      <itemPath>CEffectBubbles.cpp</itemPath>
+      <itemPath>CEffectBubbles.h</itemPath>
       <itemPath>CFish.cpp</itemPath>
+      <itemPath>CFish.h</itemPath>
       <itemPath>CFishBeta.cpp</itemPath>
+      <itemPath>CFishBeta.h</itemPath>
       <itemPath>CFishMolly.cpp</itemPath>
+      <itemPath>CFishMolly.h</itemPath>
       <itemPath>CFishNemo.cpp</itemPath>
+      <itemPath>CFishNemo.h</itemPath>
       <itemPath>CFrame.cpp</itemPath>
+      <itemPath>CFrame.h</itemPath>
       <itemPath>CItem.cpp</itemPath>
+      <itemPath>CItem.h</itemPath>
       <itemPath>CItemVisitor.cpp</itemPath>
+      <itemPath>CItemVisitor.h</itemPath>
+      <itemPath>CReporter.cpp</itemPath>
+      <itemPath>CReporter.h</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -76,6 +84,10 @@
       </item>
       <item path="CAquarium.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="CBubbleVisitor.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="CBubbleVisitor.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="CCountFishVisitor.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="CCountFishVisitor.h" ex="false" tool="3" flavor2="0">
@@ -85,6 +97,8 @@
       <item path="CDecorTreasure.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="CEffectBubbles.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="CEffectBubbles.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="CFish.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -115,6 +129,8 @@
       <item path="CItemVisitor.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="CReporter.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="CReporter.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -150,6 +166,10 @@
       </item>
       <item path="CAquarium.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="CBubbleVisitor.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="CBubbleVisitor.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="CCountFishVisitor.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="CCountFishVisitor.h" ex="false" tool="3" flavor2="0">
@@ -159,6 +179,8 @@
       <item path="CDecorTreasure.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="CEffectBubbles.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="CEffectBubbles.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="CFish.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -189,6 +211,8 @@
       <item path="CItemVisitor.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="CReporter.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="CReporter.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>

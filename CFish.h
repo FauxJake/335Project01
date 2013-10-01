@@ -1,7 +1,7 @@
 /*!
  * \file CFish.h
  *
- * \author David Warner
+ * \author Team Land Shark
  */
 
 #pragma once
