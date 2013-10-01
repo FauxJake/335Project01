@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<aqua>
+  <item x="1280" y="403" type="animated-chest"/>
+  <item x="433" y="585" SpeedX="-65.573951" SpeedY="-57.321472" type="beta"/>
+  <item x="1004" y="533" SpeedX="-21.825290" SpeedY="26.295079" type="nemo"/>
+  <item x="1085" y="595" SpeedX="-21.825290" SpeedY="-26.295079" type="nemo"/>
+  <item x="731" y="314" SpeedX="-65.573951" SpeedY="-57.321472" type="beta"/>
+  <item x="1544" y="525" SpeedX="65.573951" SpeedY="-57.321472" type="beta"/>
+  <item x="1587" y="483" type="animated-chest"/>
+  <item x="1280" y="-3977" speed="-58.000000" type="bubbles"/>
+  <item x="964" y="483" type="animated-chest"/>
+  <item x="1154" y="619" SpeedX="65.573951" SpeedY="57.321472" type="beta"/>
+  <item x="614" y="143" SpeedX="62.842311" SpeedY="67.389943" type="beta"/>
+  <item x="682" y="476" SpeedX="-43.132429" SpeedY="-32.025669" type="molly"/>
+  <item x="1050" y="191" SpeedX="-41.590509" SpeedY="42.458600" type="molly"/>
+  <item x="1471" y="563" SpeedX="-41.590509" SpeedY="42.458600" type="molly"/>
+  <item x="1308" y="180" SpeedX="-41.590509" SpeedY="42.458600" type="molly"/>
+  <item x="1187" y="228" SpeedX="-43.132429" SpeedY="-32.025669" type="molly"/>
+  <item x="838" y="275" SpeedX="-43.132429" SpeedY="-32.025669" type="molly"/>
+  <item x="2247" y="228" SpeedX="14.989193" SpeedY="-18.084621" type="nemo"/>
+  <item x="1827" y="473" SpeedX="14.989193" SpeedY="18.084621" type="nemo"/>
+  <item x="937" y="213" type="treasure-chest"/>
+  <item x="1750" y="287" type="animated-chest"/>
+  <item x="1280" y="-373" speed="-18.000000" type="bubbles"/>
+  <item x="1229" y="174" type="treasure-chest"/>
+  <item x="387" y="199" SpeedX="62.842311" SpeedY="67.389943" type="beta"/>
+  <item x="122" y="176" SpeedX="62.842311" SpeedY="-67.389943" type="beta"/>
+  <item x="249" y="142" SpeedX="-62.842311" SpeedY="-67.389943" type="beta"/>
+  <item x="1009" y="455" SpeedX="-43.132429" SpeedY="-32.025669" type="molly"/>
+  <item x="1104" y="369" SpeedX="-43.132429" SpeedY="-32.025669" type="molly"/>
+  <item x="1750" y="-971" speed="-50.000000" type="bubbles"/>
+  <item x="1964" y="172" SpeedX="14.989193" SpeedY="18.084621" type="nemo"/>
+  <item x="209" y="596" SpeedX="65.573951" SpeedY="-57.321472" type="beta"/>
+  <item x="1618" y="666" type="animated-chest"/>
+  <item x="2050" y="364" SpeedX="14.989193" SpeedY="18.084621" type="nemo"/>
+</aqua>
