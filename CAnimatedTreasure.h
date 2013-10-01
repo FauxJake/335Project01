@@ -1,7 +1,7 @@
 /*!
  * \file CAnimatedTreasure.h
  *
- * \author Jacob M. Riesser
+ * \author Team Land Shark
  */
 
 #pragma once

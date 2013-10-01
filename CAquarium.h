@@ -81,6 +81,8 @@ public:
     
     //! Gets time since the fish have been last feed
     double GetLastFed() { return mTimerFeed; }
+    
+    //! Adds a bubble point
             
 private:
     //! Default copy constructor
