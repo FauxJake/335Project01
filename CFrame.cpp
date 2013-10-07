@@ -40,7 +40,7 @@ END_EVENT_TABLE()
 
 //! Milliseconds
 const int FrameDuration = 30;
-const int ReporterDisplay = 5000;
+const int ReporterDisplay = 30000;
 
 /*! \brief Default constructor
  * 
@@ -457,8 +457,6 @@ void CFrame::OnTimer(wxTimerEvent &event)
  */
 void CFrame::OnReport(wxTimerEvent &event)
 {
-    mReporter->Report(L"5 seconds has passed");
-    
     std::wstringstream strCount;
     CCountFishVisitor countFish;
     mAquarium.Accept(&countFish);
