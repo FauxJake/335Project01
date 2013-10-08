@@ -85,6 +85,9 @@ public:
     //! Adds a bubble point
     void AddBubblePoint() { mBubbles++; }
     
+    //! Subtracts a bubble point
+    void SubBubblePoint() { mBubbles--; }
+    
     //! Gets the current Count of Bubbles
     int GetBubbleCount() { return mBubbles; }
             
@@ -110,6 +113,7 @@ private:
     double mX;  //!< Location of top left point of background image (x-axis)
     double mY;  //!< Location of top left point of background image (y-axis)
     
+    //! The current count of bubbles
     int mBubbles;
 };
 

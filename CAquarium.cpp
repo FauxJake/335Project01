@@ -331,18 +331,18 @@ void CAquarium::Update(double elapsed)
 
     // Change background depending on cleaning needed
     // Only check if statements if within range (save run speed)
-    if (mTimerClean > 9.00 && mTimerClean < 46.00) {
-        if (mTimerClean >= 10.00 && mTimerClean <= 10.10) {
+    if (mTimerClean > 19.00 && mTimerClean < 61.00) {
+        if (mTimerClean >= 20.00 && mTimerClean <= 20.10) {
             // Stage 1
             if (!mBackground.LoadFile(L"images/backgroundW1.png", wxBITMAP_TYPE_PNG))
                 wxMessageBox(L"Failed to open image backgroundW1.png");
         }
-        else if (mTimerClean >= 25.00 && mTimerClean <= 25.10) {
+        else if (mTimerClean >= 40.00 && mTimerClean <= 40.10) {
             // Stage 2
             if (!mBackground.LoadFile(L"images/backgroundW2.png", wxBITMAP_TYPE_PNG))
                 wxMessageBox(L"Failed to open image backgroundW2.png");
         }
-        else if (mTimerClean >= 45.00 && mTimerClean <= 45.10) {
+        else if (mTimerClean >= 60.00 && mTimerClean <= 60.10) {
             // Stage 3
             if (!mBackground.LoadFile(L"images/backgroundW3.png", wxBITMAP_TYPE_PNG))
                 wxMessageBox(L"Failed to open image backgroundW3.png");
