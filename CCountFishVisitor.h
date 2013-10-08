@@ -1,5 +1,5 @@
 /*!
- * \file CCountBetaVisitor.h
+ * \file CCountFishVisitor.h
  *
  * Class that counts all types of fish 
  *
@@ -32,5 +32,5 @@ private:
 
 };
 
-#endif	/* CCOUNTBETAVISITOR_H */
+#endif	/* CCOUNTFISHVISITOR_H */
 
