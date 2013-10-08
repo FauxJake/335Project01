@@ -22,7 +22,7 @@ CReporter::CReporter(wxFrame *parent) : wxFrame( parent, -1, L"Tank Reporter",
     wxBoxSizer *vertSizer = new wxBoxSizer(wxVERTICAL);
     
     mReport = new wxTextCtrl(this, wxID_ANY, wxEmptyString,
-                                 wxDefaultPosition, wxSize(300, 400),
+                                 wxDefaultPosition, wxSize(300, 300),
                                  wxTE_READONLY | wxTE_MULTILINE | wxSUNKEN_BORDER);
     vertSizer->Add(mReport, 1, wxALL | wxEXPAND);
     

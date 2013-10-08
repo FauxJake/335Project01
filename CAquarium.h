@@ -83,6 +83,10 @@ public:
     double GetLastFed() { return mTimerFeed; }
     
     //! Adds a bubble point
+    void AddBubblePoint() { mBubbles++; }
+    
+    //! Gets the current Count of Bubbles
+    int GetBubbleCount() { return mBubbles; }
             
 private:
     //! Default copy constructor
@@ -105,6 +109,8 @@ private:
     
     double mX;  //!< Location of top left point of background image (x-axis)
     double mY;  //!< Location of top left point of background image (y-axis)
+    
+    int mBubbles;
 };
 
 #endif	/* CAQUARIUM_H */

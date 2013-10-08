@@ -44,6 +44,8 @@ CAquarium::CAquarium()
 
     mX = 0.0;
     mY = 0.0;
+    
+    mBubbles = 0;
 }
 
 /*! \brief Destructor
@@ -347,7 +349,7 @@ void CAquarium::Update(double elapsed)
         }
     }
 
-    if (mTimerFeed >= 80.00)
+    if (mTimerFeed >= 30.00)
         unFedFish = true;
 
     for (std::list<CItem *>::iterator i = mItems.begin();
