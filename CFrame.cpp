@@ -40,7 +40,7 @@ END_EVENT_TABLE()
 
 //! Milliseconds
 const int FrameDuration = 30;
-const int ReporterDisplay = 5000;
+const int ReporterDisplay = 50;
 
 /*! \brief Default constructor
  * 
@@ -457,18 +457,24 @@ void CFrame::OnTimer(wxTimerEvent &event)
  */
 void CFrame::OnReport(wxTimerEvent &event)
 {
-    mReporter->Report(L"5 seconds has passed");
-    
-    std::wstringstream strCount;
     CCountFishVisitor countFish;
     mAquarium.Accept(&countFish);
-    strCount << L"Number of Fish in Tank: " 
+    
+    std::wstringstream strSpace;
+    for (int i = 0; i < 100; i++)
+        strSpace << "\n";
+    strSpace << std::ends;
+    mReporter->Report(strSpace.str());
+    
+    std::wstringstream strCount;
+    strCount 
+        << L"Number of Fish in Tank: "
         << (countFish.GetBetaCount() +
             countFish.GetNemoCount() +
             countFish.GetMollyCount()) << "\n"
         << L"Beta Fish: " << countFish.GetBetaCount() << "\n"
         << L"Nemo Fish: " << countFish.GetNemoCount() << "\n"
-        << L"Molly Fish: " << countFish.GetMollyCount() << std::ends;
+        << L"Molly Fish: " << countFish.GetMollyCount() << "\n" << std::ends;
     mReporter->Report(strCount.str());
     
     std::wstringstream strDirty;
@@ -478,4 +484,8 @@ void CFrame::OnReport(wxTimerEvent &event)
     std::wstringstream strFed;
     strFed << L"Time since last fed: " << mAquarium.GetLastFed() << "\n" << std::ends;
     mReporter->Report(strFed.str());
+    
+    std::wstringstream strBubbles;
+    strBubbles << L"Number of Bubbles: " << mAquarium.GetBubbleCount() << "\n" << std::ends;
+    mReporter->Report(strBubbles.str());
 }
