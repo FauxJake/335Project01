@@ -1,7 +1,7 @@
 /*!
  * \file CAnimatedTreasure.h
  *
- * \author Jacob M. Riesser
+ * \author Team Land Shark
  */
 
 #pragma once
@@ -32,12 +32,20 @@ public:
     
     void Accept(CItemVisitor *visitor) {visitor->VisitAnimatedTreasure(this);}
     
+    void Update(double elapsed);
+    int AdvanceAnimation(int currStage);
+    
 private:
     //! Default constructor (disabled)
     CAnimatedTreasure();
 
     //! Copy constructor (disabled)
-    CAnimatedTreasure(const CAnimatedTreasure &);    
+    CAnimatedTreasure(const CAnimatedTreasure &);  
+    
+    double mChestAnimationTimer;            //!< The timer for chest animation
+    int mChestStage;                        //!< The current stage of the chest
+    bool mChestOpening;                     //!< var to keep track of direction of animation
+    wxBitmap mChestImage;                   //!< The current image
 };
 
 #endif	/* CDECORTREASURE_H */

@@ -1,7 +1,7 @@
 /*!
  * \file CAquarium.h
  *
- * \author David Warner
+ * \author Team Land Shark
  */
 
 #pragma once
@@ -48,6 +48,8 @@ public:
     
     void Feed();
     
+    void AddBubbles(CItem* origin);
+    
     //! \brief Get the width of the aquarium
     //! \returns Aquarium width
     int GetWidth() const {return mBackground.GetWidth();}
@@ -56,17 +58,31 @@ public:
     //! \returns Aquarium height
     int GetHeight() const {return mBackground.GetHeight();}
     
-    void Accept(CItemVisitor *visitor);
+    //! \brief Get the x location of the top left point
+    //! \return Background image top left point x location
+    double GetAquariumTestPointX() {return mX;}
     
-    /*! \brief makes sure the scroll button is always rendered first
-     */
-    void PushScrollButtonToTop() { mItems.splice(mItems.end(), mItems, --mItems.end() ); }
+    //! \brief Get the y location of the top left point
+    //! \return Background image top left point y location
+    double GetAquariumTestPointY() {return mY;}
+    
+    //! \brief Change background test location
+    //! \param x  New value for background test location
+    void SetAquariumTestPointX(double x) {mX = x;}
+    
+    //! \brief Change background test location
+    //! \param y  New value for background test location
+    void SetAquariumTestPointY(double y) {mY = y;}
+    
+    void Accept(CItemVisitor *visitor);
     
     //! Gets time since aquarium has been last cleaned
     double GetLastClean() { return mTimerClean; }
     
     //! Gets time since the fish have been last feed
     double GetLastFed() { return mTimerFeed; }
+    
+    //! Adds a bubble point
             
 private:
     //! Default copy constructor
@@ -86,6 +102,9 @@ private:
     
     //! Timer to check fish being fed
     double mTimerFeed;
+    
+    double mX;  //!< Location of top left point of background image (x-axis)
+    double mY;  //!< Location of top left point of background image (y-axis)
 };
 
 #endif	/* CAQUARIUM_H */

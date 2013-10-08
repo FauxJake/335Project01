@@ -1,7 +1,7 @@
 /*!
  * \file CDecorTreasure.cpp
  *
- * \author David Warner
+ * \author Team Land Shark
  */
 
 #include "wx/prec.h"
