@@ -45,7 +45,7 @@ CAquarium::CAquarium()
     mX = 0.0;
     mY = 0.0;
     
-    mBubbles = 0;
+    mBubbles = 50;
 }
 
 /*! \brief Destructor
@@ -418,4 +418,12 @@ void CAquarium::Accept(CItemVisitor *visitor)
         CItem *item = *i;
         item->Accept(visitor);
     }
+}
+
+/*!  \brief Adds or Subtracts bubbles from current count
+ *   \param value  Signed integer that can change bubble count
+ */
+void CAquarium::BubblePoints(int value)
+{
+    mBubbles += value;
 }

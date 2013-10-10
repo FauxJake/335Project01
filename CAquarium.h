@@ -82,11 +82,8 @@ public:
     //! Gets time since the fish have been last feed
     double GetLastFed() { return mTimerFeed; }
     
-    //! Adds a bubble point
-    void AddBubblePoint() { mBubbles++; }
-    
-    //! Subtracts a bubble point
-    void SubBubblePoint() { mBubbles--; }
+    //! Adds or subtracts bubble points
+    void BubblePoints(int value);
     
     //! Gets the current Count of Bubbles
     int GetBubbleCount() { return mBubbles; }
