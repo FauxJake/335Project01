@@ -47,6 +47,9 @@ private:
     
     //! Fish speed in the Y direction
     double mSpeedY;
+    
+    //! Timer to produce bubbles on fish
+    double mBubbleTimer;
 
 };
 
