@@ -10,13 +10,18 @@
 #include "CFish.h"
 #include "CAquarium.h"
 
+const double MaxBubbleTimer = 5.00;
+const double MinBubbleTimer = 0.00;
+
 /*! Constructor
  * \param aquarium The aquarium we are in
  * \param filename Filename for the image we use
  */
 CFish::CFish(CAquarium *aquarium, const std::wstring &filename) :
-        CItem(aquarium, filename) 
+        CItem(aquarium, filename)
 {
+    // Set random bubble timer to vary bubble spawn time for fish
+    mBubbleTimer = MinBubbleTimer + ((double)rand() / RAND_MAX) * (MaxBubbleTimer - MinBubbleTimer);
 }
 
 /*! \brief Copy Constructor
@@ -56,6 +61,35 @@ void CFish::Update(double elapsed)
        mSpeedY < 0 && GetY() <= GetImage()->GetHeight()/2 + 40)
     {
         mSpeedY = -mSpeedY;
+    }
+    
+    mBubbleTimer += elapsed;
+    
+    // Pixel heights for each fish returned by GetImage()->GetHeight())
+    const int betaHeight = 117, mollyHeight = 56, nemoHeight = 176;
+    
+    // Check for type of fish and produce bubble based on time passed
+    if(GetImage()->GetHeight() == betaHeight)
+    {
+        if(mBubbleTimer >= 12.00)
+        {
+            AddBubbles();
+            mBubbleTimer = 0.00;
+        }
+    } else if(GetImage()->GetHeight() == mollyHeight)
+    {
+        if(mBubbleTimer >= 10.00)
+        {
+            AddBubbles();
+            mBubbleTimer = 0.00;
+        }
+    } else if(GetImage()->GetHeight() == nemoHeight)
+    {
+        if(mBubbleTimer >= 6.00)
+        {
+            AddBubbles();
+            mBubbleTimer = 0.00;
+        }
     }
 }
 

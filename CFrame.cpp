@@ -67,30 +67,30 @@ mTimer(this, ID_Timer), mReport(this, ID_ReportDisplay)
     menuFile->Append(ID_About, L"&About");
 
     //
-    // Fish Menu
+    // Fish Menu + costs
     //
     wxMenu *menuFish = new wxMenu;
-    menuFish->Append(ID_AddFishBeta, L"&Beta");
-    menuFish->Append(ID_AddFishNemo, L"&Nemo");
-    menuFish->Append(ID_AddFishMolly, L"&Molly");
+    menuFish->Append(ID_AddFishBeta, L"&Beta - 1 Bubble");
+    menuFish->Append(ID_AddFishNemo, L"&Nemo - 7 Bubbles");
+    menuFish->Append(ID_AddFishMolly, L"&Molly - 4 Bubbles");
 
     //
-    // Decor Menu
+    // Decor Menu + costs
     //
     wxMenu *menuDecor = new wxMenu;
-    menuDecor->Append(ID_AddDecorTreasure, L"&Treasure Chest");
+    menuDecor->Append(ID_AddDecorTreasure, L"&Treasure Chest - 0 Bubbles");
     wxMenuItem *addAnimatedTreasureItem = menuDecor->Append(ID_AddAnimatedChest,
-                                                            L"&Animated Chest");
+                                                            L"&Animated Chest - 10 Bubbles");
 
     addAnimatedTreasureItem->SetHelp(L"Add an animated chest to the aquarium");
 
     //
-    // Care Menu
+    // Care Menu + costs
     //
 
     wxMenu *menuCare = new wxMenu;
-    menuCare->Append(ID_Clean, L"&Clean");
-    menuCare->Append(ID_Feed, L"&Feed");
+    menuCare->Append(ID_Clean, L"&Clean - 5 Bubbles");
+    menuCare->Append(ID_Feed, L"&Feed - 3 Bubbles");
 
     //
     // Menu Bar
@@ -157,6 +157,7 @@ void CFrame::OnPaint(wxPaintEvent &event)
 
     mAquarium.OnDraw(dc);
     
+    // Snap frame size to max height/width
     // Background width = 806
     if(this->m_height > 806)
         this->SetSize(this->m_width, 806);
@@ -460,12 +461,14 @@ void CFrame::OnReport(wxTimerEvent &event)
     CCountFishVisitor countFish;
     mAquarium.Accept(&countFish);
     
+    // Create space to make appearance of replacing text
     std::wstringstream strSpace;
     for (int i = 0; i < 100; i++)
         strSpace << "\n";
     strSpace << std::ends;
     mReporter->Report(strSpace.str());
     
+    // Display basic statistics
     std::wstringstream strCount;
     strCount 
         << L"Number of Fish in Tank: "
@@ -477,15 +480,43 @@ void CFrame::OnReport(wxTimerEvent &event)
         << L"Molly Fish: " << countFish.GetMollyCount() << "\n" << std::ends;
     mReporter->Report(strCount.str());
     
+    // Display time since last cleaned
     std::wstringstream strDirty;
-    strDirty << L"Time since last cleaned: " << mAquarium.GetLastClean() << std::ends;
+    strDirty << L"Time since last cleaned: " << mAquarium.GetLastClean() << "\n";
+    
+    // Tell user bubble loss rate from not cleaning (see CAquarium.cpp::Update())
+    // 0-20 = clean
+    // 20-40 = stage 1
+    // 40-60 = stage 2
+    // 60+   = stage 3
+    strDirty << L"Bubble loss rate: ";
+    if(mAquarium.GetLastClean() <= 20.00)
+        strDirty << L"0 bubbles/second" << std::ends;
+    else if(mAquarium.GetLastClean() >= 20.00 && mAquarium.GetLastClean() <= 40.00)
+        strDirty << L"1 bubbles/second" << std::ends;
+    else if(mAquarium.GetLastClean() >= 40.00 && mAquarium.GetLastClean() <= 60.00)
+        strDirty << L"2 bubbles/second" << std::ends;
+    else
+        strDirty << L"3 bubbles/second" << std::ends;
     mReporter->Report(strDirty.str());
     
+    // Display time since last fed
     std::wstringstream strFed;
-    strFed << L"Time since last fed: " << mAquarium.GetLastFed() << "\n" << std::ends;
+    strFed << L"Time since last fed: " << mAquarium.GetLastFed() << "\n";
+    
+    // Warn user if fish will starve and when
+    if(mAquarium.GetLastFed() >= 20.00)
+    {
+        // 30.00 = time when fish will starve (see CAquarium.cpp::Update())
+        strFed << L"!!!WARNING!!! Fish will starve in: "
+               << (30.00 - mAquarium.GetLastFed()) << std::ends;
+    } else
+        strFed << std::ends;
     mReporter->Report(strFed.str());
     
+    // Display total number of bubbles collected and how many to go
     std::wstringstream strBubbles;
-    strBubbles << L"Number of Bubbles: " << mAquarium.GetBubbleCount() << "\n" << std::ends;
+    strBubbles << L"Number of Bubbles: " << mAquarium.GetBubbleCount() << "\n";
+    strBubbles << (150 - mAquarium.GetBubbleCount()) << L" bubbles to go!" << std::ends;
     mReporter->Report(strBubbles.str());
 }
