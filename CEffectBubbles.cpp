@@ -73,7 +73,7 @@ bool CEffectBubbles::HitTest(int x, int y)
     if (CItem::HitTest(x,y))
     {
         //Point add here
-        GetAquarium()->AddBubblePoint();
+        GetAquarium()->BubblePoints(1);
         GetAquarium()->DeleteItem(this);
     }
 }
