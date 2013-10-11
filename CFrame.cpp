@@ -122,7 +122,17 @@ mTimer(this, ID_Timer), mReport(this, ID_ReportDisplay)
         wxMessageBox(L"Failed to open image nav1.png");
 
     mIsScrollMode = false;
-
+    
+    // Display introduction (pause game)
+    mAquarium.Pause(true);
+    
+    wxMessageBox(L"Welcome to Bubble-arium!  The goal is to collect 100 bubbles."
+             "Watch out though!  If you don't feed your fish, you lose."
+             "Also keep that aquarium clean or else you'll lose a LOT of bubbles.",
+             L"Bubble-arium",
+             wxOK | wxICON_INFORMATION, this);
+    
+    mAquarium.Pause(false);
 }
 
 CFrame::CFrame(const CFrame& orig)
@@ -133,14 +143,20 @@ CFrame::~CFrame()
 {
 }
 
-/*! \brief File/About menu option handler
+/*! \brief File/About menu option handler (pause game)
  *  \param event  An object that describes the event.
  */
 void CFrame::OnAbout(wxCommandEvent& event)
 {
-    wxMessageBox(L"This is a simple wxWidgets application",
-                 L"About Step 2",
-                 wxOK | wxICON_INFORMATION, this);
+    mAquarium.Pause(true);
+    
+    wxMessageBox(L"Welcome to Bubble-arium!  The goal is to collect 100 bubbles."
+             "Watch out though!  If you don't feed your fish, you lose."
+             "Also keep that aquarium clean or else you'll lose a LOT of bubbles.",
+             L"Bubble-arium",
+             wxOK | wxICON_INFORMATION, this);
+    
+    mAquarium.Pause(false);
 }
 
 /*! \brief Function called whenever we need to redraw the window
@@ -512,11 +528,46 @@ void CFrame::OnReport(wxTimerEvent &event)
                << (30.00 - mAquarium.GetLastFed()) << std::ends;
     } else
         strFed << std::ends;
+    
+    // Lose if fish are not fed (see Game Outline on project website)
+    if(mAquarium.GetLastFed() >= 30.00)
+    {
+        wxMessageBox(L"You lose!  Your fish have died.  Why would you not feed"
+                "them?  Animal cruelty!  Feel free to try again.",
+                 L"Game Over...",
+                 wxOK | wxICON_INFORMATION, this);
+        mAquarium.EndGame();
+        if(mIsScrollMode)
+            ToggleScrollMode();
+    }
+    
     mReporter->Report(strFed.str());
     
     // Display total number of bubbles collected and how many to go
     std::wstringstream strBubbles;
-    strBubbles << L"Number of Bubbles: " << mAquarium.GetBubbleCount() << "\n";
-    strBubbles << (150 - mAquarium.GetBubbleCount()) << L" bubbles to go!" << std::ends;
+    if(mAquarium.GetBubbleCount() >= 1 && mAquarium.GetBubbleCount() < 100)
+    {
+        strBubbles << L"Number of Bubbles: " << mAquarium.GetBubbleCount() << "\n";
+        strBubbles << (100 - mAquarium.GetBubbleCount()) << L" bubbles to go!" << std::ends;
+    } else if(mAquarium.GetBubbleCount() >= 100) {
+        // Play has won (goal, collect 100 bubbles)
+        wxMessageBox(L"You managed to collect 100 bubbles!  Sadly, you also wasted"
+                 " a good chunk of time plaything this simple game and won't get"
+                 " that time back.  Please feel free to play again.",
+                 L"You Win!",
+                 wxOK | wxICON_INFORMATION, this);
+        mAquarium.EndGame();
+        if(mIsScrollMode)
+            ToggleScrollMode();
+    } else {
+        // Player has lost (ran out of bubbles)
+        wxMessageBox(L"You lose!  You have lost all your bubbles.  How pathetic..."
+                 "feel free to try again.",
+                 L"Game Over...",
+                 wxOK | wxICON_INFORMATION, this);
+        mAquarium.EndGame();
+        if(mIsScrollMode)
+            ToggleScrollMode();
+    }
     mReporter->Report(strBubbles.str());
 }

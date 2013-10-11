@@ -40,12 +40,14 @@ CAquarium::CAquarium()
 
     mTrashCanActive = false;
 
-    mTimerClean = mTimerFeed = 0.00;
+    mTimerClean = mTimerFeed = mSecondTimer = 0.00;
 
-    mX = 0.0;
-    mY = 0.0;
+    mX = mY = 0.0;
     
-    mBubbles = 0;
+    mBubbles = 5;
+    mDecreaseBubbles = 0;
+    
+    mPause = false;
 }
 
 /*! \brief Destructor
@@ -324,29 +326,46 @@ void CAquarium::Update(double elapsed)
 {
     bool unFedFish = false;
 
-    mTimerClean += elapsed;
+    // Check if game is paused
+    if(!mPause)
+    {
+        mTimerClean += elapsed;
+        mSecondTimer += elapsed;
 
-    if (mTimerFeed != 0.00)
-        mTimerFeed += elapsed;
+        if (mTimerFeed != 0.00)
+            mTimerFeed += elapsed;
+    }
 
     // Change background depending on cleaning needed
+    // Change bubble loss rate depending on cleaning needed
     // Only check if statements if within range (save run speed)
     if (mTimerClean > 19.00 && mTimerClean < 61.00) {
         if (mTimerClean >= 20.00 && mTimerClean <= 20.10) {
             // Stage 1
+            mDecreaseBubbles = 1;
             if (!mBackground.LoadFile(L"images/backgroundW1.png", wxBITMAP_TYPE_PNG))
                 wxMessageBox(L"Failed to open image backgroundW1.png");
         }
         else if (mTimerClean >= 40.00 && mTimerClean <= 40.10) {
             // Stage 2
+            mDecreaseBubbles = 2;
             if (!mBackground.LoadFile(L"images/backgroundW2.png", wxBITMAP_TYPE_PNG))
                 wxMessageBox(L"Failed to open image backgroundW2.png");
         }
         else if (mTimerClean >= 60.00 && mTimerClean <= 60.10) {
             // Stage 3
+            mDecreaseBubbles = 3;
             if (!mBackground.LoadFile(L"images/backgroundW3.png", wxBITMAP_TYPE_PNG))
                 wxMessageBox(L"Failed to open image backgroundW3.png");
         }
+    }
+    
+    // Check if second has passed and decrease bubble count
+    // Decrease = 0 if aquarium is clean
+    if (mSecondTimer >= 1.00)
+    {
+        mBubbles -= mDecreaseBubbles;
+        mSecondTimer = 0.00;
     }
 
     if (mTimerFeed >= 30.00)
@@ -386,6 +405,7 @@ void CAquarium::Update(double elapsed)
 void CAquarium::Clean()
 {
     mTimerClean = 0.00;
+    mDecreaseBubbles = 0;
     if (!mBackground.LoadFile(L"images/backgroundW.png", wxBITMAP_TYPE_PNG))
         wxMessageBox(L"Failed to open image backgroundW.png");
 }
@@ -418,4 +438,15 @@ void CAquarium::Accept(CItemVisitor *visitor)
         CItem *item = *i;
         item->Accept(visitor);
     }
+}
+
+void CAquarium::EndGame()
+{
+    Clear();
+    Clean();
+    Feed();
+    mBubbles = 5;
+    mX = mY = 0.0;
+    mDecreaseBubbles = 0;
+    mTrashCanActive = false;
 }

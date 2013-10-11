@@ -119,7 +119,7 @@ private:
     
     //! scroll mode boolean
     bool mIsScrollMode;
-    
+        
     //! A reporter window
     CReporter *mReporter;
     
