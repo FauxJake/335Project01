@@ -190,7 +190,11 @@ void CFrame::OnPaint(wxPaintEvent &event)
  */
 void CFrame::OnAddFishBeta(wxCommandEvent& event)
 {
-    mAquarium.AddItem(new CFishBeta(&mAquarium));
+    if (mAquarium.GetBubbleCount() >= 1)
+    {
+        mAquarium.BubblePoints(-1);
+        mAquarium.AddItem(new CFishBeta(&mAquarium));
+    }
     Refresh();
 }
 
@@ -199,7 +203,11 @@ void CFrame::OnAddFishBeta(wxCommandEvent& event)
  */
 void CFrame::OnAddFishNemo(wxCommandEvent& event)
 {
-    mAquarium.AddItem(new CFishNemo(&mAquarium));
+    if (mAquarium.GetBubbleCount() >= 7)
+    {
+        mAquarium.BubblePoints(-7);
+        mAquarium.AddItem(new CFishNemo(&mAquarium));
+    }
     Refresh();
 }
 
@@ -208,7 +216,11 @@ void CFrame::OnAddFishNemo(wxCommandEvent& event)
  */
 void CFrame::OnAddFishMolly(wxCommandEvent& event)
 {
-    mAquarium.AddItem(new CFishMolly(&mAquarium));
+    if (mAquarium.GetBubbleCount() >= 4)
+    {
+        mAquarium.BubblePoints(-4);
+        mAquarium.AddItem(new CFishMolly(&mAquarium));
+    }
     Refresh();
 }
 
@@ -226,7 +238,11 @@ void CFrame::OnAddDecorTreasure(wxCommandEvent& event)
  */
 void CFrame::OnAddAnimatedChest(wxCommandEvent& event)
 {
-    mAquarium.AddItem(new CAnimatedTreasure(&mAquarium));
+    if (mAquarium.GetBubbleCount() >= 10)
+    {
+        mAquarium.BubblePoints(-10);
+        mAquarium.AddItem(new CAnimatedTreasure(&mAquarium));
+    }
     Refresh();
 }
 
@@ -235,7 +251,11 @@ void CFrame::OnAddAnimatedChest(wxCommandEvent& event)
  */
 void CFrame::OnClean(wxCommandEvent& event)
 {
-    mAquarium.Clean();
+    if (mAquarium.GetBubbleCount() >= 5)
+    {
+        mAquarium.BubblePoints(-5);
+        mAquarium.Clean();
+    }
     Refresh();
 }
 
@@ -244,7 +264,11 @@ void CFrame::OnClean(wxCommandEvent& event)
  */
 void CFrame::OnFeed(wxCommandEvent& event)
 {
-    mAquarium.Feed();
+    if (mAquarium.GetBubbleCount() >= 3)
+    {
+        mAquarium.BubblePoints(-3);
+        mAquarium.Feed();
+    }
 }
 
 /*! \brief Add File/Save option handler
