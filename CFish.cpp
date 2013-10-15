@@ -71,21 +71,21 @@ void CFish::Update(double elapsed)
     // Check for type of fish and produce bubble based on time passed
     if(GetImage()->GetHeight() == betaHeight)
     {
-        if(mBubbleTimer >= 12.00)
+        if(mBubbleTimer >= 6.00)
         {
             AddBubbles();
             mBubbleTimer = 0.00;
         }
     } else if(GetImage()->GetHeight() == mollyHeight)
     {
-        if(mBubbleTimer >= 10.00)
+        if(mBubbleTimer >= 5.00)
         {
             AddBubbles();
             mBubbleTimer = 0.00;
         }
     } else if(GetImage()->GetHeight() == nemoHeight)
     {
-        if(mBubbleTimer >= 6.00)
+        if(mBubbleTimer >= 2.00)
         {
             AddBubbles();
             mBubbleTimer = 0.00;
