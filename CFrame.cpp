@@ -369,25 +369,9 @@ void CFrame::OnLeftButtonDown(wxMouseEvent &event)
                                          event.m_y - mAquarium.GetAquariumTestPointY());
         if (mGrabbedItem != NULL)
         {
-            // We grabbed something
-            bool ctrl = event.m_controlDown;
-
-            if (ctrl)
-            {
-                // Make a copy of the item we grabbed
-                CItem *clone = mGrabbedItem->Clone();
-
-                mAquarium.AddItem(clone);
-                clone->SetLocation(event.m_x, event.m_y);
-                mGrabbedItem = clone;
-                Refresh();
-            }
-            else
-            {
                 // Move it to the front
                 mAquarium.MoveToFront(mGrabbedItem);
                 Refresh();
-            }
         }
     }
 }
