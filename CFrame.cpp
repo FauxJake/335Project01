@@ -31,6 +31,7 @@ EVT_MENU(ID_AddAnimatedChest, CFrame::OnAddAnimatedChest)
 EVT_MENU(ID_Clean, CFrame::OnClean)
 EVT_MENU(ID_Feed, CFrame::OnFeed)
 EVT_PAINT(CFrame::OnPaint)
+EVT_MENU(ID_Pause, CFrame::OnPause)
 EVT_LEFT_DOWN(CFrame::OnLeftButtonDown)
 EVT_MOTION(CFrame::OnMouseMove)
 EVT_LEFT_UP(CFrame::OnMouseMove)
@@ -65,7 +66,10 @@ mTimer(this, ID_Timer), mReport(this, ID_ReportDisplay)
                                                wxITEM_CHECK);
     menuFile->AppendSeparator();
     menuFile->Append(ID_About, L"&About");
-
+    menuFile->AppendSeparator();
+    wxMenuItem *pauseItem = menuFile->Append(ID_Pause, L"&Pause");
+    pauseItem->SetHelp(L"Pause the game");
+    
     //
     // Fish Menu + costs
     //
@@ -127,7 +131,7 @@ mTimer(this, ID_Timer), mReport(this, ID_ReportDisplay)
     mAquarium.Pause(true);
     
     wxMessageBox(L"Welcome to Bubble-arium!  The goal is to collect 100 bubbles."
-             "Watch out though!  If you don't feed your fish, you lose."
+             "Watch out though!  If you don't feed your fish, you lose. "
              "Also keep that aquarium clean or else you'll lose a LOT of bubbles.",
              L"Bubble-arium",
              wxOK | wxICON_INFORMATION, this);
@@ -310,6 +314,19 @@ void CFrame::OnFileSaveAs(wxCommandEvent& event)
 
     mAquarium.Save(filename);
 }
+
+/*! \brief On Pause event handler
+ *
+ * \param event A wxEvent item describing the event
+ */
+void CFrame::OnPause(wxCommandEvent& event)
+{
+    if(!mAquarium.IsPaused())
+        mAquarium.Pause(true);
+    else
+        mAquarium.Pause(false);
+}
+
 /*! \brief Add File/Open option handler
  *  \param event  An object that describes the event.
  */

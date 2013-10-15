@@ -92,6 +92,9 @@ public:
     
     //! Pause the game
     void Pause(bool value) {mPause = value;}
+    
+    //! Get Pause Status
+    bool IsPaused() {return mPause;}
             
 private:
     //! Default copy constructor

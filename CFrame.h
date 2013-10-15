@@ -40,6 +40,7 @@ public:
         ID_ReportDisplay,
         ID_Clean, 
         ID_Feed,
+        ID_Pause
     };
     
     // Add object events
@@ -68,6 +69,7 @@ public:
     void OnExit(wxCommandEvent& event);
     void OnAbout(wxCommandEvent& event);
     void OnFileTrashCan(wxCommandEvent& event);
+    void OnPause(wxCommandEvent& event);
     
     // - Other Event handlers
     void OnTimer(wxTimerEvent &event);
