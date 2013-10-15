@@ -87,6 +87,11 @@ public:
     
     //! Gets the current Count of Bubbles
     int GetBubbleCount() { return mBubbles; }
+    
+    void EndGame();
+    
+    //! Pause the game
+    void Pause(bool value) {mPause = value;}
             
 private:
     //! Default copy constructor
@@ -101,6 +106,9 @@ private:
     //! All of the items that populate our aquarium
     std::list<CItem *> mItems;
     
+    //! Timer to active every 1 second (handle bubble decrease)
+    double mSecondTimer;
+    
     //! Timer to check changing background image
     double mTimerClean;
     
@@ -112,6 +120,12 @@ private:
     
     //! The current count of bubbles
     int mBubbles;
+    
+    //! Value to decrease bubble count every second (based on clean state)
+    int mDecreaseBubbles;
+    
+    //! Check if pause is true or false
+    bool mPause;
 };
 
 #endif	/* CAQUARIUM_H */
