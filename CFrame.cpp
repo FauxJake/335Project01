@@ -132,8 +132,15 @@ mTimer(this, ID_Timer), mReport(this, ID_ReportDisplay)
     mAquarium.Pause(true);
 
     wxMessageBox(L"Welcome to Bubble-arium!  The goal is to collect 100 bubbles."
-                 "Watch out though!  If you don't feed your fish, you lose. "
-                 "Also keep that aquarium clean or else you'll lose a LOT of bubbles.",
+                 "Watch out though!  If you don't feed your fish, you lose."
+                 "\n\nRules:"
+                 "\n 1. Add items, grab the bubbles"
+                 "\n 2. Use bubbles, clean tank and feed your fish (and get more items)"
+                 "\n 3. Profit"
+                 "\n\nBe Aware:"
+                 "\n 1. You can't grab things in scroll mode!"
+                 "\n 2. Your fish will die if you don't feed them!"
+                 "\n 3. You will lose bubbles if you don't clean the tank!",
                  L"Bubble-arium",
                  wxOK | wxICON_INFORMATION, this);
 
@@ -157,7 +164,14 @@ void CFrame::OnAbout(wxCommandEvent& event)
 
     wxMessageBox(L"Welcome to Bubble-arium!  The goal is to collect 100 bubbles."
                  "Watch out though!  If you don't feed your fish, you lose."
-                 "Also keep that aquarium clean or else you'll lose a LOT of bubbles.",
+                 "\n\nRules:"
+                 "\n 1. Add items, grab the bubbles"
+                 "\n 2. Use bubbles, clean tank and feed your fish (and get more items)"
+                 "\n 3. Profit"
+                 "\n\nBe Aware:"
+                 "\n 1. You can't grab things in scroll mode!"
+                 "\n 2. Your fish will die if you don't feed them!"
+                 "\n 3. You will lose bubbles if you don't clean the tank!",
                  L"Bubble-arium",
                  wxOK | wxICON_INFORMATION, this);
 
