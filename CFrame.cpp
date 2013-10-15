@@ -387,7 +387,7 @@ void CFrame::OnLeftButtonDown(wxMouseEvent &event)
         ToggleScrollMode();
     }
 
-    if (!mAquarium.IsPaused())
+    if (!mAquarium.IsPaused() && !mIsScrollMode)
     {
         mGrabbedItem = mAquarium.HitTest(event.m_x - mAquarium.GetAquariumTestPointX(),
                                          event.m_y - mAquarium.GetAquariumTestPointY());

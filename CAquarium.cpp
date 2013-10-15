@@ -44,7 +44,7 @@ CAquarium::CAquarium()
 
     mX = mY = 0.0;
 
-    mBubbles = 10;
+    mBubbles = 20;
     mDecreaseBubbles = 0;
 
     mPause = false;
