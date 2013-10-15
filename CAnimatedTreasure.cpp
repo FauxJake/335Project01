@@ -147,8 +147,9 @@ int CAnimatedTreasure::AdvanceAnimation(int currStage)
                 break;
             mChestStage = 3;
             mChestOpening = false;
+            AddBubbles(-30);
             AddBubbles();
+            AddBubbles(30);
             break;
-
     }
 }

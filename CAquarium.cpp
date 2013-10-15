@@ -44,7 +44,7 @@ CAquarium::CAquarium()
 
     mX = mY = 0.0;
 
-    mBubbles = 30;
+    mBubbles = 6;
     mDecreaseBubbles = 0;
 
     mPause = false;
@@ -147,11 +147,11 @@ void CAquarium::AddItem(CItem *item)
  *
  * \param origin  A pointer to a CItem object that is the origin of the bubble effect
  */
-void CAquarium::AddBubbles(CItem* origin)
+void CAquarium::AddBubbles(CItem* origin, int xOffset)
 {
     CEffectBubbles* item = new CEffectBubbles(this);
 
-    item->SetLocation(origin->GetX(),
+    item->SetLocation(origin->GetX() + xOffset,
                       origin->GetY() - origin->GetImage()->GetHeight() / 2);
     mItems.push_back(item);
 }

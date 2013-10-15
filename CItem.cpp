@@ -148,7 +148,7 @@ void CItem::Mirror(bool mirror)
 
 /*! \brief Adds bubbles to the aquarium using this item as an origin
  */
-void CItem::AddBubbles()
+void CItem::AddBubbles(int xOffset)
 {
-    mAquarium->AddBubbles(this);
+    mAquarium->AddBubbles(this, xOffset);
 }

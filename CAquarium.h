@@ -48,7 +48,7 @@ public:
     
     void Feed();
     
-    void AddBubbles(CItem* origin);
+    void AddBubbles(CItem* origin, int xOffset = 0);
     
     //! \brief Get the width of the aquarium
     //! \returns Aquarium width

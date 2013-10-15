@@ -42,7 +42,7 @@ public:
     
     bool Animate(const std::wstring &filename);
     
-    void AddBubbles();
+    void AddBubbles(int xOffset = 0);
         
     //! Test to see if we clicked on this item
     //! \param x X location
