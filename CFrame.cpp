@@ -69,7 +69,7 @@ mTimer(this, ID_Timer), mReport(this, ID_ReportDisplay)
     menuFile->AppendSeparator();
     wxMenuItem *pauseItem = menuFile->Append(ID_Pause, L"&Pause");
     pauseItem->SetHelp(L"Pause the game");
-    
+
     //
     // Fish Menu + costs
     //
@@ -112,10 +112,10 @@ mTimer(this, ID_Timer), mReport(this, ID_ReportDisplay)
     SetBackgroundColour(wxColour(0, 0, 0));
 
     mGrabbedItem = NULL;
-    
+
     mReporter = new CReporter(this);
     mReport.Start(ReporterDisplay);
-    
+
     mTimer.Start(FrameDuration);
     mCurrentTime = wxGetLocalTimeMillis().GetValue();
 
@@ -126,16 +126,16 @@ mTimer(this, ID_Timer), mReport(this, ID_ReportDisplay)
         wxMessageBox(L"Failed to open image nav1.png");
 
     mIsScrollMode = false;
-    
+
     // Display introduction (pause game)
     mAquarium.Pause(true);
-    
+
     wxMessageBox(L"Welcome to Bubble-arium!  The goal is to collect 100 bubbles."
-             "Watch out though!  If you don't feed your fish, you lose. "
-             "Also keep that aquarium clean or else you'll lose a LOT of bubbles.",
-             L"Bubble-arium",
-             wxOK | wxICON_INFORMATION, this);
-    
+                 "Watch out though!  If you don't feed your fish, you lose. "
+                 "Also keep that aquarium clean or else you'll lose a LOT of bubbles.",
+                 L"Bubble-arium",
+                 wxOK | wxICON_INFORMATION, this);
+
     mAquarium.Pause(false);
 }
 
@@ -153,13 +153,13 @@ CFrame::~CFrame()
 void CFrame::OnAbout(wxCommandEvent& event)
 {
     mAquarium.Pause(true);
-    
+
     wxMessageBox(L"Welcome to Bubble-arium!  The goal is to collect 100 bubbles."
-             "Watch out though!  If you don't feed your fish, you lose."
-             "Also keep that aquarium clean or else you'll lose a LOT of bubbles.",
-             L"Bubble-arium",
-             wxOK | wxICON_INFORMATION, this);
-    
+                 "Watch out though!  If you don't feed your fish, you lose."
+                 "Also keep that aquarium clean or else you'll lose a LOT of bubbles.",
+                 L"Bubble-arium",
+                 wxOK | wxICON_INFORMATION, this);
+
     mAquarium.Pause(false);
 }
 
@@ -176,13 +176,13 @@ void CFrame::OnPaint(wxPaintEvent &event)
     wxPaintDC dc(this);
 
     mAquarium.OnDraw(dc);
-    
+
     // Snap frame size to max height/width
     // Background width = 806
-    if(this->m_height > 806)
+    if (this->m_height > 806)
         this->SetSize(this->m_width, 806);
     // Background height = 2560
-    if(this->m_width > 2560)
+    if (this->m_width > 2560)
         this->SetSize(2560, this->m_height);
 
     // draw interface stuff
@@ -321,7 +321,7 @@ void CFrame::OnFileSaveAs(wxCommandEvent& event)
  */
 void CFrame::OnPause(wxCommandEvent& event)
 {
-    if(!mAquarium.IsPaused())
+    if (!mAquarium.IsPaused())
         mAquarium.Pause(true);
     else
         mAquarium.Pause(false);
@@ -355,37 +355,39 @@ void CFrame::OnLeftButtonDown(wxMouseEvent &event)
     // Get mouse location (for scrolling)
     mMouseLocationX = event.m_x;
     mMouseLocationY = event.m_y;
-    
+
     // Test for button hit (exact box for button)
-    if((event.m_x >= 0 && event.m_x <= 68 )
-            && ((event.m_y <= this->m_height) && event.m_y >= this->m_height - 59*2))
+    if ((event.m_x >= 0 && event.m_x <= 68)
+            && ((event.m_y <= this->m_height) && event.m_y >= this->m_height - 59 * 2))
     {
         ToggleScrollMode();
     }
-    
-    //need to test if scroll mode here then
-    mGrabbedItem = mAquarium.HitTest(event.m_x - mAquarium.GetAquariumTestPointX(), 
-                                     event.m_y - mAquarium.GetAquariumTestPointY());
-    if (mGrabbedItem != NULL)
+
+    if (!mAquarium.IsPaused())
     {
-        // We grabbed something
-        bool ctrl = event.m_controlDown;
-
-        if (ctrl)
+        mGrabbedItem = mAquarium.HitTest(event.m_x - mAquarium.GetAquariumTestPointX(),
+                                         event.m_y - mAquarium.GetAquariumTestPointY());
+        if (mGrabbedItem != NULL)
         {
-            // Make a copy of the item we grabbed
-            CItem *clone = mGrabbedItem->Clone();
+            // We grabbed something
+            bool ctrl = event.m_controlDown;
 
-            mAquarium.AddItem(clone);
-            clone->SetLocation(event.m_x, event.m_y);
-            mGrabbedItem = clone;
-            Refresh();
-        }
-        else
-        {
-            // Move it to the front
-            mAquarium.MoveToFront(mGrabbedItem);
-            Refresh();
+            if (ctrl)
+            {
+                // Make a copy of the item we grabbed
+                CItem *clone = mGrabbedItem->Clone();
+
+                mAquarium.AddItem(clone);
+                clone->SetLocation(event.m_x, event.m_y);
+                mGrabbedItem = clone;
+                Refresh();
+            }
+            else
+            {
+                // Move it to the front
+                mAquarium.MoveToFront(mGrabbedItem);
+                Refresh();
+            }
         }
     }
 }
@@ -405,7 +407,7 @@ void CFrame::OnMouseMove(wxMouseEvent &event)
         // move it while the left button is down.
         if (event.m_leftDown)
         {
-            mGrabbedItem->SetLocation(event.m_x - mAquarium.GetAquariumTestPointX(), 
+            mGrabbedItem->SetLocation(event.m_x - mAquarium.GetAquariumTestPointX(),
                                       event.m_y - mAquarium.GetAquariumTestPointY());
         }
         else
@@ -422,58 +424,59 @@ void CFrame::OnMouseMove(wxMouseEvent &event)
 
         // Force the screen to redraw
         Refresh();
-    } else
+    }
+    else
     {
         // Check mouse clicked and scroll mode is active
-        if(event.m_leftDown && mIsScrollMode)
+        if (event.m_leftDown && mIsScrollMode)
         {
             //! Any image outside the frame
             double imageOutsideX = 2560 - this->m_width;
             double imageOutsideY = 806 - this->m_height;
-            
+
             // Set image bounds
-            if(mAquarium.GetAquariumTestPointX() <= 0.0 &&
-                  mAquarium.GetAquariumTestPointX() >= -imageOutsideX)
+            if (mAquarium.GetAquariumTestPointX() <= 0.0 &&
+                    mAquarium.GetAquariumTestPointX() >= -imageOutsideX)
             {
                 // Stop scrolling too far right
-                if(mMouseLocationX > event.m_x &&
-                      mAquarium.GetAquariumTestPointX() > -imageOutsideX + (mMouseLocationX - event.m_x))
+                if (mMouseLocationX > event.m_x &&
+                        mAquarium.GetAquariumTestPointX() > -imageOutsideX + (mMouseLocationX - event.m_x))
                 {
                     mAquarium.SetAquariumTestPointX(mAquarium.GetAquariumTestPointX()
-                                                      - (mMouseLocationX - event.m_x));
+                                                    - (mMouseLocationX - event.m_x));
                     mMouseLocationX = event.m_x;
                 }
-                // Stop scrolling too far left
-                else if(mMouseLocationX < event.m_x &&
-                      mAquarium.GetAquariumTestPointX() < 0 + (event.m_x - mMouseLocationX))
+                    // Stop scrolling too far left
+                else if (mMouseLocationX < event.m_x &&
+                        mAquarium.GetAquariumTestPointX() < 0 + (event.m_x - mMouseLocationX))
                 {
                     mAquarium.SetAquariumTestPointX(mAquarium.GetAquariumTestPointX()
-                                                      + (event.m_x - mMouseLocationX));
+                                                    + (event.m_x - mMouseLocationX));
                     // Prevent image scroll too far (weird issue with left side)
                     if (mAquarium.GetAquariumTestPointX() > 0.0)
                         mAquarium.SetAquariumTestPointX(0.0);
                     mMouseLocationX = event.m_x;
                 }
             }
-            
+
             // Set image bounds
-            if(mAquarium.GetAquariumTestPointY() <= 0.0 &&
-                  mAquarium.GetAquariumTestPointY() >= -imageOutsideY)
+            if (mAquarium.GetAquariumTestPointY() <= 0.0 &&
+                    mAquarium.GetAquariumTestPointY() >= -imageOutsideY)
             {
                 // Stop scrolling too far right
-                if(mMouseLocationY > event.m_y &&
-                      mAquarium.GetAquariumTestPointY() > -imageOutsideY + (mMouseLocationY - event.m_y))
+                if (mMouseLocationY > event.m_y &&
+                        mAquarium.GetAquariumTestPointY() > -imageOutsideY + (mMouseLocationY - event.m_y))
                 {
                     mAquarium.SetAquariumTestPointY(mAquarium.GetAquariumTestPointY()
-                                                      - (mMouseLocationY - event.m_y));
+                                                    - (mMouseLocationY - event.m_y));
                     mMouseLocationY = event.m_y;
                 }
-                // Stop scrolling too far left
-                else if(mMouseLocationY < event.m_y &&
-                      mAquarium.GetAquariumTestPointY() < 0 + (event.m_y - mMouseLocationY))
+                    // Stop scrolling too far left
+                else if (mMouseLocationY < event.m_y &&
+                        mAquarium.GetAquariumTestPointY() < 0 + (event.m_y - mMouseLocationY))
                 {
                     mAquarium.SetAquariumTestPointY(mAquarium.GetAquariumTestPointY()
-                                                      + (event.m_y - mMouseLocationY));
+                                                    + (event.m_y - mMouseLocationY));
                     // Prevent image scroll too far (weird issue with left side)
                     if (mAquarium.GetAquariumTestPointY() > 0.0)
                         mAquarium.SetAquariumTestPointY(0.0);
@@ -517,97 +520,102 @@ void CFrame::OnReport(wxTimerEvent &event)
 {
     CCountFishVisitor countFish;
     mAquarium.Accept(&countFish);
-    
+
     // Create space to make appearance of replacing text
     std::wstringstream strSpace;
     for (int i = 0; i < 100; i++)
         strSpace << "\n";
     strSpace << std::ends;
     mReporter->Report(strSpace.str());
-    
+
     // Display basic statistics
     std::wstringstream strCount;
-    strCount 
-        << L"Number of Fish in Tank: "
-        << (countFish.GetBetaCount() +
+    strCount
+            << L"Number of Fish in Tank: "
+            << (countFish.GetBetaCount() +
             countFish.GetNemoCount() +
             countFish.GetMollyCount()) << "\n"
-        << L"Beta Fish: " << countFish.GetBetaCount() << "\n"
-        << L"Nemo Fish: " << countFish.GetNemoCount() << "\n"
-        << L"Molly Fish: " << countFish.GetMollyCount() << "\n" << std::ends;
+            << L"Beta Fish: " << countFish.GetBetaCount() << "\n"
+            << L"Nemo Fish: " << countFish.GetNemoCount() << "\n"
+            << L"Molly Fish: " << countFish.GetMollyCount() << "\n" << std::ends;
     mReporter->Report(strCount.str());
-    
+
     // Display time since last cleaned
     std::wstringstream strDirty;
     strDirty << L"Time since last cleaned: " << mAquarium.GetLastClean() << "\n";
-    
+
     // Tell user bubble loss rate from not cleaning (see CAquarium.cpp::Update())
     // 0-20 = clean
     // 20-40 = stage 1
     // 40-60 = stage 2
     // 60+   = stage 3
     strDirty << L"Bubble loss rate: ";
-    if(mAquarium.GetLastClean() <= 20.00)
+    if (mAquarium.GetLastClean() <= 20.00)
         strDirty << L"0 bubbles/second" << std::ends;
-    else if(mAquarium.GetLastClean() >= 20.00 && mAquarium.GetLastClean() <= 40.00)
+    else if (mAquarium.GetLastClean() >= 20.00 && mAquarium.GetLastClean() <= 40.00)
         strDirty << L"1 bubbles/second" << std::ends;
-    else if(mAquarium.GetLastClean() >= 40.00 && mAquarium.GetLastClean() <= 60.00)
+    else if (mAquarium.GetLastClean() >= 40.00 && mAquarium.GetLastClean() <= 60.00)
         strDirty << L"2 bubbles/second" << std::ends;
     else
         strDirty << L"3 bubbles/second" << std::ends;
     mReporter->Report(strDirty.str());
-    
+
     // Display time since last fed
     std::wstringstream strFed;
     strFed << L"Time since last fed: " << mAquarium.GetLastFed() << "\n";
-    
+
     // Warn user if fish will starve and when
-    if(mAquarium.GetLastFed() >= 20.00)
+    if (mAquarium.GetLastFed() >= 20.00)
     {
         // 30.00 = time when fish will starve (see CAquarium.cpp::Update())
         strFed << L"!!!WARNING!!! Fish will starve in: "
-               << (30.00 - mAquarium.GetLastFed()) << std::ends;
-    } else
+                << (30.00 - mAquarium.GetLastFed()) << std::ends;
+    }
+    else
         strFed << std::ends;
-    
+
     // Lose if fish are not fed (see Game Outline on project website)
-    if(mAquarium.GetLastFed() >= 30.00)
+    if (mAquarium.GetLastFed() >= 30.00)
     {
         wxMessageBox(L"You lose!  Your fish have died.  Why would you not feed"
-                "them?  Animal cruelty!  Feel free to try again.",
-                 L"Game Over...",
-                 wxOK | wxICON_INFORMATION, this);
+                     "them?  Animal cruelty!  Feel free to try again.",
+                     L"Game Over...",
+                     wxOK | wxICON_INFORMATION, this);
         mAquarium.EndGame();
-        if(mIsScrollMode)
+        if (mIsScrollMode)
             ToggleScrollMode();
     }
-    
+
     mReporter->Report(strFed.str());
-    
+
     // Display total number of bubbles collected and how many to go
     std::wstringstream strBubbles;
-    if(mAquarium.GetBubbleCount() >= 1 && mAquarium.GetBubbleCount() < 100)
+    if (mAquarium.GetBubbleCount() >= 1 && mAquarium.GetBubbleCount() < 100)
     {
         strBubbles << L"Number of Bubbles: " << mAquarium.GetBubbleCount() << "\n";
         strBubbles << (100 - mAquarium.GetBubbleCount()) << L" bubbles to go!" << std::ends;
-    } else if(mAquarium.GetBubbleCount() >= 100) {
+    }
+    else if (mAquarium.GetBubbleCount() >= 100)
+    {
         // Play has won (goal, collect 100 bubbles)
         wxMessageBox(L"You managed to collect 100 bubbles!  Sadly, you also wasted"
-                 " a good chunk of time plaything this simple game and won't get"
-                 " that time back.  Please feel free to play again.",
-                 L"You Win!",
-                 wxOK | wxICON_INFORMATION, this);
+                     " a good chunk of time plaything this simple game and won't get"
+                     " that time back.  Please feel free to play again.",
+                     L"You Win!",
+                     wxOK | wxICON_INFORMATION, this);
         mAquarium.EndGame();
-        if(mIsScrollMode)
+        if (mIsScrollMode)
             ToggleScrollMode();
-    } else {
+    }
+    else
+    {
         // Player has lost (ran out of bubbles)
         wxMessageBox(L"You lose!  You have lost all your bubbles.  How pathetic..."
-                 "feel free to try again.",
-                 L"Game Over...",
-                 wxOK | wxICON_INFORMATION, this);
+                     "feel free to try again.",
+                     L"Game Over...",
+                     wxOK | wxICON_INFORMATION, this);
         mAquarium.EndGame();
-        if(mIsScrollMode)
+        if (mIsScrollMode)
             ToggleScrollMode();
     }
     mReporter->Report(strBubbles.str());

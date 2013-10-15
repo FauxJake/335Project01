@@ -43,10 +43,10 @@ CAquarium::CAquarium()
     mTimerClean = mTimerFeed = mSecondTimer = 0.00;
 
     mX = mY = 0.0;
-    
-    mBubbles = 5;
+
+    mBubbles = 30;
     mDecreaseBubbles = 0;
-    
+
     mPause = false;
 }
 
@@ -65,11 +65,13 @@ void CAquarium::OnDraw(wxDC &dc)
 {
     dc.DrawBitmap(mBackground, mX, mY);
 
-    if (mTrashCanActive) {
+    if (mTrashCanActive)
+    {
         dc.DrawBitmap(mTrashcan, 0, 0);
     }
 
-    for (std::list<CItem *>::iterator t = mItems.begin(); t != mItems.end(); t++) {
+    for (std::list<CItem *>::iterator t = mItems.begin(); t != mItems.end(); t++)
+    {
         CItem *item = *t;
         item->Draw(dc, mX, mY);
     }
@@ -92,7 +94,8 @@ wxImage *CAquarium::GetCachedImage(const std::wstring name)
 {
     // See if the name exists in the cache already.
     std::map<std::wstring, wxImage>::iterator i = mImageCache.find(name);
-    if (i != mImageCache.end()) {
+    if (i != mImageCache.end())
+    {
         // If we got here, it does exist and i->second is a
         // reference to the bitmap object.
         return &i->second;
@@ -103,7 +106,8 @@ wxImage *CAquarium::GetCachedImage(const std::wstring name)
 
     // Create a bitmap image and load the file into it.
     wxImage bitmap;
-    if (!bitmap.LoadFile(realname.c_str())) {
+    if (!bitmap.LoadFile(realname.c_str()))
+    {
         std::wstring msg = std::wstring(L"Unable to open image ") + realname;
         wxMessageBox(msg.c_str());
         return NULL;
@@ -128,7 +132,8 @@ void CAquarium::AddItem(CItem *item)
     // Check if first fish added
     int fishCount = 0;
     for (std::list<CItem *>::iterator i = mItems.begin();
-            i != mItems.end(); i++) {
+            i != mItems.end(); i++)
+    {
         if ((*i)->IsFish())
             fishCount++;
     }
@@ -159,8 +164,10 @@ void CAquarium::AddBubbles(CItem* origin)
  */
 CItem *CAquarium::HitTest(int x, int y)
 {
-    for (std::list<CItem *>::reverse_iterator i = mItems.rbegin(); i != mItems.rend(); i++) {
-        if ((*i)->HitTest(x, y)) {
+    for (std::list<CItem *>::reverse_iterator i = mItems.rbegin(); i != mItems.rend(); i++)
+    {
+        if ((*i)->HitTest(x, y))
+        {
             return *i;
         }
     }
@@ -190,7 +197,8 @@ void CAquarium::ToggleTrashCanActive()
  */
 bool CAquarium::IsOverTrashcan(int x, int y)
 {
-    if (!mTrashCanActive) {
+    if (!mTrashCanActive)
+    {
         return false;
     }
 
@@ -228,16 +236,19 @@ void CAquarium::Save(const std::wstring &filename)
 
     // Iterate over all of the aquarium items so we can save each to the
     // XML document.
-    for (std::list<CItem *>::const_iterator t = mItems.begin(); t != mItems.end(); t++) {
+    for (std::list<CItem *>::const_iterator t = mItems.begin(); t != mItems.end(); t++)
+    {
         // And the tile to create a node for itself
         wxXmlNode *node = (*t)->XmlSave();
 
         // If we have a previous child, add this node after
         // the child.
-        if (lastChild == NULL) {
+        if (lastChild == NULL)
+        {
             root->AddChild(node);
         }
-        else {
+        else
+        {
             lastChild->SetNext(node);
         }
 
@@ -256,7 +267,8 @@ void CAquarium::Save(const std::wstring &filename)
 void CAquarium::Load(const std::wstring &filename)
 {
     wxXmlDocument xmlDoc;
-    if (!xmlDoc.Load(filename.c_str())) {
+    if (!xmlDoc.Load(filename.c_str()))
+    {
         std::wstringstream str;
         str << L"Unable to open file " << filename << std::ends;
         wxMessageBox(str.str().c_str(),
@@ -270,34 +282,42 @@ void CAquarium::Load(const std::wstring &filename)
 
     wxXmlNode *root = xmlDoc.GetRoot();
     wxXmlNode *child = root->GetChildren();
-    while (child != NULL) {
+    while (child != NULL)
+    {
         // This is the tile we will create
         CItem *item = NULL;
         CFish *fish = NULL;
 
         // We have a tile. What type?
         wxString type = child->GetAttribute(L"type", L"");
-        if (type == L"beta") {
+        if (type == L"beta")
+        {
             fish = new CFishBeta(this);
         }
-        else if (type == L"treasure-chest") {
+        else if (type == L"treasure-chest")
+        {
             item = new CDecorTreasure(this);
         }
-        else if (type == L"animated-chest") {
+        else if (type == L"animated-chest")
+        {
             item = new CAnimatedTreasure(this);
         }
-        else if (type == L"molly") {
+        else if (type == L"molly")
+        {
             fish = new CFishMolly(this);
         }
-        else if (type == L"nemo") {
+        else if (type == L"nemo")
+        {
             fish = new CFishNemo(this);
         }
 
-        if (item != NULL) {
+        if (item != NULL)
+        {
             item->XmlLoad(child);
             mItems.push_back(item);
         }
-        else if (fish != NULL) {
+        else if (fish != NULL)
+        {
             fish->XmlLoad(child);
             mItems.push_back(fish);
         }
@@ -313,7 +333,8 @@ void CAquarium::Load(const std::wstring &filename)
  */
 void CAquarium::Clear()
 {
-    while (!mItems.empty()) {
+    while (!mItems.empty())
+    {
         delete mItems.front();
         mItems.pop_front();
     }
@@ -327,77 +348,87 @@ void CAquarium::Update(double elapsed)
     bool unFedFish = false;
 
     // Check if game is paused
-    if(!mPause)
+    if (!mPause)
     {
         mTimerClean += elapsed;
         mSecondTimer += elapsed;
 
         if (mTimerFeed != 0.00)
             mTimerFeed += elapsed;
-    }
 
-    // Change background depending on cleaning needed
-    // Change bubble loss rate depending on cleaning needed
-    // Only check if statements if within range (save run speed)
-    if (mTimerClean > 19.00 && mTimerClean < 61.00) {
-        if (mTimerClean >= 20.00 && mTimerClean <= 20.10) {
-            // Stage 1
-            mDecreaseBubbles = 1;
-            if (!mBackground.LoadFile(L"images/backgroundW1.png", wxBITMAP_TYPE_PNG))
-                wxMessageBox(L"Failed to open image backgroundW1.png");
-        }
-        else if (mTimerClean >= 40.00 && mTimerClean <= 40.10) {
-            // Stage 2
-            mDecreaseBubbles = 2;
-            if (!mBackground.LoadFile(L"images/backgroundW2.png", wxBITMAP_TYPE_PNG))
-                wxMessageBox(L"Failed to open image backgroundW2.png");
-        }
-        else if (mTimerClean >= 60.00 && mTimerClean <= 60.10) {
-            // Stage 3
-            mDecreaseBubbles = 3;
-            if (!mBackground.LoadFile(L"images/backgroundW3.png", wxBITMAP_TYPE_PNG))
-                wxMessageBox(L"Failed to open image backgroundW3.png");
-        }
-    }
-    
-    // Check if second has passed and decrease bubble count
-    // Decrease = 0 if aquarium is clean
-    if (mSecondTimer >= 1.00)
-    {
-        mBubbles -= mDecreaseBubbles;
-        mSecondTimer = 0.00;
-    }
-
-    if (mTimerFeed >= 30.00)
-        unFedFish = true;
-
-    for (std::list<CItem *>::iterator i = mItems.begin();
-            i != mItems.end(); i++) {
-        CItem *item = *i;
-
-        // Fish were not fed (all fish die)
-        if (unFedFish) {
-            if ((item)->IsFish()) {
-                mItems.remove(item);
-
-                // mItems.end() is one back, prevent seg-fault
-                i--;
+        // Change background depending on cleaning needed
+        // Change bubble loss rate depending on cleaning needed
+        // Only check if statements if within range (save run speed)
+        if (mTimerClean > 19.00 && mTimerClean < 61.00)
+        {
+            if (mTimerClean >= 20.00 && mTimerClean <= 20.10)
+            {
+                // Stage 1
+                mDecreaseBubbles = 1;
+                if (!mBackground.LoadFile(L"images/backgroundW1.png", wxBITMAP_TYPE_PNG))
+                    wxMessageBox(L"Failed to open image backgroundW1.png");
             }
-
-
-            // No fish, no feed timer
-            mTimerFeed = 0.00;
-        }
-            // hackish way to remove bubbles
-        else {
-            item->Update(elapsed);
-            if ((item)->IsBubble()
-                && item->GetY() <= GetAquariumTestPointY()) {
-                mItems.remove(item);
-                i--;
+            else if (mTimerClean >= 40.00 && mTimerClean <= 40.10)
+            {
+                // Stage 2
+                mDecreaseBubbles = 2;
+                if (!mBackground.LoadFile(L"images/backgroundW2.png", wxBITMAP_TYPE_PNG))
+                    wxMessageBox(L"Failed to open image backgroundW2.png");
+            }
+            else if (mTimerClean >= 60.00 && mTimerClean <= 60.10)
+            {
+                // Stage 3
+                mDecreaseBubbles = 3;
+                if (!mBackground.LoadFile(L"images/backgroundW3.png", wxBITMAP_TYPE_PNG))
+                    wxMessageBox(L"Failed to open image backgroundW3.png");
             }
         }
+
+        // Check if second has passed and decrease bubble count
+        // Decrease = 0 if aquarium is clean
+        if (mSecondTimer >= 1.00)
+        {
+            mBubbles -= mDecreaseBubbles;
+            mSecondTimer = 0.00;
+        }
+
+        if (mTimerFeed >= 30.00)
+            unFedFish = true;
+
+        for (std::list<CItem *>::iterator i = mItems.begin();
+                i != mItems.end(); i++)
+        {
+            CItem *item = *i;
+
+            // Fish were not fed (all fish die)
+            if (unFedFish)
+            {
+                if ((item)->IsFish())
+                {
+                    mItems.remove(item);
+
+                    // mItems.end() is one back, prevent seg-fault
+                    i--;
+                }
+
+
+                // No fish, no feed timer
+                mTimerFeed = 0.00;
+            }
+                // hackish way to remove bubbles
+            else
+            {
+                item->Update(elapsed);
+                if ((item)->IsBubble()
+                        && item->GetY() <= GetAquariumTestPointY())
+                {
+                    mItems.remove(item);
+                    i--;
+                }
+            }
+        }
     }
+
 }
 
 /*! \brief Resets clean timer and background
@@ -417,7 +448,8 @@ void CAquarium::Feed()
     // Check for any fish
     int fishCount = 0;
     for (std::list<CItem *>::iterator i = mItems.begin();
-            i != mItems.end(); i++) {
+            i != mItems.end(); i++)
+    {
         if ((*i)->IsFish())
             fishCount++;
     }
@@ -434,7 +466,8 @@ void CAquarium::Feed()
  */
 void CAquarium::Accept(CItemVisitor *visitor)
 {
-    for (std::list<CItem *>::iterator i = mItems.begin(); i != mItems.end(); i++) {
+    for (std::list<CItem *>::iterator i = mItems.begin(); i != mItems.end(); i++)
+    {
         CItem *item = *i;
         item->Accept(visitor);
     }
