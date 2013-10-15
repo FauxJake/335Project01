@@ -6,6 +6,7 @@
 
 #include "wx/prec.h"
 #include <string>
+#include <iostream>
 #include <sstream>
 
 #include "CFrame.h"
@@ -174,6 +175,10 @@ void CFrame::OnPaint(wxPaintEvent &event)
 {
     // Create a device context
     wxPaintDC dc(this);
+    
+    wxFont font(20, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false);
+    dc.SetFont(font);
+    dc.SetTextForeground(wxColor(255, 0, 0));
 
     mAquarium.OnDraw(dc);
 
@@ -193,9 +198,7 @@ void CFrame::OnPaint(wxPaintEvent &event)
     else
         dc.DrawBitmap(mScrollModeInactive, 0, this->m_height - 59 * 2);
 
-    dc.SetPen(wxNullPen);
-    dc.SetBrush(wxNullBrush);
-    dc.SetFont(wxNullFont);
+
 
     // Handle updates
     long long newTime = wxGetLocalTimeMillis().GetValue();
@@ -203,6 +206,20 @@ void CFrame::OnPaint(wxPaintEvent &event)
     mCurrentTime = newTime;
 
     mAquarium.Update(elapsed);
+
+    if (mAquarium.GetLastFed() >= 20)
+    {
+        std::wstringstream fishDeath;
+        fishDeath
+                << L"TIME UNTIL FISH DEATH: "
+                << (30 - mAquarium.GetLastFed()) << std::ends;
+
+        dc.DrawText(fishDeath.str(), 0, 0);
+    }
+
+    dc.SetPen(wxNullPen);
+    dc.SetBrush(wxNullBrush);
+    dc.SetFont(wxNullFont);
 }
 
 /*! \brief Add Fish/Beta menu option handler
@@ -369,9 +386,9 @@ void CFrame::OnLeftButtonDown(wxMouseEvent &event)
                                          event.m_y - mAquarium.GetAquariumTestPointY());
         if (mGrabbedItem != NULL)
         {
-                // Move it to the front
-                mAquarium.MoveToFront(mGrabbedItem);
-                Refresh();
+            // Move it to the front
+            mAquarium.MoveToFront(mGrabbedItem);
+            Refresh();
         }
     }
 }
