@@ -214,8 +214,15 @@ void CFrame::OnPaint(wxPaintEvent &event)
                 << L"TIME UNTIL FISH DEATH: "
                 << (30 - mAquarium.GetLastFed()) << std::ends;
 
-        dc.DrawText(fishDeath.str(), 0, 0);
+        dc.DrawText(fishDeath.str(), 0, 30);
     }
+    
+    std::wstringstream bubbleCount;
+        bubbleCount
+                << L"Bubble Count: "
+                << mAquarium.GetBubbleCount() << std::ends;
+        
+    dc.DrawText(bubbleCount.str(), 0, 0);
 
     dc.SetPen(wxNullPen);
     dc.SetBrush(wxNullBrush);
