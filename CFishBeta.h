@@ -30,6 +30,9 @@ public:
     
     virtual void Accept(CItemVisitor *visitor) {visitor->VisitBeta(this);}
     
+    //! virtual function to sell this fish for bubble points
+    void Sell();
+    
 private:
     //! Default constructor (disabled)
     CFishBeta();

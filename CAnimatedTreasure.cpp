@@ -7,10 +7,10 @@
 #include "wx/prec.h"
 #include "CAnimatedTreasure.h"
 #include "CAquarium.h"
+#include "CItem.h"
 
 //! treasure chest filename, closed is default image
-const std::wstring CAnimatedTreasureFileNames [5] =
-{ 
+const std::wstring CAnimatedTreasureFileNames [5] ={
     L"chest1.png",
     L"chest2.png",
     L"chest3.png",
@@ -74,32 +74,33 @@ wxXmlNode *CAnimatedTreasure::XmlSave()
 void CAnimatedTreasure::Update(double elapsed)
 {
     mChestAnimationTimer += elapsed;
-    
+
     // NOTE: comments are for first iteration only
     // closed -> stage 1, time here represents open AND closed timer
-    if(mChestAnimationTimer >= 2.00 && mChestAnimationTimer <= 2.03)
+    if (mChestAnimationTimer >= 2.00 && mChestAnimationTimer <= 2.03)
         this->AdvanceAnimation(mChestStage);
-    
-    // stage 1 -> stage 2
-    else if(mChestAnimationTimer >= 4.00 && mChestAnimationTimer <= 4.03)
+
+        // stage 1 -> stage 2
+    else if (mChestAnimationTimer >= 4.00 && mChestAnimationTimer <= 4.03)
         this->AdvanceAnimation(mChestStage);
-    
-    // stage 2 -> stage 3
-    else if(mChestAnimationTimer >= 6.00 && mChestAnimationTimer <= 6.03)
+
+        // stage 2 -> stage 3
+    else if (mChestAnimationTimer >= 6.00 && mChestAnimationTimer <= 6.03)
         this->AdvanceAnimation(mChestStage);
-    
-    // stage 3 -> open
-    else if(mChestAnimationTimer >= 8.00 && mChestAnimationTimer <= 8.03)
+
+        // stage 3 -> open
+    else if (mChestAnimationTimer >= 8.00 && mChestAnimationTimer <= 8.03)
         this->AdvanceAnimation(mChestStage);
-    
-    // open, reset timer for second iteration
-    else if(mChestAnimationTimer >= 10.00)
+
+        // open, reset timer for second iteration
+    else if (mChestAnimationTimer >= 10.00)
     {
         this->AdvanceAnimation(mChestStage);
         mChestAnimationTimer = 0.00;
     }
     else
-    {}
+    {
+    }
 }
 
 /*! \brief A function to advance the chest animation
@@ -112,43 +113,50 @@ int CAnimatedTreasure::AdvanceAnimation(int currStage)
     switch (currStage)
     {
         // chest is closed
-        case 0:
-            if (!Animate(CAnimatedTreasureFileNames[0]))
-                break;
-            mChestStage = 1;
-            mChestOpening = true;
+    case 0:
+        if (!Animate(CAnimatedTreasureFileNames[0]))
             break;
+        mChestStage = 1;
+        mChestOpening = true;
+        break;
 
         // first animation
-        case 1:
-            if (!Animate(CAnimatedTreasureFileNames[1]))
-                break;
-            mChestStage = mChestOpening ? 2:0;
+    case 1:
+        if (!Animate(CAnimatedTreasureFileNames[1]))
             break;
-        
+        mChestStage = mChestOpening ? 2 : 0;
+        break;
+
         // second animation
-        case 2:
-            if (!Animate(CAnimatedTreasureFileNames[2]))
-                break;
-            mChestStage = mChestOpening ? 3:1;
+    case 2:
+        if (!Animate(CAnimatedTreasureFileNames[2]))
             break;
+        mChestStage = mChestOpening ? 3 : 1;
+        break;
 
         // third animation
-        case 3:
-            if (!Animate(CAnimatedTreasureFileNames[3]))
-                break;
-            mChestStage = mChestOpening ? 4:2;
+    case 3:
+        if (!Animate(CAnimatedTreasureFileNames[3]))
             break;
-            
+        mChestStage = mChestOpening ? 4 : 2;
+        break;
+
         // chest is open
-        case 4:
-            if (!Animate(CAnimatedTreasureFileNames[4]))
-                break;
-            mChestStage = 3;
-            mChestOpening = false;
-            AddBubbles(-30);
-            AddBubbles();
-            AddBubbles(30);
+    case 4:
+        if (!Animate(CAnimatedTreasureFileNames[4]))
             break;
+        mChestStage = 3;
+        mChestOpening = false;
+        AddBubbles(-30);
+        AddBubbles();
+        AddBubbles(30);
+        break;
     }
+}
+
+/*! \brief Sells the animated chest
+ */
+void CAnimatedTreasure::Sell()
+{
+    GetAquarium()->BubblePoints(9);
 }

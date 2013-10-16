@@ -35,6 +35,9 @@ public:
     void Update(double elapsed);
     int AdvanceAnimation(int currStage);
     
+    //! virtual function to sell this Animated Chest for bubble points
+    void Sell(); 
+    
 private:
     //! Default constructor (disabled)
     CAnimatedTreasure();

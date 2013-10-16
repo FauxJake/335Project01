@@ -34,6 +34,9 @@ public:
     //! Tells item is a fish
     virtual bool IsFish() { return true; }
     
+    //! Virtual item to sell the fish for bubbles
+    virtual void Sell() = 0;
+    
 protected:
     CFish(CAquarium *aquarium, const std::wstring &filename);
     CFish(const CFish &);

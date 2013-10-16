@@ -71,3 +71,10 @@ wxXmlNode *CFishBeta::XmlSave()
     node->AddAttribute(L"type", L"beta");
     return node;
 }
+
+/*! \brief Sells the beta fish
+ */
+void CFishBeta::Sell()
+{
+    CItem::GetAquarium()->BubblePoints(1);
+}

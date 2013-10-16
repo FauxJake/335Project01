@@ -63,3 +63,10 @@ wxXmlNode *CFishNemo::XmlSave()
     node->AddAttribute(L"type", L"nemo");
     return node;
 }
+
+/*! \brief Sells the nemo fish
+ */
+void CFishNemo::Sell()
+{
+    CItem::GetAquarium()->BubblePoints(6);
+}

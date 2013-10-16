@@ -29,6 +29,9 @@ public:
     
     virtual void Accept(CItemVisitor *visitor) {visitor->VisitMolly(this);}
     
+    //! virtual function to sell this fish for bubble points
+    void Sell();
+    
 private:
     //! Default constructor (disabled)
     CFishMolly();

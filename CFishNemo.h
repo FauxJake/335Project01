@@ -28,6 +28,9 @@ public:
     CItem *Clone();
     
     virtual void Accept(CItemVisitor *visitor) {visitor->VisitNemo(this);}
+    
+    //! virtual function to sell this fish for bubble points
+    void Sell();
         
 private:
     //! Default constructor (disabled)

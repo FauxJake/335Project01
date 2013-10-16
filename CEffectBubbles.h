@@ -39,6 +39,9 @@ public:
     // TODO: remove this and implement visitor pattern
     bool IsBubble() {return true;}
     
+    //! virtual function to sell this item for bubble points
+    void Sell() {}
+    
     CItem *Clone();
     
 private:

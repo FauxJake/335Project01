@@ -85,6 +85,9 @@ public:
     //! Virtual function to accept visitors into items
     virtual void Accept(CItemVisitor *) = 0;
     
+    //! virtual function for selling items
+    virtual void Sell() {};
+    
 protected:
     CItem(CAquarium *aquarium, const std::wstring &filename);
     CItem(const CItem &);

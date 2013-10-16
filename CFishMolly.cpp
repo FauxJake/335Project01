@@ -63,3 +63,10 @@ wxXmlNode *CFishMolly::XmlSave()
     node->AddAttribute(L"type", L"molly");
     return node;
 }
+
+/*! \brief Sells the animated chest
+ */
+void CFishMolly::Sell()
+{
+    CItem::GetAquarium()->BubblePoints(3);
+}

@@ -75,10 +75,14 @@ mTimer(this, ID_Timer), mReport(this, ID_ReportDisplay)
     // Fish Menu + costs
     //
     wxMenu *menuFish = new wxMenu;
-    menuFish->Append(ID_AddFishBeta, L"&Beta - 1 Bubble\tb");
-    menuFish->Append(ID_AddFishNemo, L"&Nemo - 7 Bubbles\tn");
-    menuFish->Append(ID_AddFishMolly, L"&Molly - 4 Bubbles\tm");
+    wxMenuItem *betaItem = menuFish->Append(ID_AddFishBeta, L"&Beta - 1 Bubble\tb");
+    wxMenuItem *nemoItem = menuFish->Append(ID_AddFishNemo, L"&Nemo - 7 Bubbles\tn");
+    wxMenuItem *mollyItem = menuFish->Append(ID_AddFishMolly, L"&Molly - 4 Bubbles\tm");
 
+    betaItem->SetHelp(L"Betas are the cheapest fish  and produce bubbles the slowest.  Sells for 1 bubble");
+    nemoItem->SetHelp(L"Nemos are the most expensive fish and produce bubbles the fastest.  Sells for 6 bubbles");
+    mollyItem->SetHelp(L"Mollys are average bubble producers and in-between the other fish.  Sells for 3 bubbles");
+    
     //
     // Decor Menu + costs
     //
@@ -87,7 +91,7 @@ mTimer(this, ID_Timer), mReport(this, ID_ReportDisplay)
     wxMenuItem *addAnimatedTreasureItem = menuDecor->Append(ID_AddAnimatedChest,
                                                             L"&Animated Chest - 10 Bubbles\ta");
 
-    addAnimatedTreasureItem->SetHelp(L"Add an animated chest to the aquarium");
+    addAnimatedTreasureItem->SetHelp(L"Add an animated chest to the aquarium, produces 3 bubbles every now and then. Sells for 9 bubbles");
 
     //
     // Care Menu + costs
@@ -141,6 +145,7 @@ mTimer(this, ID_Timer), mReport(this, ID_ReportDisplay)
                  "\n 1. You can't grab things in scroll mode!"
                  "\n 2. Your fish will die if you don't feed them!"
                  "\n 3. You will lose bubbles if you don't clean the tank!"
+                 "\n 4. You can sell your items by putting them in the trash.  But there is diminishing returns..."
                  "\n\nHotkeys:"
                  "\n C - Clean the tank"
                  "\n F - Feed the fish"
@@ -179,6 +184,7 @@ void CFrame::OnAbout(wxCommandEvent& event)
                  "\n 1. You can't grab things in scroll mode!"
                  "\n 2. Your fish will die if you don't feed them!"
                  "\n 3. You will lose bubbles if you don't clean the tank!"
+                 "\n 4. You can sell your items by putting them in the trash.  But there is diminishing returns..."
                  "\n\nHotkeys:"
                  "\n C - Clean the tank"
                  "\n F - Feed the fish"
@@ -452,6 +458,7 @@ void CFrame::OnMouseMove(wxMouseEvent &event)
             // item.
             if (mAquarium.IsOverTrashcan(event.m_x, event.m_y))
             {
+                mGrabbedItem->Sell();
                 mAquarium.DeleteItem(mGrabbedItem);
             }
 
