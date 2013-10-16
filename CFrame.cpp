@@ -140,7 +140,14 @@ mTimer(this, ID_Timer), mReport(this, ID_ReportDisplay)
                  "\n\nBe Aware:"
                  "\n 1. You can't grab things in scroll mode!"
                  "\n 2. Your fish will die if you don't feed them!"
-                 "\n 3. You will lose bubbles if you don't clean the tank!",
+                 "\n 3. You will lose bubbles if you don't clean the tank!"
+                 "\n\nHotkeys:"
+                 "\n C - Clean the tank"
+                 "\n F - Feed the fish"
+                 "\n B - Add Beta fish"
+                 "\n N - Add Nemo fish"
+                 "\n M - Add Molly fish"
+                 "\n A - Add Animated treasure chest",
                  L"Bubble-arium",
                  wxOK | wxICON_INFORMATION, this);
 
@@ -171,7 +178,14 @@ void CFrame::OnAbout(wxCommandEvent& event)
                  "\n\nBe Aware:"
                  "\n 1. You can't grab things in scroll mode!"
                  "\n 2. Your fish will die if you don't feed them!"
-                 "\n 3. You will lose bubbles if you don't clean the tank!",
+                 "\n 3. You will lose bubbles if you don't clean the tank!"
+                 "\n\nHotkeys:"
+                 "\n C - Clean the tank"
+                 "\n F - Feed the fish"
+                 "\n B - Add Beta fish"
+                 "\n N - Add Nemo fish"
+                 "\n M - Add Molly fish"
+                 "\n A - Add Animated treasure chest",
                  L"Bubble-arium",
                  wxOK | wxICON_INFORMATION, this);
 
