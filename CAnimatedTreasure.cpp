@@ -61,11 +61,10 @@ wxXmlNode *CAnimatedTreasure::XmlSave()
 /*! \brief Handles the update over time method
  * 
  *  Breakdown of timing:
- *      0-10s   - Chest is closed (Stage 0)
- *      10-12s  - Stage 1
- *      12-14   - Stage 2
- *      14-16   - Stage 3
- *      18-28   - Open Chest (Stage 4)
+ *      0-2s     - Chest is closed (Stage 1)
+ *      4-6s     - Stage 2
+ *      8-10s    - Stage 3
+ *      10-12s   - Open Chest (Stage 4)
  * 
  *  after open is reached the mChestAnimationTimer will reset to 0 and
  *  the animation will cycle through again
