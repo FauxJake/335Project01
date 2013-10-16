@@ -68,16 +68,16 @@ mTimer(this, ID_Timer), mReport(this, ID_ReportDisplay)
     menuFile->AppendSeparator();
     menuFile->Append(ID_About, L"&About");
     menuFile->AppendSeparator();
-    wxMenuItem *pauseItem = menuFile->Append(ID_Pause, L"&Pause");
+    wxMenuItem *pauseItem = menuFile->Append(ID_Pause, L"&Pause\tp");
     pauseItem->SetHelp(L"Pause the game");
 
     //
     // Fish Menu + costs
     //
     wxMenu *menuFish = new wxMenu;
-    menuFish->Append(ID_AddFishBeta, L"&Beta - 1 Bubble");
-    menuFish->Append(ID_AddFishNemo, L"&Nemo - 7 Bubbles");
-    menuFish->Append(ID_AddFishMolly, L"&Molly - 4 Bubbles");
+    menuFish->Append(ID_AddFishBeta, L"&Beta - 1 Bubble\tb");
+    menuFish->Append(ID_AddFishNemo, L"&Nemo - 7 Bubbles\tn");
+    menuFish->Append(ID_AddFishMolly, L"&Molly - 4 Bubbles\tm");
 
     //
     // Decor Menu + costs
@@ -85,7 +85,7 @@ mTimer(this, ID_Timer), mReport(this, ID_ReportDisplay)
     wxMenu *menuDecor = new wxMenu;
     menuDecor->Append(ID_AddDecorTreasure, L"&Treasure Chest - 0 Bubbles");
     wxMenuItem *addAnimatedTreasureItem = menuDecor->Append(ID_AddAnimatedChest,
-                                                            L"&Animated Chest - 10 Bubbles");
+                                                            L"&Animated Chest - 10 Bubbles\ta");
 
     addAnimatedTreasureItem->SetHelp(L"Add an animated chest to the aquarium");
 
@@ -94,8 +94,8 @@ mTimer(this, ID_Timer), mReport(this, ID_ReportDisplay)
     //
 
     wxMenu *menuCare = new wxMenu;
-    menuCare->Append(ID_Clean, L"&Clean - 5 Bubbles");
-    menuCare->Append(ID_Feed, L"&Feed - 3 Bubbles");
+    menuCare->Append(ID_Clean, L"&Clean - 5 Bubbles\tC");
+    menuCare->Append(ID_Feed, L"&Feed - 3 Bubbles\tF");
 
     //
     // Menu Bar
