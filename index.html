@@ -48,41 +48,66 @@
         </div>
         <div class="container">
             <div class="row">
-				<div class=col-md-6>
-					<div class="panel panel-primary">
-						<div class="panel-heading">Project 1 Part 1 Tasks</div>
-						<div class="panel-body">
-							<ol>
-								<li>Implement scrolling in the aquarium</li>
-								<li>Use the visitor pattern for all items in the aquarium</li>
-								<li>make a web page for the project (hmmm...)</li>
-								<li>Implement an interactive environment, with support for feeding and cleaning the tank</li>
-								<li>Add an animated treasure chest item, because animation is cool</li>
-								<li>Use the provided CReporting class to report on the status of the tank over time</li>
-							</ol>
-						</div>
-					</div>
-				</div>
-				<div class=col-md-6>
-					<img width="500" src="images/happyfish.png" alt="Clean tank with fish" />
-				</div>
+                <div class=col-md-6>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">Project 1 Part 1 Tasks</div>
+                        <div class="panel-body">
+                            <ol>
+                                <li>Implement scrolling in the aquarium</li>
+                                <li>Use the visitor pattern for all items in the aquarium</li>
+                                <li>make a web page for the project (hmmm...)</li>
+                                <li>Implement an interactive environment, with support for feeding and cleaning the tank</li>
+                                <li>Add an animated treasure chest item, because animation is cool</li>
+                                <li>Use the provided CReporting class to report on the status of the tank over time</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <div class=col-md-6>
+                    <img width="500" src="images/happyfish.png" alt="Clean tank with fish" />
+                </div>
             </div>
         </div>
-		
-		<div class="container">
-			<div>
-				<h2>Game Outline</h2>
-				For our game the fish will randomly release bubbles that will float upward until they hit the top of the screen and disappear.  
-				The bubbles that the player collects will allow them to buy new fish and decorations.  A bubble will be released from one of the 
-				fish or animated treasure chests after a specified random range of time (around 1-10 seconds).  The bubbles collected will be 
-				recorded in the reporting window along with last time fed and tank cleanliness.  The reporting time will be reduced to every 5 
-				seconds.  If the tank gets too dirty the bubbles you have collected will start to go down at a rapid rate.  If the bubble count 
-				reaches 0 the player loses and receives a dialog box telling them they have failed and that they should be sad, then the program 
-				resets.  If the fish are not fed after 30 seconds all the fish die and you lose, again receiving a message box that your fish have 
-				starved to death because you are a bad person, then the game resets.  If you reach 100 bubbles you win, a message box telling you 
-				even though you have won the game but you have wasted precious time in your life that you will never get back, then the game resets.
-			</div>
-		</div>
+
+        <div class="container">
+            <div>
+                <h2>Game Outline</h2>
+                For our game the fish will randomly release bubbles that will float upward until they hit the top of the screen and disappear.  
+                The bubbles that the player collects will allow them to buy new fish and decorations.  A bubble will be released from one of the 
+                fish or animated treasure chests after a specified random range of time (around 1-10 seconds).  The bubbles collected will be 
+                recorded in the reporting window along with last time fed and tank cleanliness.  The reporting time will be reduced to every 5 
+                seconds.  If the tank gets too dirty the bubbles you have collected will start to go down at a rapid rate.  If the bubble count 
+                reaches 0 the player loses and receives a dialog box telling them they have failed and that they should be sad, then the program 
+                resets.  If the fish are not fed after 30 seconds all the fish die and you lose, again receiving a message box that your fish have 
+                starved to death because you are a bad person, then the game resets.  If you reach 100 bubbles you win, a message box telling you 
+                even though you have won the game but you have wasted precious time in your life that you will never get back, then the game resets.
+            </div>
+            <div>
+                <h2>Official Rules and Such</h2>
+                <h3>Rules</h3>
+                <ol>
+                    <li>Add items, grab the bubbles to get bubble points</li>
+                    <li>Use bubbles, clean tank and feed your fish (and get more items)</li>
+                    <li>Profit (win the game by getting 100 bubble points)</li>
+                </ol>
+                <h3>Be Aware</h3>
+                <ol>
+                    <li>You can't grab things in scroll mode!</li>
+                    <li>Your fish will die if you don't feed them!</li>
+                    <li>You will lose bubbles if you don't clean the tank!</li>
+                    <li>You can sell your items by putting them in the trash.  But there is diminishing returns...</li>
+                </ol>
+                <h3>Hotkeys</h3>
+                <ul class="list-unstyled">
+                    <li>C - Clean the tank</li>
+                    <li>F - Feed the fish</li>
+                    <li>B - Add Beta fish</li>
+                    <li>N - Add Nemo fish</li>
+                    <li>M - Add Molly fish</li>
+                    <li>A - Add Animated treasure chest</li>
+                </ul>
+            </div>
+        </div>
 
         <div class="container">
             <div class="row">
@@ -93,41 +118,56 @@
                     </div>
                     <div class="caption">
                         <h3>Jacob M. Riesser</h3>
-                        <h4>Duties/Contributions</h4>
                         <ul class="list-unstyled">
                             <li>Created Website</li>
                             <li>Implemented an animated Chest Item</li>
                             <li>Contributed to group tasks</li>
                         </ul>
+                        <h3>Part 2</h3>
+                        <ul class="list-unstyled">
+                            <li>Bug fixes and source control</li>
+                            <li>Website maintenance</li>
+                            <li>Implemented selling fish</li>
+                        </ul>
                     </div>
                 </div>
-                
+
                 <div class="col-sm-6 col-md-3">
                     <a href="#" class="thumbnail">
                         <img width="300" src="images/Joshua_Morgan.JPG" alt="Joshua A. Morgan picture">
                     </a>
                     <div class="caption">
                         <h3>Joshua A. Morgan</h3>
-                        <h4>Duties/Contributions</h4>
                         <ul class="list-unstyled">
                             <li>Implemented Environment settings</li>
                             <li>Implemented the functionality to feed the fish and clean the tank</li>
                             <li>Contributed to group tasks</li>
                         </ul>
+                        <h4>Part 2</h4>
+                        <ul class="list-unstyled">
+                            <li>Added bubble spawn to all fish/items (bar chests)</li>
+                            <li>Implemented fish death and bubble loss rates</li>
+                            <li>Various debugging and fixes</li>
+                        </ul>
                     </div>
                 </div>
-                
+
                 <div class="col-sm-6 col-md-3">
                     <a href="#" class="thumbnail">
                         <img width="300" src="images/David_Warner.jpg" alt="David W. Warner picture">
                     </a>
                     <div class="caption">
                         <h3>David W. Warner</h3>
-                        <h4>Duties/Contributions</h4>
                         <ul class="list-unstyled">
                             <li>Main force behind implementing visitor pattern</li>
                             <li>Added reporting functionality to the aquarium</li>
                             <li>Contributed to other group tasks</li>
+                        </ul>
+                        <h3>Part 2</h3>
+                        <ul class="list-unstyled">
+                            <li>Implemented Visitor pattern to various items</li>
+                            <li>Bug fixes and improvements</li>
+                            <li>Initial work on user interface and game balance</li>
                         </ul>
                     </div>
                 </div>
