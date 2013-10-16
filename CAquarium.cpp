@@ -490,7 +490,7 @@ void CAquarium::EndGame()
     Clear();
     Clean();
     Feed();
-    mBubbles = 5;
+    mBubbles = 20;
     mX = mY = 0.0;
     mDecreaseBubbles = 0;
     mTrashCanActive = false;
